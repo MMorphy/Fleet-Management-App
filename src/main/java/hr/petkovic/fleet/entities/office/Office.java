@@ -37,7 +37,7 @@ public class Office {
 	private WorkingHours workingHours;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "vehicle_id")
+	@JoinColumn(name = "office_id")
 	private List<Vehicle> vehiclePool = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)

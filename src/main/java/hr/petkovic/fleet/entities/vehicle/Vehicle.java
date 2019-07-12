@@ -1,5 +1,7 @@
 package hr.petkovic.fleet.entities.vehicle;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,6 +35,7 @@ public class Vehicle {
 
 	private String registrationNumber;
 
+	@Column(nullable = false)
 	private Integer manufactoringYear;
 
 	@ColumnDefault(value = "0")
@@ -57,6 +61,10 @@ public class Vehicle {
 	private Tire tire;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "vehicle_id")
+	@JoinColumn(name = "spec_id")
 	private CarSpecification specification;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "vehicle_id")
+	private Set<CarDamage> damages;
 }
