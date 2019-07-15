@@ -20,9 +20,8 @@ public class CarSpecification {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="nagivation_id")
-	private Navigation navigation;
+	@Column(nullable = false)
+	private Integer doors;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "engine_id")

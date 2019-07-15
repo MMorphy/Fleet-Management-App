@@ -16,16 +16,10 @@ public class Engine {
 	private Long id;
 
 	@Column(nullable = false)
-	private Integer cilinders;
-
-	@Column(nullable = false)
 	private Float capacity;
 
 	@Column(nullable = false)
 	private Float maxPower;
-
-	@Column(nullable = false)
-	private Float maxTorque;
 
 	@Column(nullable = false)
 	private Float consumption;

@@ -47,9 +47,6 @@ public class Vehicle {
 	@Column(nullable = false)
 	private String model;
 
-	@Column(nullable = false)
-	private Integer doors;
-
 	@Enumerated(EnumType.STRING)
 	private CarGroups carGroup;
 
@@ -67,4 +64,8 @@ public class Vehicle {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "vehicle_id")
 	private Set<CarDamage> damages;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="nagivation_id")
+	private Navigation navigation;
 }
