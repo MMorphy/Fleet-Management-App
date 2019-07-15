@@ -66,23 +66,6 @@ public class RestUserController {
 		return userRepo.saveAndFlush(user);
 	}
 
-
-	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping(consumes="application/json", path = "/post/test")
-	public User saveTest()
-	{
-		User user = new User();
-		user.setAdmin(true);
-		user.setCreateTS(LocalDateTime.now());
-		user.setEmail("123@gmail.com");
-		user.setEmployee(true);
-		user.setLastChangeTS(LocalDateTime.now());
-		user.setPassword("12345");
-		user.setUsername("mrtviUser");
-		user.setId(1L);
-		return userRepo.save(user);
-	}
-
 	@PutMapping("/{id}")
 	public ResponseEntity<User> update(@PathVariable Long id, User user)
 	{
