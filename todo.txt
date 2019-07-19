@@ -1,6 +1,7 @@
 TODO: 
 	zavrsi grupe CarGroups
 	napravi modele
-	generiraj settere, getere i defualt construktore za sve entitete
 	kad si gotov s projektom promijeni ddl generation type
+	Zavrsi rest controllere za svaki entitet
+Improvements:
 	napravi kompositni key izmedju opcija i rezervacije/ugovora
