@@ -1,11 +1,11 @@
-package hr.petkovic.fleet.repositories;
+package hr.petkovic.fleet.repositories.office;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import hr.petkovic.fleet.entities.vehicle.User;
+import hr.petkovic.fleet.entities.office.User;
 
 public interface UsersRepository extends JpaRepository<User, Long> {
 

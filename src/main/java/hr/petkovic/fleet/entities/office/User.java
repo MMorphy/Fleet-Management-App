@@ -1,4 +1,4 @@
-package hr.petkovic.fleet.entities.vehicle;
+package hr.petkovic.fleet.entities.office;
 
 import java.time.LocalDateTime;
 

@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import hr.petkovic.fleet.entities.vehicle.User;
 import hr.petkovic.fleet.entities.vehicle.Vehicle;
 
 @Entity

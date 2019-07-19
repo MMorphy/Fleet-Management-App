@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import hr.petkovic.fleet.entities.office.Office;
-import hr.petkovic.fleet.entities.vehicle.User;
+import hr.petkovic.fleet.entities.office.User;
 import hr.petkovic.fleet.enums.CarGroups;
 
 @Entity

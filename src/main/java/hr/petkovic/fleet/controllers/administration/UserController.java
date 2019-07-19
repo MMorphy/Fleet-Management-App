@@ -3,7 +3,7 @@ package hr.petkovic.fleet.controllers.administration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import hr.petkovic.fleet.repositories.UsersRepository;
+import hr.petkovic.fleet.repositories.office.UsersRepository;
 
 @Controller
 @RequestMapping("/user")

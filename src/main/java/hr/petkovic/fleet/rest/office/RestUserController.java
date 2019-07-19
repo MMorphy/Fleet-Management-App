@@ -1,4 +1,4 @@
-package hr.petkovic.fleet.rest;
+package hr.petkovic.fleet.rest.office;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import hr.petkovic.fleet.entities.vehicle.User;
-import hr.petkovic.fleet.repositories.UsersRepository;
+import hr.petkovic.fleet.entities.office.User;
+import hr.petkovic.fleet.repositories.office.UsersRepository;
 
 @RestController
 //@CrossOrigin
