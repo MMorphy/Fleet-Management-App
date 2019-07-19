@@ -68,4 +68,108 @@ public class Vehicle {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="nagivation_id")
 	private Navigation navigation;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getVIN() {
+		return VIN;
+	}
+
+	public void setVIN(String vIN) {
+		VIN = vIN;
+	}
+
+	public String getRegistrationNumber() {
+		return registrationNumber;
+	}
+
+	public void setRegistrationNumber(String registrationNumber) {
+		this.registrationNumber = registrationNumber;
+	}
+
+	public Integer getManufactoringYear() {
+		return manufactoringYear;
+	}
+
+	public void setManufactoringYear(Integer manufactoringYear) {
+		this.manufactoringYear = manufactoringYear;
+	}
+
+	public Integer getCurrentKM() {
+		return currentKM;
+	}
+
+	public void setCurrentKM(Integer currentKM) {
+		this.currentKM = currentKM;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public CarGroups getCarGroup() {
+		return carGroup;
+	}
+
+	public void setCarGroup(CarGroups carGroup) {
+		this.carGroup = carGroup;
+	}
+
+	public FuelTypes getFuelType() {
+		return fuelType;
+	}
+
+	public void setFuelType(FuelTypes fuelType) {
+		this.fuelType = fuelType;
+	}
+
+	public Tire getTire() {
+		return tire;
+	}
+
+	public void setTire(Tire tire) {
+		this.tire = tire;
+	}
+
+	public CarSpecification getSpecification() {
+		return specification;
+	}
+
+	public void setSpecification(CarSpecification specification) {
+		this.specification = specification;
+	}
+
+	public Set<CarDamage> getDamages() {
+		return damages;
+	}
+
+	public void setDamages(Set<CarDamage> damages) {
+		this.damages = damages;
+	}
+
+	public Navigation getNavigation() {
+		return navigation;
+	}
+
+	public void setNavigation(Navigation navigation) {
+		this.navigation = navigation;
+	}
 }

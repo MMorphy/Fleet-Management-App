@@ -20,4 +20,20 @@ public class Navigation {
 
 	@Enumerated(EnumType.STRING)
 	private NavigationModels model;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public NavigationModels getModel() {
+		return model;
+	}
+
+	public void setModel(NavigationModels model) {
+		this.model = model;
+	}
 }

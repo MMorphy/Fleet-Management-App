@@ -39,4 +39,60 @@ public class CarSpecification {
 
 	@Column(nullable = false)
 	private Integer numberOfSeats;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getDoors() {
+		return doors;
+	}
+
+	public void setDoors(Integer doors) {
+		this.doors = doors;
+	}
+
+	public Engine getEngine() {
+		return engine;
+	}
+
+	public void setEngine(Engine engine) {
+		this.engine = engine;
+	}
+
+	public Float getFuelLevel() {
+		return fuelLevel;
+	}
+
+	public void setFuelLevel(Float fuelLevel) {
+		this.fuelLevel = fuelLevel;
+	}
+
+	public Integer getFuelTankCapacity() {
+		return fuelTankCapacity;
+	}
+
+	public void setFuelTankCapacity(Integer fuelTankCapacity) {
+		this.fuelTankCapacity = fuelTankCapacity;
+	}
+
+	public Float getTopSpeed() {
+		return topSpeed;
+	}
+
+	public void setTopSpeed(Float topSpeed) {
+		this.topSpeed = topSpeed;
+	}
+
+	public Integer getNumberOfSeats() {
+		return numberOfSeats;
+	}
+
+	public void setNumberOfSeats(Integer numberOfSeats) {
+		this.numberOfSeats = numberOfSeats;
+	}
 }

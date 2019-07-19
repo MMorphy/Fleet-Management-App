@@ -24,4 +24,36 @@ public class Engine {
 	@Column(nullable = false)
 	private Float consumption;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Float getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Float capacity) {
+		this.capacity = capacity;
+	}
+
+	public Float getMaxPower() {
+		return maxPower;
+	}
+
+	public void setMaxPower(Float maxPower) {
+		this.maxPower = maxPower;
+	}
+
+	public Float getConsumption() {
+		return consumption;
+	}
+
+	public void setConsumption(Float consumption) {
+		this.consumption = consumption;
+	}
+
 }

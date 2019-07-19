@@ -36,4 +36,44 @@ public class CarDamage {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ra_id", nullable = false)
 	private RentalAgreement ra;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public DamageTypes getType() {
+		return type;
+	}
+
+	public void setType(DamageTypes type) {
+		this.type = type;
+	}
+
+	public DamageSizes getSize() {
+		return size;
+	}
+
+	public void setSize(DamageSizes size) {
+		this.size = size;
+	}
+
+	public Boolean getRepaired() {
+		return repaired;
+	}
+
+	public void setRepaired(Boolean repaired) {
+		this.repaired = repaired;
+	}
+
+	public RentalAgreement getRa() {
+		return ra;
+	}
+
+	public void setRa(RentalAgreement ra) {
+		this.ra = ra;
+	}
 }
