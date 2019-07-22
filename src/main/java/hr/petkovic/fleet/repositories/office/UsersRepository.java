@@ -21,5 +21,4 @@ public interface UsersRepository extends JpaRepository<User, Long> {
 
 	User save(User user);
 
-	
 }

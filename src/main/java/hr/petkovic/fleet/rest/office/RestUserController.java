@@ -1,6 +1,5 @@
 package hr.petkovic.fleet.rest.office;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import javax.transaction.Transactional;

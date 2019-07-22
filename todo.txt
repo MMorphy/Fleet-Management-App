@@ -1,7 +1,7 @@
 TODO: 
 	zavrsi grupe CarGroups
-	napravi modele
 	kad si gotov s projektom promijeni ddl generation type
 	Zavrsi rest controllere za svaki entitet
+	Napravi validaciju za UserAdmin
 Improvements:
 	napravi kompositni key izmedju opcija i rezervacije/ugovora
