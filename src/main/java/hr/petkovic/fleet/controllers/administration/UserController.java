@@ -57,7 +57,7 @@ public class UserController {
 
 	@PostMapping("/edit/{id}")
 	public String updateUser(@PathVariable("id") String id, User user) {
-		logger.info(userService.updateUser(Long.parseLong(id), user).toString());
+		userService.updateUser(Long.parseLong(id), user).toString();
 		return "redirect:/user/administration";
 	}
 	@PostMapping("/delete/{id}")
