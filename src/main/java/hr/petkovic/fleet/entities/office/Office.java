@@ -90,4 +90,10 @@ public class Office {
 	public void setEmployees(List<User> employees) {
 		this.employees = employees;
 	}
+
+	@Override
+	public String toString() {
+		return "Office [id=" + id + ", name=" + name + ", address=" + address + ", workingHours=" + workingHours
+				+ ", vehiclePool=" + vehiclePool + ", employees=" + employees + "]";
+	}
 }

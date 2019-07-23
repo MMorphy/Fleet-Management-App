@@ -42,7 +42,7 @@ public class OfficeServiceImpl implements OfficeService {
 
 	@Override
 	public Office saveOffice(Office office) {
-		return this.officeRepo.saveAndFlush(office);
+		return this.officeRepo.save(office);
 	}
 
 	@Override

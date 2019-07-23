@@ -47,7 +47,7 @@ public class WorkingHours {
 	private Time holidayST;
 
 	private Time holidayET;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -182,5 +182,14 @@ public class WorkingHours {
 
 	public void setHolidayET(Time holidayET) {
 		this.holidayET = holidayET;
+	}
+
+	@Override
+	public String toString() {
+		return "WorkingHours [id=" + id + ", mondayST=" + mondayST + ", mondayET=" + mondayET + ", tuesdayST="
+				+ tuesdayST + ", tuesdayET=" + tuesdayET + ", wednesdayST=" + wednesdayST + ", wednesdayET="
+				+ wednesdayET + ", thursdayST=" + thursdayST + ", thursdayET=" + thursdayET + ", fridayST=" + fridayST
+				+ ", fridayET=" + fridayET + ", saturdayST=" + saturdayST + ", saturdayET=" + saturdayET + ", sundayST="
+				+ sundayST + ", sundayET=" + sundayET + ", holidayST=" + holidayST + ", holidayET=" + holidayET + "]";
 	}
 }

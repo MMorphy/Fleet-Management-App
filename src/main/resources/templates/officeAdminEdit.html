@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet"
@@ -8,7 +9,8 @@
 </head>
 <body>
 	<h2>Office user</h2>
-	<form method="POST" th:object="${office}" th:action="@{@{'/office/edit/' + ${office.id}}}">
+	<form method="POST" th:object="${office}"
+		th:action="@{@{'/office/edit/' + ${office.id}}}">
 		<div class="form-group">
 			<label for="name">Name:</label> <input type="text"
 				class="form-control" id="name" th:field="${office.name}">
@@ -18,7 +20,7 @@
 				class="form-control" id="address" th:field="${office.address}">
 		</div>
 		<div class="form-group">
-			<button>Choose Work Hours</button>
+			<a th:href="@{'/office/whpick/' + ${office.id}}">Pick working hours</a>
 		</div>
 
 		<input type="submit" th:value="Save">
