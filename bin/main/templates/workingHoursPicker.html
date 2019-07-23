@@ -57,15 +57,34 @@
 						<td th:text="${hour.holidayST}"></td>
 						<td th:text="${hour.holidayET}"></td>
 						<td>
-							<form th:action="@{/office/add/}" method="get" th:object="${office}">
-							<div hidden="hidden">
-								<input th:value="${session.office.name}" th:name="name">
-								<input th:value="${session.office.address}" th:name="address">
-								<select th:field="${office.workingHours}" >
-									<option th:value="${hour.id}" th:text=${hour.id}></option>
-								</select>
-							</div>
-								<button>Pick</button>
+							<form th:action="@{/office/add/}" method="get"
+								th:object="${addOffice}" th:if="${session.action} == adding">
+								<div hidden="hidden">
+									<input th:value="${session.addingOffice.name}"
+										th:field="*{name}"> <input
+										th:value="${session.addingOffice.address}"
+										th:field="*{address}"> <select
+										th:field="*{workingHours}">
+										<option th:value="${hour.id}" th:text=${hour.id}></option>
+									</select>
+								</div>
+								<button>Pick Add</button>
+							</form>
+
+							<form
+								th:action="@{@{'/office/edit/' + ${session.editedOffice.id}}}"
+								method="get" th:object="${editOffice}"
+								th:if="${session.action} == editing">
+								<div hidden="hidden">
+									<input th:value="${session.editedOffice.name}"
+										th:field="*{name}"> <input
+										th:value="${session.editedOffice.address}"
+										th:field="*{address}"> <select
+										th:field="*{workingHours}">
+										<option th:value="${hour.id}" th:text=${hour.id}></option>
+									</select>
+								</div>
+								<button>Pick Edit</button>
 							</form>
 						</td>
 					</tr>

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hr.petkovic.fleet.entities.office.Office;
-import hr.petkovic.fleet.entities.office.WorkingHours;
 import hr.petkovic.fleet.impl.office.OfficeServiceImpl;
 import hr.petkovic.fleet.impl.office.WorkingHoursServiceImpl;
 
@@ -34,45 +33,79 @@ public class OfficeController {
 
 	}
 
+	// Home admin page
 	@GetMapping("/administration")
 	public String getOfficeAdministration(Model model) {
 		model.addAttribute("offices", officeService.findAllOffices());
 		return "officeAdmin";
 	}
 
+	// Adding
 	@GetMapping("/add")
-	public String getOfficeAdding(Model model, Office office, HttpSession session) {
-		session.setAttribute("office", office);
+	public String getOfficeAdding(Model model, Office addOffice, HttpSession session) {
+		if (session.getAttribute("addingOffice") == null || addOffice == null) {
+			session.setAttribute("addingOffice", new Office());
+			model.addAttribute("addOffice", new Office());
+		} else {
+			session.setAttribute("addingOffice", addOffice);
+			model.addAttribute("addOffice", addOffice);
+		}
+		session.setAttribute("action", "adding");
 		return "officeAdminAdd";
 	}
 
 	@PostMapping("/add/")
-	public String addOffice(Model model, Office office, String action, HttpSession session) {
-		logger.info(action);
+	public String addOffice(Model model, Office addOffice, String action, HttpSession session) {
+		model.addAttribute("oldOffice", session.getAttribute("addingOffice"));
 		if (action.equals("Pick")) {
+			model.addAttribute("addOffice", addOffice);
+			session.setAttribute("addingOffice", addOffice);
 			model.addAttribute("hours", whService.findAllWorkingHours());
-			session.setAttribute("office", office);
 			return "workingHoursPicker";
 		} else if (action.equals("Submit")) {
-			session.removeAttribute("office");
-			officeService.saveOffice(office);
+			officeService.saveOffice(addOffice);
+			session.removeAttribute("addingOffice");
+			session.removeAttribute("action");
 			return "redirect:/office/administration";
-
 		} else {
+			session.removeAttribute("addingOffice");
+			session.removeAttribute("action");
 			return "redirect:/office/administration";
 		}
 	}
 
+	// Editing
 	@GetMapping("/edit/{id}")
-	public String getUpdateOffice(@PathVariable("id") String id, Model model) {
-		model.addAttribute("office", officeService.findOfficeById(Long.parseLong(id)));
+	public String getUpdateOffice(@PathVariable("id") String id, Model model, HttpSession session, Office editOffice) {
+		if (session.getAttribute("editedOffice") == null || editOffice == null) {
+			session.setAttribute("editedOffice", officeService.findOfficeById(Long.parseLong(id)));
+			model.addAttribute("editOffice", editOffice = officeService.findOfficeById(Long.parseLong(id)));
+		} else {
+			session.setAttribute("editedOffice", editOffice);
+			model.addAttribute("editOffice", editOffice);
+		}
+		session.setAttribute("action", "editing");
 		return "officeAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")
-	public String updateOffice(@PathVariable("id") String id, Office office) {
-		officeService.updateOffice(Long.parseLong(id), office);
-		return "redirect:/office/administration";
+	public String updateOffice(@PathVariable("id") String id, Model model, Office editOffice, String action,
+			HttpSession session) {
+		if (action.equals("Pick")) {
+			session.setAttribute("editedOffice", editOffice);
+			model.addAttribute("editOffice", editOffice);
+			model.addAttribute("hours", whService.findAllWorkingHours());
+			return "workingHoursPicker";
+		} else if (action.equals("Submit")) {
+			officeService.updateOffice(Long.parseLong(id), editOffice);
+			session.removeAttribute("editedOffice");
+			session.removeAttribute("action");
+			return "redirect:/office/administration";
+		} else {
+			session.removeAttribute("editedOffice");
+			session.removeAttribute("action");
+			return "redirect:/office/administration";
+		}
 	}
 
 	@PostMapping("/delete/{id}")

@@ -3,6 +3,6 @@ TODO:
 	kad si gotov s projektom promijeni ddl generation type
 	Zavrsi rest controllere za svaki entitet
 	Napravi validaciju za UserAdmin i office admin
-	Napravi picker za working hours u office admin
+	Popravi bug s backom na OfficeEdit-u
 Improvements:
 	napravi kompositni key izmedju opcija i rezervacije/ugovora
