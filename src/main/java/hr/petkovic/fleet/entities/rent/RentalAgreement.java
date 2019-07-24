@@ -6,8 +6,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,8 +19,8 @@ import javax.persistence.Table;
 import hr.petkovic.fleet.entities.office.Office;
 import hr.petkovic.fleet.entities.office.User;
 import hr.petkovic.fleet.entities.vehicle.CarDamage;
+import hr.petkovic.fleet.entities.vehicle.CarGroup;
 import hr.petkovic.fleet.entities.vehicle.Vehicle;
-import hr.petkovic.fleet.enums.CarGroups;
 
 @Entity
 @Table(name = "rental_agreement")
@@ -50,21 +48,18 @@ public class RentalAgreement {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@Enumerated(EnumType.STRING)
-	private CarGroups carGroup;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "group_id", nullable = false)
+	private CarGroup carGroup;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="vehicle_id", referencedColumnName = "id")
+	@JoinColumn(name = "vehicle_id", referencedColumnName = "id")
 	private Vehicle rentedVehicle;
 
-	@OneToMany(cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY,
-			mappedBy = "ra")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "ra")
 	private Set<Option> options;
 
-	@OneToMany(cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY,
-			mappedBy = "ra")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "ra")
 	private Set<CarDamage> damages;
 
 	public Long getId() {
@@ -115,11 +110,11 @@ public class RentalAgreement {
 		this.user = user;
 	}
 
-	public CarGroups getCarGroup() {
+	public CarGroup getCarGroup() {
 		return carGroup;
 	}
 
-	public void setCarGroup(CarGroups carGroup) {
+	public void setCarGroup(CarGroup carGroup) {
 		this.carGroup = carGroup;
 	}
 

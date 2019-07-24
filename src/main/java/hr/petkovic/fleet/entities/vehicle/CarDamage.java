@@ -2,8 +2,6 @@ package hr.petkovic.fleet.entities.vehicle;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,8 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import hr.petkovic.fleet.entities.rent.RentalAgreement;
-import hr.petkovic.fleet.enums.DamageSizes;
-import hr.petkovic.fleet.enums.DamageTypes;
 
 @Entity
 @Table(name = "damages")
@@ -24,11 +20,13 @@ public class CarDamage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Enumerated(EnumType.STRING)
-	private DamageTypes type;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "damage_type_id", nullable = false)
+	private CarDamageType type;
 
-	@Enumerated(EnumType.STRING)
-	private DamageSizes size;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "damage_size_id", nullable = false)
+	private CarDamageSize size;
 
 	@Column(nullable = false)
 	private Boolean repaired = false;
@@ -45,19 +43,19 @@ public class CarDamage {
 		this.id = id;
 	}
 
-	public DamageTypes getType() {
+	public CarDamageType getType() {
 		return type;
 	}
 
-	public void setType(DamageTypes type) {
+	public void setType(CarDamageType type) {
 		this.type = type;
 	}
 
-	public DamageSizes getSize() {
+	public CarDamageSize getSize() {
 		return size;
 	}
 
-	public void setSize(DamageSizes size) {
+	public void setSize(CarDamageSize size) {
 		this.size = size;
 	}
 

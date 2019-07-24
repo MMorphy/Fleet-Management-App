@@ -5,8 +5,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,9 +16,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
-
-import hr.petkovic.fleet.enums.CarGroups;
-import hr.petkovic.fleet.enums.FuelTypes;
 
 @Entity
 @Table(name = "vehicles")
@@ -47,14 +42,16 @@ public class Vehicle {
 	@Column(nullable = false)
 	private String model;
 
-	@Enumerated(EnumType.STRING)
-	private CarGroups carGroup;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "group_id", nullable = false)
+	private CarGroup carGroup;
 
-	@Enumerated(EnumType.STRING)
-	private FuelTypes fuelType;
-	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fuel_type_id", nullable = false)
+	private FuelType fuelType;
+
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="tire_id", referencedColumnName = "id")
+	@JoinColumn(name = "tire_id", referencedColumnName = "id")
 	private Tire tire;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -66,7 +63,7 @@ public class Vehicle {
 	private Set<CarDamage> damages;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="nagivation_id")
+	@JoinColumn(name = "nagivation_id")
 	private Navigation navigation;
 
 	public Long getId() {
@@ -125,19 +122,19 @@ public class Vehicle {
 		this.model = model;
 	}
 
-	public CarGroups getCarGroup() {
+	public CarGroup getCarGroup() {
 		return carGroup;
 	}
 
-	public void setCarGroup(CarGroups carGroup) {
+	public void setCarGroup(CarGroup carGroup) {
 		this.carGroup = carGroup;
 	}
 
-	public FuelTypes getFuelType() {
+	public FuelType getFuelType() {
 		return fuelType;
 	}
 
-	public void setFuelType(FuelTypes fuelType) {
+	public void setFuelType(FuelType fuelType) {
 		this.fuelType = fuelType;
 	}
 

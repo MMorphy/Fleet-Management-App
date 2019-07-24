@@ -22,7 +22,6 @@ import hr.petkovic.fleet.entities.office.User;
 import hr.petkovic.fleet.repositories.office.UsersRepository;
 
 @RestController
-//@CrossOrigin
 @RequestMapping(path = "/api/user", produces = "application/json")
 public class RestUserController {
 
@@ -72,9 +71,8 @@ public class RestUserController {
 		if (usr.isPresent())
 		{
 			User us = usr.get();
-			us.setAdmin(user.isAdmin());
 			us.setEmail(user.getEmail());
-			us.setEmployee(user.isEmployee());
+			us.setRoles(user.getRoles());
 			////TODO stavi bcrypt
 			us.setPassword(user.getPassword());
 			us.setUsername(user.getUsername());

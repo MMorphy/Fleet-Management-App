@@ -1,14 +1,13 @@
 package hr.petkovic.fleet.entities.vehicle;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import hr.petkovic.fleet.enums.NavigationModels;
 
 @Entity
 @Table(name = "navigations")
@@ -18,8 +17,9 @@ public class Navigation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Enumerated(EnumType.STRING)
-	private NavigationModels model;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "navigation_model_id", nullable = false)
+	private NavigationModel model;
 
 	public Long getId() {
 		return id;
@@ -29,11 +29,11 @@ public class Navigation {
 		this.id = id;
 	}
 
-	public NavigationModels getModel() {
+	public NavigationModel getModel() {
 		return model;
 	}
 
-	public void setModel(NavigationModels model) {
+	public void setModel(NavigationModel model) {
 		this.model = model;
 	}
 }

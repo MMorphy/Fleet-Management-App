@@ -1,44 +1,51 @@
 package hr.petkovic.fleet.entities.office;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String username;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String password;
 
-	@ColumnDefault(value="NOW()")
+	@ColumnDefault(value = "NOW()")
 	private LocalDateTime createTS;
-	
-	@ColumnDefault(value="NOW()")
+
+	@ColumnDefault(value = "NOW()")
 	private LocalDateTime lastChangeTS;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String email;
 
-	@ColumnDefault(value="false")
-	private boolean admin;
-
-	@ColumnDefault(value="false")
-	private boolean employee;
+	@ManyToMany
+    @JoinTable( 
+            name = "user_roles", 
+            joinColumns = @JoinColumn(
+              name = "user_id", referencedColumnName = "id"), 
+            inverseJoinColumns = @JoinColumn(
+              name = "role_id", referencedColumnName = "id"))
+	private Collection<Role> roles;
 
 	public User() {
 	}
@@ -91,33 +98,24 @@ public class User {
 		this.email = email;
 	}
 
-	public boolean isAdmin() {
-		return admin;
+	public Collection<Role> getRoles() {
+		return roles;
 	}
 
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
-
-	public boolean isEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(boolean employee) {
-		this.employee = employee;
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (admin ? 1231 : 1237);
 		result = prime * result + ((createTS == null) ? 0 : createTS.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + (employee ? 1231 : 1237);
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastChangeTS == null) ? 0 : lastChangeTS.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -131,8 +129,6 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (admin != other.admin)
-			return false;
 		if (createTS == null) {
 			if (other.createTS != null)
 				return false;
@@ -142,8 +138,6 @@ public class User {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
-			return false;
-		if (employee != other.employee)
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -160,6 +154,11 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (roles == null) {
+			if (other.roles != null)
+				return false;
+		} else if (!roles.equals(other.roles))
+			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -171,7 +170,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", createTS=" + createTS
-				+ ", lastChangeTS=" + lastChangeTS + ", email=" + email + ", admin=" + admin + ", employee=" + employee
-				+ "]";
+				+ ", lastChangeTS=" + lastChangeTS + ", email=" + email + ", roles=" + roles + "]";
 	}
+
+
 }

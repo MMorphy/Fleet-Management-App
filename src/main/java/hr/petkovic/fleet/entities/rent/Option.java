@@ -2,8 +2,6 @@ package hr.petkovic.fleet.entities.rent;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import hr.petkovic.fleet.enums.CarGroups;
+import hr.petkovic.fleet.entities.vehicle.CarGroup;
+
 
 @Entity
 @Table(name = "options")
@@ -28,8 +27,9 @@ public class Option {
 	@Column(nullable = false)
 	private String name;
 
-	@Enumerated(EnumType.STRING)
-	private CarGroups carGroup;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "group_id", nullable = false)
+	private CarGroup carGroup;
 
 	@Column(nullable = false)
 	private Float price = 0F;
@@ -66,11 +66,11 @@ public class Option {
 		this.name = name;
 	}
 
-	public CarGroups getCarGroup() {
+	public CarGroup getCarGroup() {
 		return carGroup;
 	}
 
-	public void setCarGroup(CarGroups carGroup) {
+	public void setCarGroup(CarGroup carGroup) {
 		this.carGroup = carGroup;
 	}
 

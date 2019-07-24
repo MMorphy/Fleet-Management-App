@@ -31,7 +31,9 @@
 						<td th:text="${office.id}"></td>
 						<td th:text="${office.name}"></td>
 						<td th:text="${office.address}"></td>
-						<td>Working link</td>
+						<td>
+						<a th:href="@{'/workingHours/administration/' + ${office.workingHours.id}}">Working Hours</a>
+						</td>
 						<td>Employees link</td>
 						<td>Vehicles link</td>
 						<td>

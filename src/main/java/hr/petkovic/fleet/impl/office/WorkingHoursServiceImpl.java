@@ -50,22 +50,15 @@ public class WorkingHoursServiceImpl implements WorkingHoursService {
 		if(whOpt.isPresent())
 		{
 			WorkingHours wh = whOpt.get();
-			wh.setFridayET(workingHours.getFridayET());
-			wh.setFridayST(workingHours.getFridayST());
+
 			wh.setHolidayET(workingHours.getHolidayET());
 			wh.setHolidayST(workingHours.getHolidayST());
-			wh.setMondayET(workingHours.getMondayET());
-			wh.setMondayST(workingHours.getMondayST());
 			wh.setSaturdayET(workingHours.getSaturdayET());
 			wh.setSaturdayST(workingHours.getSaturdayST());
 			wh.setSundayET(workingHours.getSundayET());
 			wh.setSundayST(workingHours.getSundayST());
-			wh.setThursdayET(workingHours.getThursdayET());
-			wh.setThursdayST(workingHours.getThursdayST());
-			wh.setTuesdayET(workingHours.getTuesdayET());
-			wh.setTuesdayST(workingHours.getTuesdayST());
-			wh.setWednesdayET(workingHours.getWednesdayET());
-			wh.setWednesdayST(workingHours.getWednesdayST());
+			wh.setWorkdayET(workingHours.getWorkdayET());
+			wh.setWorkdayST(workingHours.getWorkdayST());
 			this.whRepo.save(wh);
 			return wh;
 		}

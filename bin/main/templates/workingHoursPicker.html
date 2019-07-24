@@ -19,16 +19,8 @@
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Monday From</th>
-						<th>Monday To</th>
-						<th>Tuesday From</th>
-						<th>Tuesday To</th>
-						<th>Wednesday From</th>
-						<th>Wednesday To</th>
-						<th>Thursday From</th>
-						<th>Thursday To</th>
-						<th>Friday From</th>
-						<th>Friday To</th>
+						<th>Workday From</th>
+						<th>Workday To</th>
 						<th>Saturday From</th>
 						<th>Saturday To</th>
 						<th>Sunday From</th>
@@ -39,23 +31,15 @@
 				</thead>
 				<tbody>
 					<tr th:each="hour : ${hours}">
-						<td th:text="${hour.id}"></td>
-						<td th:text="${hour.mondayST}"></td>
-						<td th:text="${hour.mondayET}"></td>
-						<td th:text="${hour.tuesdayST}"></td>
-						<td th:text="${hour.tuesdayET}"></td>
-						<td th:text="${hour.wednesdayST}"></td>
-						<td th:text="${hour.wednesdayET}"></td>
-						<td th:text="${hour.thursdayST}"></td>
-						<td th:text="${hour.thursdayET}"></td>
-						<td th:text="${hour.fridayST}"></td>
-						<td th:text="${hour.fridayET}"></td>
-						<td th:text="${hour.saturdayST}"></td>
-						<td th:text="${hour.saturdayET}"></td>
-						<td th:text="${hour.sundayST}"></td>
-						<td th:text="${hour.sundayET}"></td>
-						<td th:text="${hour.holidayST}"></td>
-						<td th:text="${hour.holidayET}"></td>
+						<td th:text="${{hour.id}}"></td>
+						<td th:text="${{hour.workdayST}}"></td>
+						<td th:text="${{hour.workdayET}}"></td>
+						<td th:text="${{hour.saturdayST}}"></td>
+						<td th:text="${{hour.saturdayET}}"></td>
+						<td th:text="${{hour.sundayST}}"></td>
+						<td th:text="${{hour.sundayET}}"></td>
+						<td th:text="${{hour.holidayST}}"></td>
+						<td th:text="${{hour.holidayET}}"></td>
 						<td>
 							<form th:action="@{/office/add/}" method="get"
 								th:object="${addOffice}" th:if="${session.action} == adding">

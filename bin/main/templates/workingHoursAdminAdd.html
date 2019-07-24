@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Enter new working hours</title>
+</head>
+<body>
+	<h2>Enter new working hours</h2>
+	<form method="POST" th:object="${whours}"
+		th:action="@{/workingHours/add/}">
+
+		<div class="form-group">
+			<label for="workdayST">Workday From:</label> <input type="time"
+				class="form-control" id="workdayST" th:field="${{whours.workdayST}}">
+			<label for="workdayET">Workday To:</label> <input type="time"
+				class="form-control" id="workdayET" th:field="${{whours.workdayET}}">
+		</div>
+
+		<div class="form-group">
+			<label for="saturdayST">Saturday From:</label> <input type="time"
+				class="form-control" id="saturdayST" th:field="${{whours.saturdayST}}">
+			<label for="saturdayET">Saturday To:</label> <input type="time"
+				class="form-control" id="saturdayET" th:field="${{whours.saturdayET}}">
+		</div>
+		
+		<div class="form-group">
+			<label for="sundayST">Sunday From:</label> <input type="time"
+				class="form-control" id="sundayST" th:field="${{whours.sundayST}}">
+			<label for="sundayET">Sunday To:</label> <input type="time"
+				class="form-control" id="sundayET" th:field="${{whours.sundayET}}">
+		</div>
+	
+		<div class="form-group">
+			<label for="holidayST">Holiday From:</label> <input type="time"
+				class="form-control" id="holidayST" th:field="${{whours.holidayST}}">
+			<label for="holidayET">Holiday To:</label> <input type="time"
+				class="form-control" id="holidayET" th:field="${{whours.holidayET}}">
+		</div>
+		<input type="submit" th:value="Enter">
+	</form>
+</body>
+</html>

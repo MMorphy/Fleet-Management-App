@@ -76,10 +76,10 @@ public class OfficeController {
 
 	// Editing
 	@GetMapping("/edit/{id}")
-	public String getUpdateOffice(@PathVariable("id") String id, Model model, HttpSession session, Office editOffice) {
+	public String getUpdateOffice(@PathVariable("id") Long id, Model model, HttpSession session, Office editOffice) {
 		if (session.getAttribute("editedOffice") == null || editOffice == null) {
-			session.setAttribute("editedOffice", officeService.findOfficeById(Long.parseLong(id)));
-			model.addAttribute("editOffice", editOffice = officeService.findOfficeById(Long.parseLong(id)));
+			session.setAttribute("editedOffice", officeService.findOfficeById(id));
+			model.addAttribute("editOffice", editOffice = officeService.findOfficeById(id));
 		} else {
 			session.setAttribute("editedOffice", editOffice);
 			model.addAttribute("editOffice", editOffice);
@@ -89,7 +89,7 @@ public class OfficeController {
 	}
 
 	@PostMapping("/edit/{id}")
-	public String updateOffice(@PathVariable("id") String id, Model model, Office editOffice, String action,
+	public String updateOffice(@PathVariable("id") Long id, Model model, Office editOffice, String action,
 			HttpSession session) {
 		if (action.equals("Pick")) {
 			session.setAttribute("editedOffice", editOffice);
@@ -97,7 +97,7 @@ public class OfficeController {
 			model.addAttribute("hours", whService.findAllWorkingHours());
 			return "workingHoursPicker";
 		} else if (action.equals("Submit")) {
-			officeService.updateOffice(Long.parseLong(id), editOffice);
+			officeService.updateOffice(id, editOffice);
 			session.removeAttribute("editedOffice");
 			session.removeAttribute("action");
 			return "redirect:/office/administration";
@@ -109,8 +109,8 @@ public class OfficeController {
 	}
 
 	@PostMapping("/delete/{id}")
-	public String deleteOffice(@PathVariable("id") String id) {
-		officeService.deleteOfficeById(Long.parseLong(id));
+	public String deleteOffice(@PathVariable("id") Long id) {
+		officeService.deleteOfficeById(id);
 		return "redirect:/office/administration";
 	}
 

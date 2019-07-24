@@ -6,8 +6,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +17,7 @@ import javax.persistence.Table;
 
 import hr.petkovic.fleet.entities.office.Office;
 import hr.petkovic.fleet.entities.office.User;
-import hr.petkovic.fleet.enums.CarGroups;
+import hr.petkovic.fleet.entities.vehicle.CarGroup;
 
 @Entity
 @Table(name = "reservations")
@@ -47,12 +45,11 @@ public class Reservation {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@Enumerated(EnumType.STRING)
-	private CarGroups carGroup;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "group_id", nullable = false)
+	private CarGroup carGroup;
 
-	@OneToMany(cascade = CascadeType.ALL,
-			fetch = FetchType.LAZY,
-			mappedBy = "reservation")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "reservation")
 	private Set<Option> options;
 
 	public Long getId() {
@@ -103,11 +100,11 @@ public class Reservation {
 		this.user = user;
 	}
 
-	public CarGroups getCarGroup() {
+	public CarGroup getCarGroup() {
 		return carGroup;
 	}
 
-	public void setCarGroup(CarGroups carGroup) {
+	public void setCarGroup(CarGroup carGroup) {
 		this.carGroup = carGroup;
 	}
 

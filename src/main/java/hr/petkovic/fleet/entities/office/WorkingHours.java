@@ -1,6 +1,6 @@
 package hr.petkovic.fleet.entities.office;
 
-import java.sql.Time;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,46 +8,40 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
-@Table(name="workingHours")
+@Table(name = "workingHours")
 public class WorkingHours {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private Time mondayST;
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalDateTime workdayST;
 
-	private Time mondayET;
-	
-	private Time tuesdayST;
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalDateTime workdayET;
 
-	private Time tuesdayET;
-	
-	private Time wednesdayST;
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalDateTime saturdayST;
 
-	private Time wednesdayET;
-	
-	private Time thursdayST;
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalDateTime saturdayET;
 
-	private Time thursdayET;
-	
-	private Time fridayST;
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalDateTime sundayST;
 
-	private Time fridayET;
-	
-	private Time saturdayST;
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalDateTime sundayET;
 
-	private Time saturdayET;
-	
-	private Time sundayST;
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalDateTime holidayST;
 
-	private Time sundayET;
-	
-	private Time holidayST;
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalDateTime holidayET;
 
-	private Time holidayET;
-	
 	public Long getId() {
 		return id;
 	}
@@ -56,140 +50,77 @@ public class WorkingHours {
 		this.id = id;
 	}
 
-	public Time getMondayST() {
-		return mondayST;
+
+	public LocalDateTime getWorkdayST() {
+		return workdayST;
 	}
 
-	public void setMondayST(Time mondayST) {
-		this.mondayST = mondayST;
+	public void setWorkdayST(LocalDateTime workdayST) {
+		this.workdayST = workdayST;
 	}
 
-	public Time getMondayET() {
-		return mondayET;
+	public LocalDateTime getWorkdayET() {
+		return workdayET;
 	}
 
-	public void setMondayET(Time mondayET) {
-		this.mondayET = mondayET;
+	public void setWorkdayET(LocalDateTime workdayET) {
+		this.workdayET = workdayET;
 	}
 
-	public Time getTuesdayST() {
-		return tuesdayST;
-	}
-
-	public void setTuesdayST(Time tuesdayST) {
-		this.tuesdayST = tuesdayST;
-	}
-
-	public Time getTuesdayET() {
-		return tuesdayET;
-	}
-
-	public void setTuesdayET(Time tuesdayET) {
-		this.tuesdayET = tuesdayET;
-	}
-
-	public Time getWednesdayST() {
-		return wednesdayST;
-	}
-
-	public void setWednesdayST(Time wednesdayST) {
-		this.wednesdayST = wednesdayST;
-	}
-
-	public Time getWednesdayET() {
-		return wednesdayET;
-	}
-
-	public void setWednesdayET(Time wednesdayET) {
-		this.wednesdayET = wednesdayET;
-	}
-
-	public Time getThursdayST() {
-		return thursdayST;
-	}
-
-	public void setThursdayST(Time thursdayST) {
-		this.thursdayST = thursdayST;
-	}
-
-	public Time getThursdayET() {
-		return thursdayET;
-	}
-
-	public void setThursdayET(Time thursdayET) {
-		this.thursdayET = thursdayET;
-	}
-
-	public Time getFridayST() {
-		return fridayST;
-	}
-
-	public void setFridayST(Time fridayST) {
-		this.fridayST = fridayST;
-	}
-
-	public Time getFridayET() {
-		return fridayET;
-	}
-
-	public void setFridayET(Time fridayET) {
-		this.fridayET = fridayET;
-	}
-
-	public Time getSaturdayST() {
+	public LocalDateTime getSaturdayST() {
 		return saturdayST;
 	}
 
-	public void setSaturdayST(Time saturdayST) {
+	public void setSaturdayST(LocalDateTime saturdayST) {
 		this.saturdayST = saturdayST;
 	}
 
-	public Time getSaturdayET() {
+	public LocalDateTime getSaturdayET() {
 		return saturdayET;
 	}
 
-	public void setSaturdayET(Time saturdayET) {
+	public void setSaturdayET(LocalDateTime saturdayET) {
 		this.saturdayET = saturdayET;
 	}
 
-	public Time getSundayST() {
+	public LocalDateTime getSundayST() {
 		return sundayST;
 	}
 
-	public void setSundayST(Time sundayST) {
+	public void setSundayST(LocalDateTime sundayST) {
 		this.sundayST = sundayST;
 	}
 
-	public Time getSundayET() {
+	public LocalDateTime getSundayET() {
 		return sundayET;
 	}
 
-	public void setSundayET(Time sundayET) {
+	public void setSundayET(LocalDateTime sundayET) {
 		this.sundayET = sundayET;
 	}
 
-	public Time getHolidayST() {
+	public LocalDateTime getHolidayST() {
 		return holidayST;
 	}
 
-	public void setHolidayST(Time holidayST) {
+	public void setHolidayST(LocalDateTime holidayST) {
 		this.holidayST = holidayST;
 	}
 
-	public Time getHolidayET() {
+	public LocalDateTime getHolidayET() {
 		return holidayET;
 	}
 
-	public void setHolidayET(Time holidayET) {
+	public void setHolidayET(LocalDateTime holidayET) {
 		this.holidayET = holidayET;
 	}
 
+
 	@Override
 	public String toString() {
-		return "WorkingHours [id=" + id + ", mondayST=" + mondayST + ", mondayET=" + mondayET + ", tuesdayST="
-				+ tuesdayST + ", tuesdayET=" + tuesdayET + ", wednesdayST=" + wednesdayST + ", wednesdayET="
-				+ wednesdayET + ", thursdayST=" + thursdayST + ", thursdayET=" + thursdayET + ", fridayST=" + fridayST
-				+ ", fridayET=" + fridayET + ", saturdayST=" + saturdayST + ", saturdayET=" + saturdayET + ", sundayST="
-				+ sundayST + ", sundayET=" + sundayET + ", holidayST=" + holidayST + ", holidayET=" + holidayET + "]";
+		return "WorkingHours [id=" + id + ", workdayST=" + workdayST + ", workdayET=" + workdayET + ", saturdayST="
+				+ saturdayST + ", saturdayET=" + saturdayET + ", sundayST=" + sundayST + ", sundayET=" + sundayET
+				+ ", holidayST=" + holidayST + ", holidayET=" + holidayET + "]";
 	}
+
 }

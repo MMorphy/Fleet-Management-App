@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Working Hours</title>
+</head>
+<body>
+
+
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<h1 class="col-md-3">Working Hours</h1>
+		</div>
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Workday From</th>
+						<th>Workday To</th>
+						<th>Saturday From</th>
+						<th>Saturday To</th>
+						<th>Sunday From</th>
+						<th>Sunday To</th>
+						<th>Holiday From</th>
+						<th>Holiday To</th>
+						<th>Delete</th>
+						<th>Edit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="hour : ${hours}">
+						<td th:text="${{hour.id}}"></td>
+						<td th:text="${{hour.workdayST}}"></td>
+						<td th:text="${{hour.workdayET}}"></td>
+						<td th:text="${{hour.saturdayST}}"></td>
+						<td th:text="${{hour.saturdayET}}"></td>
+						<td th:text="${{hour.sundayST}}"></td>
+						<td th:text="${{hour.sundayET}}"></td>
+						<td th:text="${{hour.holidayST}}"></td>
+						<td th:text="${{hour.holidayET}}"></td>
+						<td>
+							<form th:action="@{'/workingHours/delete/' + ${hour.id}}" method="post">
+								<button>Remove</button>
+							</form>
+						</td>
+						<td>
+							<form th:action="@{'/workingHours/edit/' + ${hour.id}}" method="get">
+								<button>Edit</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<form th:action="@{/workingHours/add/}" method="get">
+			<button>Add new working hours</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,17 +1,14 @@
 package hr.petkovic.fleet.entities.vehicle;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import hr.petkovic.fleet.enums.TireBrands;
-import hr.petkovic.fleet.enums.TireTypes;
-import hr.petkovic.fleet.enums.WheelTypes;
 
 @Entity
 @Table(name="tires")
@@ -29,14 +26,17 @@ public class Tire {
 
 	private Integer manufacturingYear;
 
-	@Enumerated(EnumType.STRING)
-	private TireBrands tireBrand;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "tire_brand_id", nullable = false)
+	private TireBrand tireBrand;
 
-	@Enumerated(EnumType.STRING)
-	private TireTypes tireType;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "tire_type_id", nullable = false)
+	private TireType tireType;
 
-	@Enumerated(EnumType.STRING)
-	private WheelTypes wheelType;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "wheel_type_id", nullable = false)
+	private WheelType wheelType;
 
 	@OneToOne(mappedBy = "tire")
 	private Vehicle vehicle;
@@ -81,27 +81,27 @@ public class Tire {
 		this.manufacturingYear = manufacturingYear;
 	}
 
-	public TireBrands getTireBrand() {
+	public TireBrand getTireBrand() {
 		return tireBrand;
 	}
 
-	public void setTireBrand(TireBrands tireBrand) {
+	public void setTireBrand(TireBrand tireBrand) {
 		this.tireBrand = tireBrand;
 	}
 
-	public TireTypes getTireType() {
+	public TireType getTireType() {
 		return tireType;
 	}
 
-	public void setTireType(TireTypes tireType) {
+	public void setTireType(TireType tireType) {
 		this.tireType = tireType;
 	}
 
-	public WheelTypes getWheelType() {
+	public WheelType getWheelType() {
 		return wheelType;
 	}
 
-	public void setWheelType(WheelTypes wheelType) {
+	public void setWheelType(WheelType wheelType) {
 		this.wheelType = wheelType;
 	}
 

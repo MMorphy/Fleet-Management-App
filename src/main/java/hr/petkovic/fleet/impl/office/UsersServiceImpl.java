@@ -50,9 +50,8 @@ public class UsersServiceImpl implements UsersService {
 		Optional<User> usr = this.userRepo.findById(id);
 		if (usr.isPresent()) {
 			User us = usr.get();
-			us.setAdmin(user.isAdmin());
 			us.setEmail(user.getEmail());
-			us.setEmployee(user.isEmployee());
+			us.setRoles(user.getRoles());
 			//// TODO stavi bcrypt
 			us.setPassword(user.getPassword());
 			us.setUsername(user.getUsername());
