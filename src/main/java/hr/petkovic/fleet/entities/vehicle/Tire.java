@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tires")
+@Table(name = "tires")
 public class Tire {
 
 	@Id
@@ -20,7 +20,7 @@ public class Tire {
 
 	private Integer width;
 
-	private Integer aspectRation;
+	private Integer aspectRatio;
 
 	private Integer wheelDiameter;
 
@@ -57,12 +57,12 @@ public class Tire {
 		this.width = width;
 	}
 
-	public Integer getAspectRation() {
-		return aspectRation;
+	public Integer getAspectRatio() {
+		return aspectRatio;
 	}
 
-	public void setAspectRation(Integer aspectRation) {
-		this.aspectRation = aspectRation;
+	public void setAspectRatio(Integer aspectRatio) {
+		this.aspectRatio = aspectRatio;
 	}
 
 	public Integer getWheelDiameter() {

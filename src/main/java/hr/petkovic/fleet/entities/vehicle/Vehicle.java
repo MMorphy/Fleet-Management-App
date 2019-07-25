@@ -36,11 +36,13 @@ public class Vehicle {
 	@ColumnDefault(value = "0")
 	private Integer currentKM;
 
-	@Column(nullable = false)
-	private String manufacturer;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "manufacturer_id")
+	private CarManufacturer manufacturer;
 
-	@Column(nullable = false)
-	private String model;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_id")
+	private CarModel model;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "group_id", nullable = false)
@@ -102,24 +104,24 @@ public class Vehicle {
 		return currentKM;
 	}
 
-	public void setCurrentKM(Integer currentKM) {
-		this.currentKM = currentKM;
-	}
-
-	public String getManufacturer() {
+	public CarManufacturer getManufacturer() {
 		return manufacturer;
 	}
 
-	public void setManufacturer(String manufacturer) {
+	public void setManufacturer(CarManufacturer manufacturer) {
 		this.manufacturer = manufacturer;
 	}
 
-	public String getModel() {
+	public CarModel getModel() {
 		return model;
 	}
 
-	public void setModel(String model) {
+	public void setModel(CarModel model) {
 		this.model = model;
+	}
+
+	public void setCurrentKM(Integer currentKM) {
+		this.currentKM = currentKM;
 	}
 
 	public CarGroup getCarGroup() {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import hr.petkovic.fleet.entities.office.EmployeeDTO;
 import hr.petkovic.fleet.entities.office.Office;
 import hr.petkovic.fleet.impl.office.OfficeServiceImpl;
 import hr.petkovic.fleet.impl.office.WorkingHoursServiceImpl;
@@ -77,7 +78,7 @@ public class OfficeController {
 	// Editing
 	@GetMapping("/edit/{id}")
 	public String getUpdateOffice(@PathVariable("id") Long id, Model model, HttpSession session, Office editOffice) {
-		if (session.getAttribute("editedOffice") == null || editOffice == null) {
+		if (session.getAttribute("editedOffice") == null || editOffice == null || editOffice.getName() == null) {
 			session.setAttribute("editedOffice", officeService.findOfficeById(id));
 			model.addAttribute("editOffice", editOffice = officeService.findOfficeById(id));
 		} else {
@@ -120,4 +121,14 @@ public class OfficeController {
 		model.addAttribute("hours", whService.findAllWorkingHours());
 		return "workingHoursPicker";
 	}
+
+	@GetMapping("/employees/{id}")
+	public String getEmployees(@PathVariable("id") Long id, Model model) {
+		EmployeeDTO dto = new EmployeeDTO();
+		dto.setEmployees(officeService.findOfficeById(id).getEmployees());
+		dto.setOfficeId(id);
+		model.addAttribute("dto", dto);
+		return "employeePicker";
+	}
+
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Vehicle administration</title>
+</head>
+<body>
+
+
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<h1 class="col-md-3">Vehicle administration</h1>
+		</div>
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>VIN</th>
+						<th>Registration</th>
+						<th>Year</th>
+						<th>KM</th>
+						<th>Model</th>
+						<th>Manufacturer</th>
+						<th>Group</th>
+						<th>Fuel</th>
+						<th>Tire</th>
+						<th>Specification</th>
+						<th>Damages</th>
+						<th>Navigation</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="vehicle : ${vehicles}">
+						<td th:text="${vehicle.id}"></td>
+						<td th:text="${vehicle.VIN}"></td>
+						<td th:text="${vehicle.registrationNumber}"></td>
+						<td th:text="${vehicle.manufactoringYear}"></td>
+						<td th:text="${vehicle.currentKM}"></td>
+						<td th:text="${vehicle.model}"></td>
+						<td th:text="${vehicle.manufacturer}"></td>
+						<td th:text="${vehicle.carGroup.carGroup}"></td>
+						<td th:text="${vehicle.fuelType.type}"></td>
+						<td><a>Tires</a></td>
+						<td><a>Specification</a></td>
+						<td><a>Damages</a></td>
+						<td th:text="${vehicle.navigation.model}"></td>
+
+
+						<td>
+							<form th:action="@{'/office/delete/' + ${office.id}}"
+								method="post">
+								<button>Remove</button>
+							</form>
+						</td>
+						<td>
+							<form th:action="@{'/office/edit/' + ${office.id}}" method="get">
+								<button>Edit</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<form th:action="@{/office/add/}" method="get">
+			<button>Add new office</button>
+		</form>
+	</div>
+</body>
+</html>

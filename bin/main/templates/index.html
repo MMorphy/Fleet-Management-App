@@ -1,18 +1,20 @@
-    
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Index</title>
+<meta charset="UTF-8">
+<title>Index</title>
 </head>
 <body>
 
 	<div>
 		<p>Test</p>
 	</div>
+	<a th:href="@{/vehicle/administration/}"> Vehicle Admin</a>
 	<a th:href="@{/user/administration}"> User Admin</a>
 	<a th:href="@{/office/administration}"> Office Admin</a>
 	<a th:href="@{/workingHours/administration/}"> WH Admin</a>
-	
+
 </body>
 </html>

@@ -1,5 +1,7 @@
 package hr.petkovic.fleet.entities.rent;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -34,13 +37,14 @@ public class Option {
 	@Column(nullable = false)
 	private Float price = 0F;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "reservation_id", nullable = false)
-	private Reservation reservation;
+	@Column(nullable = false)
+	private Integer amount = 1;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ra_id", nullable = false)
-	private RentalAgreement ra;
+	@ManyToMany(mappedBy = "options")
+	private Collection<Reservation> reservation;
+
+	@ManyToMany(mappedBy = "options")
+	private Collection<RentalAgreement> ra;
 
 	public Long getId() {
 		return id;
@@ -82,20 +86,27 @@ public class Option {
 		this.price = price;
 	}
 
-	public Reservation getReservation() {
+	public Collection<Reservation> getReservation() {
 		return reservation;
 	}
 
-	public void setReservation(Reservation reservation) {
+	public void setReservation(Collection<Reservation> reservation) {
 		this.reservation = reservation;
 	}
 
-	public RentalAgreement getRa() {
+	public Collection<RentalAgreement> getRa() {
 		return ra;
 	}
 
-	public void setRa(RentalAgreement ra) {
+	public void setRa(Collection<RentalAgreement> ra) {
 		this.ra = ra;
 	}
+
+	@Override
+	public String toString() {
+		return "Option [id=" + id + ", code=" + code + ", name=" + name + ", carGroup=" + carGroup + ", price=" + price
+				+ ", reservation=" + reservation + ", ra=" + ra + "]";
+	}
+
 
 }

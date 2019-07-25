@@ -63,4 +63,13 @@ public class RoleServiceImpl implements RoleService {
 		}
 	}
 
+	@Override
+	public Role findRoleByName(String name) {
+		try {
+			return this.roleRepo.findByName(name).get();
+		} catch (NoSuchElementException ex) {
+			return null;
+		}
+	}
+
 }

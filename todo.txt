@@ -3,6 +3,7 @@ TODO:
 	kad si gotov s projektom promijeni ddl generation type
 	Zavrsi rest controllere za svaki entitet
 	Napravi validaciju za sve forme
-	Popravi bug s backom na OfficeEdit-u
+	Zavrsi employee screen
+	Napravi job koji ce importati default vrijednosti u tablice
 Improvements:
 	napravi kompositni key izmedju opcija i rezervacije/ugovora

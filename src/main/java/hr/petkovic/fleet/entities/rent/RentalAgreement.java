@@ -1,6 +1,7 @@
 package hr.petkovic.fleet.entities.rent;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -56,8 +59,9 @@ public class RentalAgreement {
 	@JoinColumn(name = "vehicle_id", referencedColumnName = "id")
 	private Vehicle rentedVehicle;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "ra")
-	private Set<Option> options;
+	@ManyToMany
+	@JoinTable(name = "ra_options", joinColumns = @JoinColumn(name = "ra_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "option_id", referencedColumnName = "id"))
+	private Collection<Option> options;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "ra")
 	private Set<CarDamage> damages;
@@ -126,14 +130,6 @@ public class RentalAgreement {
 		this.rentedVehicle = rentedVehicle;
 	}
 
-	public Set<Option> getOptions() {
-		return options;
-	}
-
-	public void setOptions(Set<Option> options) {
-		this.options = options;
-	}
-
 	public Set<CarDamage> getDamages() {
 		return damages;
 	}
@@ -141,4 +137,13 @@ public class RentalAgreement {
 	public void setDamages(Set<CarDamage> damages) {
 		this.damages = damages;
 	}
+
+	public Collection<Option> getOptions() {
+		return options;
+	}
+
+	public void setOptions(Collection<Option> options) {
+		this.options = options;
+	}
+
 }

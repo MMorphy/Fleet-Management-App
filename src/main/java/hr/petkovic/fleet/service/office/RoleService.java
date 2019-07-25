@@ -12,6 +12,8 @@ public interface RoleService {
 
 	public abstract Role findRoleById(Long id);
 
+	public abstract Role findRoleByName(String name);
+
 	public abstract void deleteRoleById(Long id);
 
 	public abstract Role saveRole(Role role);

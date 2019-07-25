@@ -1,7 +1,7 @@
 package hr.petkovic.fleet.entities.rent;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,8 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import hr.petkovic.fleet.entities.office.Office;
@@ -49,8 +50,9 @@ public class Reservation {
 	@JoinColumn(name = "group_id", nullable = false)
 	private CarGroup carGroup;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "reservation")
-	private Set<Option> options;
+	@ManyToMany
+	@JoinTable(name = "res_options", joinColumns = @JoinColumn(name = "res_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "option_id", referencedColumnName = "id"))
+	private Collection<Option> options;
 
 	public Long getId() {
 		return id;
@@ -108,11 +110,12 @@ public class Reservation {
 		this.carGroup = carGroup;
 	}
 
-	public Set<Option> getOptions() {
+	public Collection<Option> getOptions() {
 		return options;
 	}
 
-	public void setOptions(Set<Option> options) {
+	public void setOptions(Collection<Option> options) {
 		this.options = options;
 	}
+
 }

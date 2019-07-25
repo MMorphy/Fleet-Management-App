@@ -9,28 +9,37 @@
 </head>
 <body>
 	<h2>Enter new user</h2>
-	<form method="POST" th:object="${user}" th:action="@{/user/add/}">
+	<form method="POST" th:object="${addUser}" th:action="@{/user/add/}">
 		<div class="form-group">
 			<label for="username">Username:</label> <input type="text"
-				class="form-control" id="username" th:field="${user.username}">
+				class="form-control" id="username" th:field="*{username}"
+				th:value="${session.addingUser.username}">
 		</div>
 		<div class="form-group">
 			<label for="password">Password:</label> <input type="password"
-				class="form-control" id="password" th:field="${user.password}">
+				class="form-control" id="password" th:field="*{password}"
+				th:value="${session.addingUser.password}">
 		</div>
 		<div class="form-group">
 			<label for="email">Email:</label> <input type="email"
-				class="form-control" id="email" th:field="${user.email}">
+				class="form-control" id="email" th:field="*{email}"
+				th:value="${session.addingUser.email}">
 		</div>
 		<div class="form-group">
-			<label for="employee"> Employee:</label>
-			<input type="checkbox" id="employee" th:field="${user.employee}">
+			<label for="user">User Role:</label> 
+			<input type="checkbox"
+				class="form-control" id="user" th:field="*{user}"
+				th:value="${session.addingUser.user}"> 
+			<label for="oper">Operator
+				Role:</label> <input type="checkbox" class="form-control" id="oper"
+				th:field="*{oper}" th:value="${session.addingUser.oper}"> <label
+				for="admin">Admin Role:</label> <input type="checkbox"
+				class="form-control" id="admin" th:field="*{admin}"
+				th:value="${session.addingUser.admin}">
 		</div>
-		<div class="form-group">
-			<label for="admin"> Administrator:</label>
-			<input type="checkbox" id="admin" th:field="${user.admin}">
-		</div>
-		<input type="submit" th:value="Enter">
+
+		<input type="submit" th:value="Submit" name="action"> <input
+			type="submit" th:value="Cancel" name="action">
 	</form>
 </body>
 </html>

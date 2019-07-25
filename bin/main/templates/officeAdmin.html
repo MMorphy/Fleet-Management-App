@@ -32,9 +32,11 @@
 						<td th:text="${office.name}"></td>
 						<td th:text="${office.address}"></td>
 						<td>
-						<a th:href="@{'/workingHours/administration/' + ${office.workingHours.id}}">Working Hours</a>
+							<a th:href="@{'/workingHours/administration/' + ${office.workingHours.id}}">Working Hours</a>
 						</td>
-						<td>Employees link</td>
+						<td>
+							<a th:href="@{'/office/employees/' + ${office.id}}">Employees</a>
+						</td>
 						<td>Vehicles link</td>
 						<td>
 							<form th:action="@{'/office/delete/' + ${office.id}}" method="post">
