@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import hr.petkovic.fleet.entities.vehicle.NavigationModel;
 
-public interface NavigationTypeRepository extends JpaRepository<NavigationModel, Long>{
+public interface NavigationModelRepository extends JpaRepository<NavigationModel, Long>{
 
 	List<NavigationModel> findAll();
 

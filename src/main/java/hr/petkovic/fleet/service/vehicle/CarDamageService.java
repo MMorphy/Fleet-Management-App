@@ -8,7 +8,7 @@ public interface CarDamageService {
 
 	public abstract List<CarDamage> findAllDamages();
 
-	public abstract List<CarDamage> findDamageById(Long id);
+	public abstract CarDamage findDamageById(Long id);
 
 	public abstract void deleteDamageById(Long id);
 

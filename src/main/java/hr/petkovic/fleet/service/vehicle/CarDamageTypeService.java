@@ -10,7 +10,7 @@ public interface CarDamageTypeService {
 
 	public abstract CarDamageType findDamageTypeById(Long id);
 
-	public abstract void deleteDamageType(CarDamageType damageType);
+	public abstract void deleteDamageTypeById(Long id);
 
 	public abstract CarDamageType saveDamageType(CarDamageType damageType);
 

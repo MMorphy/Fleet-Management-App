@@ -10,7 +10,7 @@ public interface CarGroupService {
 
 	public abstract CarGroup findGroupById(Long id);
 
-	public abstract List<CarGroup> findAllByGearShift();
+	public abstract List<CarGroup> findAllByGearShift(String gearShift);
 
 	public abstract List<CarGroup> findAllSubgroups(String subgroup);
 
