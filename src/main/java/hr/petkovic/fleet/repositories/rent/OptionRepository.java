@@ -16,4 +16,10 @@ public interface OptionRepository extends JpaRepository<Option, Long>{
 	void deleteById(Long id);
 
 	Option save(Option option);
+
+	List<Option> findByCarGroup_carGroup(String group);
+
+	List<Option> findByReservation_id(Long id);
+
+	List<Option> findByRa_id(Long id);
 }

@@ -14,7 +14,7 @@ public interface CarGroupRepository extends JpaRepository<CarGroup, Long>{
 
 	Optional<CarGroup> findById(Long id);
 
-	@Query("SELECT g FROM CarGroup g WHERE g.carGroup LIKE __?1_")
+	@Query("SELECT g FROM CarGroup g WHERE g.carGroup LIKE '__?1_'")
 	List<CarGroup> findByGearShift(String gearShiftCode);
 
 	List<CarGroup> findByCarGroupStartsWith(String subgroupCode);
