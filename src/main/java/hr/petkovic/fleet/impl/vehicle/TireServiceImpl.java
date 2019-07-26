@@ -5,11 +5,13 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import hr.petkovic.fleet.entities.vehicle.Tire;
 import hr.petkovic.fleet.repositories.vehicle.TireRepository;
 import hr.petkovic.fleet.service.vehicle.TireService;
 
+@Service
 public class TireServiceImpl implements TireService {
 
 	@Autowired
@@ -48,8 +50,18 @@ public class TireServiceImpl implements TireService {
 		Optional<Tire> optTire = this.tireRepo.findById(id);
 		if (optTire.isPresent()) {
 			Tire tir = optTire.get();
+			tir.setAspectRatio(tire.getAspectRatio());
+			tir.setManufacturingYear(tire.getManufacturingYear());
+			tir.setTireBrand(tire.getTireBrand());
+			tir.setTireType(tire.getTireType());
+			tir.setVehicle(tire.getVehicle());
+			tir.setWheelDiameter(tire.getWheelDiameter());
+			tir.setWheelType(tire.getWheelType());
+			tir.setWidth(tire.getWidth());
+			return this.saveTire(tir);
+		} else {
+			return this.saveTire(tire);
 		}
-		return null;
 	}
 
 }

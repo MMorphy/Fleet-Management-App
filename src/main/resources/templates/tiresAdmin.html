@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Tire administration</title>
 </head>
 <body>
 
+
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<h1 class="col-md-3">Tire administration</h1>
+		</div>
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Manufacturer</th>
+						<th>Dimension</th>
+						<th>Year</th>
+						<th>Tire type</th>
+						<th>Wheel type</th>
+						<th>Vehicle</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="tire : ${tires}">
+						<td th:text="${tire.id}"></td>
+						<td th:text="${tire.tireBrand.brand}"></td>
+						<td th:text="${tire.width + '/' + tire.aspectRatio +'/' + tire.wheelDiameter}"></td>
+						<td th:text="${tire.manufacturingYear}"></td>
+						<td th:text="${tire.tireType.type}"></td>
+						<td th:text="${tire.wheelType.type}"></td>
+						<td th:if="${tire.vehicle != null}" th:text="${tire.vehicle.VIN}"></th>
+						<td th:if="${tire.vehicle == null}"> Not on vehicle</td>
+
+						<td>
+<!-- 							<form th:action="@{'/user/delete/' + ${user.id}}" method="post"> -->
+<!-- 								<button>Remove</button> -->
+<!-- 							</form> -->
+						</td>
+						<td>
+<!-- 							<form th:action="@{'/user/edit/' + ${user.id}}" method="get"> -->
+<!-- 								<button>Edit</button> -->
+<!-- 							</form> -->
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+<!-- 		<form th:action="@{/user/add/}" method="get"> -->
+<!-- 			<button>Add new user</button> -->
+<!-- 		</form> -->
+	</div>
 </body>
 </html>

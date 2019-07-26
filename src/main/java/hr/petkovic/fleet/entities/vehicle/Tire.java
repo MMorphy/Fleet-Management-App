@@ -1,5 +1,6 @@
 package hr.petkovic.fleet.entities.vehicle;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,7 @@ public class Tire {
 	@JoinColumn(name = "wheel_type_id", nullable = false)
 	private WheelType wheelType;
 
-	@OneToOne(mappedBy = "tire")
+	@OneToOne(mappedBy = "tire", fetch = FetchType.EAGER, optional = true, cascade = CascadeType.ALL)
 	private Vehicle vehicle;
 
 	public Long getId() {
