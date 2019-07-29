@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import hr.petkovic.fleet.entities.office.Office;
 import hr.petkovic.fleet.entities.vehicle.CarSpecification;
 import hr.petkovic.fleet.impl.vehicle.CarSpecificationServiceImpl;
 import hr.petkovic.fleet.impl.vehicle.EngineServiceImpl;

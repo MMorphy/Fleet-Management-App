@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Navigation administration</title>
+</head>
+<body>
+
+
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<h1 class="col-md-3">Navigation administration</h1>
+		</div>
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Model</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="nav : ${navs}">
+						<td th:text="${nav.id}"></td>
+						<td th:text="${nav.model.model}"></td>
+						<td>
+							<form th:action="@{'/navigation/delete/' + ${nav.id}}"
+								method="post">
+								<button>Remove</button>
+							</form>
+						</td>
+						<td>
+							<form th:action="@{'/navigation/edit/' + ${nav.id}}" method="get">
+								<button>Edit</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<form th:action="@{/navigation/add/}" method="get">
+			<button>Add new navigation</button>
+		</form>
+	</div>
+</body>
+</html>

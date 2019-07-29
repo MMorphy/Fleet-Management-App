@@ -63,14 +63,11 @@ public class EngineController {
 		model.addAttribute("oldEngine", session.getAttribute("addingEngine"));
 		if (action.equals("Submit")) {
 			engineService.saveEngine(addEngine);
-			session.removeAttribute("addingEngine");
-			session.removeAttribute("action");
-			return "redirect:/engine/administration/";
-		} else {
-			session.removeAttribute("addingEngine");
-			session.removeAttribute("action");
-			return "redirect:/engine/administration/";
 		}
+		session.removeAttribute("addingEngine");
+		session.removeAttribute("action");
+		return "redirect:/engine/administration/";
+
 	}
 
 	// Editing
@@ -93,6 +90,7 @@ public class EngineController {
 			HttpSession session) {
 		if (action.equals("Submit")) {
 			engineService.updateEngine(id, editEngine);
+			logger.info("12312313123");
 		}
 		session.removeAttribute("editedOffice");
 		session.removeAttribute("action");

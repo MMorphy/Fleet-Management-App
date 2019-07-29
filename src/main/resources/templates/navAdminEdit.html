@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Office edit</title>
+</head>
+<body>
+	<h2>Office edit</h2>
+	<form method="POST" th:object="${editNav}"
+		th:action="@{'/navigation/edit/' + *{id}}">
+
+		<div class="form-group">
+			<select th:field="*{model}" class="form-control">
+				<option th:each="model : ${models}" th:value="${model.id}"
+					th:text="${model.model}"></option>
+			</select>
+		</div>
+
+		<input type="submit" th:value="Submit" name="action"> <input
+			type="submit" th:value="Cancel" name="action">
+	</form>
+</body>
+</html>
