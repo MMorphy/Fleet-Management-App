@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Enter new office</title>
+</head>
+<body>
+	<h2>Enter new office</h2>
+	<form method="POST" th:object="${editTire}" th:action="@{'/tires/edit/' + *{id}}">
+		<div class="form-group">
+			<label for="manufacturingYear">Year:</label> <input type="number"
+				class="form-control" id="manufacturingYear"
+				th:field="*{manufacturingYear}"
+				th:value="${session.editedTire.manufacturingYear}" min="2000"
+				max="2099" step="1">
+		</div>
+		<div class="form-group">
+			<label for="width">Width:</label> <input type="number"
+				class="form-control" id="width" th:field="*{width}"
+				th:value="${session.editedTire.width}" min="100" max="300" step="5">
+		</div>
+
+		<div class="form-group">
+			<label for="aspectRatio">Ratio:</label> <input type="number"
+				class="form-control" id="aspectRatio" th:field="*{aspectRatio}"
+				th:value="${session.editedTire.aspectRatio}" min="30" max="200"
+				step="5">
+		</div>
+
+		<div class="form-group">
+			<label for="wheelDiameter">Diameter:</label> <input type="number"
+				class="form-control" id="wheelDiameter" th:field="*{wheelDiameter}"
+				th:value="${session.editedTire.wheelDiameter}" min="9" max="30"
+				step="1">
+		</div>
+
+		<div class="form-group">
+			<select th:field="*{tireBrand}" class="form-control">
+				<option th:each="brand : ${tireBrands}" th:value="${brand.id}"
+					th:text="${brand.brand}"></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<select th:field="*{tireType}" class="form-control">
+				<option th:each="type : ${tireTypes}" th:value="${type.id}"
+					th:text="${type.type}"></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<select th:field="*{wheelType}" class="form-control">
+				<option th:each="wheel : ${wheelTypes}" th:value="${wheel.id}"
+					th:text="${wheel.type}"></option>
+			</select>
+		</div>
+		<input type="submit" th:value="Submit" name="action"> <input
+			type="submit" th:value="Cancel" name="action">
+	</form>
+</body>
+</html>

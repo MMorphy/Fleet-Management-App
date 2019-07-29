@@ -39,23 +39,23 @@
 						<td th:if="${tire.vehicle == null}"> Not on vehicle</td>
 
 						<td>
-<!-- 							<form th:action="@{'/user/delete/' + ${user.id}}" method="post"> -->
-<!-- 								<button>Remove</button> -->
-<!-- 							</form> -->
+							<form th:action="@{'/tires/delete/' + ${tire.id}}" method="post">
+								<button>Remove</button>
+							</form>
 						</td>
 						<td>
-<!-- 							<form th:action="@{'/user/edit/' + ${user.id}}" method="get"> -->
-<!-- 								<button>Edit</button> -->
-<!-- 							</form> -->
+							<form th:action="@{'/tires/edit/' + ${tire.id}}" method="get">
+								<button>Edit</button>
+							</form>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 
 		</div>
-<!-- 		<form th:action="@{/user/add/}" method="get"> -->
-<!-- 			<button>Add new user</button> -->
-<!-- 		</form> -->
+		<form th:action="@{/tires/add/}" method="get">
+			<button>Add new tires</button>
+		</form>
 	</div>
 </body>
 </html>
