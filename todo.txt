@@ -1,9 +1,9 @@
 TODO: 
 	zavrsi grupe CarGroups
-	kad si gotov s projektom promijeni ddl generation type
 	Zavrsi rest controllere za svaki entitet
 	Napravi validaciju za sve forme
-	Zavrsi employee screen
 	Napravi job koji ce importati default vrijednosti u tablice
+	Napravi nad tires/edit pickanje vozila
+
 Improvements:
-	napravi kompositni key izmedju opcija i rezervacije/ugovora
+	razdvoji htmlove u direktorije

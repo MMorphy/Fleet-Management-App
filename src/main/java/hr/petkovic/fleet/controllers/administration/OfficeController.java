@@ -80,7 +80,7 @@ public class OfficeController {
 	public String getUpdateOffice(@PathVariable("id") Long id, Model model, HttpSession session, Office editOffice) {
 		if (session.getAttribute("editedOffice") == null || editOffice == null || editOffice.getName() == null) {
 			session.setAttribute("editedOffice", officeService.findOfficeById(id));
-			model.addAttribute("editOffice", editOffice = officeService.findOfficeById(id));
+			model.addAttribute("editOffice", officeService.findOfficeById(id));
 		} else {
 			session.setAttribute("editedOffice", editOffice);
 			model.addAttribute("editOffice", editOffice);
