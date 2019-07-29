@@ -51,6 +51,7 @@ public class EngineServiceImpl implements EngineService {
 		if (optEngine.isPresent()) {
 			Engine eng = optEngine.get();
 			eng.setCapacity(engine.getCapacity());
+			eng.setFuelType(engine.getFuelType());
 			eng.setConsumption(engine.getConsumption());
 			eng.setMaxPower(engine.getMaxPower());
 			return this.engineRepo.save(eng);

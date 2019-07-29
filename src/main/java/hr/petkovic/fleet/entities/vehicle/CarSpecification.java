@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ColumnDefault;
-
 @Entity
 @Table(name = "specifications")
 public class CarSpecification {
@@ -26,10 +24,6 @@ public class CarSpecification {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "engine_id")
 	private Engine engine;
-
-	@Column(nullable = false)
-	@ColumnDefault(value = "100")
-	private Float fuelLevel;
 
 	@Column(nullable = false)
 	private Integer fuelTankCapacity;
@@ -62,14 +56,6 @@ public class CarSpecification {
 
 	public void setEngine(Engine engine) {
 		this.engine = engine;
-	}
-
-	public Float getFuelLevel() {
-		return fuelLevel;
-	}
-
-	public void setFuelLevel(Float fuelLevel) {
-		this.fuelLevel = fuelLevel;
 	}
 
 	public Integer getFuelTankCapacity() {

@@ -52,7 +52,6 @@ public class CarSpecificationServiceImpl implements CarSpecificationService {
 			CarSpecification spc = optSpec.get();
 			spc.setDoors(spec.getDoors());
 			spc.setEngine(spec.getEngine());
-			spc.setFuelLevel(spec.getFuelLevel());
 			spc.setFuelTankCapacity(spec.getFuelTankCapacity());
 			spc.setNumberOfSeats(spec.getNumberOfSeats());
 			spc.setTopSpeed(spec.getTopSpeed());

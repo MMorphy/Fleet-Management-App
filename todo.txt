@@ -4,6 +4,7 @@ TODO:
 	Napravi validaciju za sve forme
 	Napravi job koji ce importati default vrijednosti u tablice
 	Napravi nad tires/edit pickanje vozila
+	Assign employees to office
 
 Improvements:
 	razdvoji htmlove u direktorije

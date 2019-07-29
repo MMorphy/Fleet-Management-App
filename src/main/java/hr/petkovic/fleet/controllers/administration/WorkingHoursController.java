@@ -75,7 +75,7 @@ public class WorkingHoursController {
 	@PostMapping("/delete/{id}")
 	public String deleteUser(@PathVariable("id") Long id) {
 		whService.deleteWorkingHoursById(id);
-		return "redirect:/workingHours/administration";
+		return "redirect:/workingHours/administration/";
 	}
 
 	private WorkingHours convertDTOToWorkingHours(WorkingHoursDTO whDTO) {

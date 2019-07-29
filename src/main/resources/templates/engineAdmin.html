@@ -22,6 +22,7 @@
 						<th>Capacity</th>
 						<th>Consumption</th>
 						<th>Max Power</th>
+						<th>Fuel Type</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,6 +31,7 @@
 						<td th:text="${engine.capacity}"></td>
 						<td th:text="${engine.consumption}"></td>
 						<td th:text="${engine.maxPower}"></td>
+						<td th:text="${engine.fuelType.type}"></td>
 						<td>
 							<form th:action="@{'/engine/delete/' + ${engine.id}}"
 								method="post">

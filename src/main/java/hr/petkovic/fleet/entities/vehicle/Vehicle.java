@@ -48,9 +48,8 @@ public class Vehicle {
 	@JoinColumn(name = "group_id", nullable = false)
 	private CarGroup carGroup;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fuel_type_id", nullable = false)
-	private FuelType fuelType;
+	@ColumnDefault(value = "0")
+	private Integer fuelLevel;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "tire_id", referencedColumnName = "id")
@@ -132,14 +131,6 @@ public class Vehicle {
 		this.carGroup = carGroup;
 	}
 
-	public FuelType getFuelType() {
-		return fuelType;
-	}
-
-	public void setFuelType(FuelType fuelType) {
-		this.fuelType = fuelType;
-	}
-
 	public Tire getTire() {
 		return tire;
 	}
@@ -170,5 +161,13 @@ public class Vehicle {
 
 	public void setNavigation(Navigation navigation) {
 		this.navigation = navigation;
+	}
+
+	public Integer getFuelLevel() {
+		return fuelLevel;
+	}
+
+	public void setFuelLevel(Integer fuelLevel) {
+		this.fuelLevel = fuelLevel;
 	}
 }

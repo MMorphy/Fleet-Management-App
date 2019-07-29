@@ -53,7 +53,7 @@ public class VehicleServiceImpl implements VehicleService {
 			veh.setCarGroup(vehicle.getCarGroup());
 			veh.setCurrentKM(vehicle.getCurrentKM());
 			veh.setDamages(vehicle.getDamages());
-			veh.setFuelType(vehicle.getFuelType());
+			veh.setFuelLevel(vehicle.getFuelLevel());
 			veh.setManufactoringYear(vehicle.getManufactoringYear());
 			veh.setManufacturer(vehicle.getManufacturer());
 			veh.setModel(vehicle.getModel());

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Car specification administration</title>
+</head>
+<body>
+
+
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<h1 class="col-md-3">Car specification administration</h1>
+		</div>
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Doors</th>
+						<th>Fuel Tank Capacity</th>
+						<th>Seats</th>
+						<th>Top Speed</th>
+						<th>Engine</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="spec : ${specs}">
+						<td th:text="${spec.id}"></td>
+						<td th:text="${spec.doors}"></td>
+						<td th:text="${spec.fuelTankCapacity}"></td>
+						<td th:text="${spec.numberOfSeats}"></td>
+						<td th:text="${spec.topSpeed}"></td>
+						<td><a
+							th:href="@{'/engine/administration/' + ${spec.engine.id}}">Engine</a>
+						</td>
+						<td>
+							<form th:action="@{'/specification/delete/' + ${spec.id}}"
+								method="post">
+								<button>Remove</button>
+							</form>
+						</td>
+						<td>
+							<form th:action="@{'/specification/edit/' + ${spec.id}}"
+								method="get">
+								<button>Edit</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<form th:action="@{/specification/add/}" method="get">
+			<button>Add new specification</button>
+		</form>
+	</div>
+</body>
+</html>

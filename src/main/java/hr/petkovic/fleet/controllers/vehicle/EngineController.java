@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import hr.petkovic.fleet.entities.office.Office;
 import hr.petkovic.fleet.entities.vehicle.Engine;
 import hr.petkovic.fleet.impl.vehicle.EngineServiceImpl;
+import hr.petkovic.fleet.impl.vehicle.FuelTypeServiceImpl;
 
 @Controller
 @RequestMapping("/engine")
@@ -24,15 +24,22 @@ public class EngineController {
 
 	@Autowired
 	private EngineServiceImpl engineService;
+	@Autowired
+	private FuelTypeServiceImpl fuelService;
 
-	public EngineController(EngineServiceImpl engineService) {
+	public EngineController(EngineServiceImpl engineService, FuelTypeServiceImpl fuelService) {
 		this.engineService = engineService;
+		this.fuelService = fuelService;
 	}
 
 	// Home admin page
-	@GetMapping("/administration")
-	public String getEngineAdministration(Model model) {
-		model.addAttribute("engines", engineService.findAllEngines());
+	@GetMapping({ "/administration/", "/administration/{id}" })
+	public String getEngineAdministration(@PathVariable(name = "id", required = false) Long id, Model model) {
+		if (id != null) {
+			model.addAttribute("engines", engineService.findEnginebyId(id));
+		} else {
+			model.addAttribute("engines", engineService.findAllEngines());
+		}
 		return "engineAdmin";
 	}
 
@@ -47,6 +54,7 @@ public class EngineController {
 			model.addAttribute("addEngine", addEngine);
 		}
 		session.setAttribute("action", "adding");
+		model.addAttribute("fuelTypes", fuelService.findAllFuelTypes());
 		return "engineAdminAdd";
 	}
 
@@ -57,11 +65,11 @@ public class EngineController {
 			engineService.saveEngine(addEngine);
 			session.removeAttribute("addingEngine");
 			session.removeAttribute("action");
-			return "redirect:/engine/administration";
+			return "redirect:/engine/administration/";
 		} else {
 			session.removeAttribute("addingEngine");
 			session.removeAttribute("action");
-			return "redirect:/engine/administration";
+			return "redirect:/engine/administration/";
 		}
 	}
 
@@ -76,6 +84,7 @@ public class EngineController {
 			model.addAttribute("editEngine", editEngine);
 		}
 		session.setAttribute("action", "editing");
+		model.addAttribute("fuelTypes", fuelService.findAllFuelTypes());
 		return "engineAdminEdit";
 	}
 
@@ -87,13 +96,13 @@ public class EngineController {
 		}
 		session.removeAttribute("editedOffice");
 		session.removeAttribute("action");
-		return "redirect:/engine/administration";
+		return "redirect:/engine/administration/";
 	}
 
 	// Delete
 	@PostMapping("/delete/{id}")
 	public String deleteEngine(@PathVariable("id") Long id) {
 		engineService.deleteEngineById(id);
-		return "redirect:/engine/administration";
+		return "redirect:/engine/administration/";
 	}
 }

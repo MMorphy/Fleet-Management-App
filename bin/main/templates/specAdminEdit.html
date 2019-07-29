@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Office edit</title>
+</head>
+<body>
+	<h2>Office edit</h2>
+	<form method="POST" th:object="${editSpec}"
+		th:action="@{'/specification/edit/' + *{id}}">
+		<div class="form-group">
+			<label for="doors">Doors:</label> <input type="number"
+				class="form-control" id="doors" th:field="*{doors}"
+				th:value="${session.editedSpec.doors}" min="2" max="5" step="1">
+		</div>
+		<div class="form-group">
+			<label for="capacity">Fuel Tank Capacity:</label> <input
+				type="number" class="form-control" id="capacity"
+				th:field="*{fuelTankCapacity}"
+				th:value="${session.editedSpec.fuelTankCapacity}" min="10" max="100"
+				step="1">
+		</div>
+
+		<div class="form-group">
+			<label for="seats">Seats:</label> <input type="number"
+				class="form-control" id="seats" th:field="*{numberOfSeats}"
+				th:value="${session.editedSpec.numberOfSeats}" min="2" max="10"
+				step="1">
+		</div>
+
+		<div class="form-group">
+			<label for="speed">Top Speed:</label> <input type="number"
+				class="form-control" id="speed" th:field="*{topSpeed}"
+				th:value="${session.editedSpec.topSpeed}" min="100" max="300"
+				step="1">
+		</div>
+
+		<div class="form-group">
+			<select th:field="*{engine}" class="form-control">
+				<option th:each="engine : ${engines}" th:value="${engine.id}"
+					th:text="${engine.fuelType.type + ' ' + engine.Capacity}"></option>
+			</select>
+		</div>
+		<input type="submit" th:value="Submit" name="action"> <input
+			type="submit" th:value="Cancel" name="action">
+	</form>
+</body>
+</html>
