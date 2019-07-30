@@ -18,4 +18,6 @@ public interface NavigationService {
 	public abstract Navigation saveNav(Navigation nav);
 
 	public abstract Navigation updateNav(Long id, Navigation nav);
+
+	public abstract Navigation findIntegratedNav();
 }

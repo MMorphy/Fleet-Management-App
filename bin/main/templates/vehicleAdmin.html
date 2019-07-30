@@ -23,10 +23,10 @@
 						<th>Registration</th>
 						<th>Year</th>
 						<th>KM</th>
-						<th>Model</th>
 						<th>Manufacturer</th>
+						<th>Model</th>
 						<th>Group</th>
-						<th>Fuel</th>
+						<th>Fuel Level</th>
 						<th>Tire</th>
 						<th>Specification</th>
 						<th>Damages</th>
@@ -41,14 +41,17 @@
 						<td th:text="${vehicle.registrationNumber}"></td>
 						<td th:text="${vehicle.manufactoringYear}"></td>
 						<td th:text="${vehicle.currentKM}"></td>
-						<td th:text="${vehicle.model}"></td>
 						<td th:text="${vehicle.manufacturer}"></td>
+						<td th:text="${vehicle.model}"></td>
 						<td th:text="${vehicle.carGroup.carGroup}"></td>
-						<td th:text="${vehicle.fuelType.type}"></td>
-						<td><a>Tires</a></td>
-						<td><a>Specification</a></td>
-						<td th:if="${vehicle.damages != null}"> <a  th:href="@{'/damage/administration/vehicle/' + ${dam.ra.id}}"></a></th>
-						<td th:if="${tire.vehicle == null}"> Not on vehicle</td>
+						<td th:text="${vehicle.fuelLevel}"></td>
+						<td><a
+							th:href="'/tires/administration/' + ${vehicle.tire.id}">Tires</a></td>
+						<td><a
+							th:href="'/specification/administration/' + ${vehicle.specification.id}">Specification</a></td>
+						<td th:if="${vehicle.damages != null}"><a
+							th:href="@{'/damage/administration/vehicle/' + ${vehicle.id}}"></a></td>
+						<td th:if="${vehicle.damages == null}">No damages</td>
 
 						<td th:text="${vehicle.navigation.model}"></td>
 
@@ -69,8 +72,8 @@
 			</table>
 
 		</div>
-		<form th:action="@{/office/add/}" method="get">
-			<button>Add new office</button>
+		<form th:action="@{/vehicle/add/}" method="get">
+			<button>Add new vehicle</button>
 		</form>
 	</div>
 </body>

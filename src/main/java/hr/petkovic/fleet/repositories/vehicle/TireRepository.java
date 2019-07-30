@@ -16,4 +16,6 @@ public interface TireRepository extends JpaRepository<Tire, Long>{
 	void deleteById(Long id);
 
 	Tire save(Tire tire);
+
+	List<Tire> findByVehicleIsNull();
 }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import hr.petkovic.fleet.entities.office.Office;
 import hr.petkovic.fleet.entities.vehicle.Tire;
 import hr.petkovic.fleet.impl.vehicle.TireBrandServiceImpl;
 import hr.petkovic.fleet.impl.vehicle.TireServiceImpl;
@@ -42,9 +41,13 @@ public class TireController {
 		this.wheelService = wheelService;
 	}
 
-	@GetMapping("/administration")
-	public String getTireAdministration(Model model) {
-		model.addAttribute("tires", tireService.findAllTires());
+	@GetMapping({ "/administration/", "/administration/{id}" })
+	public String getTireAdministration(@PathVariable(name = "id", required = false) Long id, Model model) {
+		if (id != null) {
+			model.addAttribute("tires", tireService.findAllTires());
+		} else {
+			model.addAttribute("tires", tireService.findAllTires());
+		}
 		return "tiresAdmin";
 	}
 
@@ -72,7 +75,7 @@ public class TireController {
 		}
 		session.removeAttribute("addingTire");
 		session.removeAttribute("action");
-		return "redirect:/tires/administration";
+		return "redirect:/tires/administration/";
 
 	}
 
@@ -98,20 +101,17 @@ public class TireController {
 			HttpSession session) {
 		if (action.equals("Submit")) {
 			tireService.updateTire(id, editTire);
-			session.removeAttribute("editedTire");
-			session.removeAttribute("action");
-			return "redirect:/tires/administration";
-		} else {
-			session.removeAttribute("editedTire");
-			session.removeAttribute("action");
-			return "redirect:/tires/administration";
 		}
+		session.removeAttribute("editedTire");
+		session.removeAttribute("action");
+		return "redirect:/tires/administration/";
+
 	}
 
 	// Delete
 	@PostMapping("/delete/{id}")
 	public String deleteTire(@PathVariable("id") Long id) {
 		tireService.deleteTireById(id);
-		return "redirect:/tires/administration";
+		return "redirect:/tires/administration/";
 	}
 }

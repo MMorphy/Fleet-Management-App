@@ -19,4 +19,6 @@ public interface NavigationRepository extends JpaRepository<Navigation, Long>{
 	void deleteById(Long id);
 
 	Navigation save(Navigation navigation);
+
+	Navigation findByModel_Model(String model);
 }

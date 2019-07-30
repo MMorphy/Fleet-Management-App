@@ -33,9 +33,13 @@ public class SpecificationController {
 	}
 
 	// Home admin page
-	@GetMapping("/administration")
-	public String getOfficeAdministration(Model model) {
-		model.addAttribute("specs", specService.findAllSpecs());
+	@GetMapping({ "/administration/", "/administration/{id}" })
+	public String getOfficeAdministration(@PathVariable(name = "id", required = false) Long id, Model model) {
+		if (id != null) {
+			model.addAttribute("specs", specService.findSpecById(id));
+		} else {
+			model.addAttribute("specs", specService.findAllSpecs());
+		}
 		return "specAdmin";
 	}
 

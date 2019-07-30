@@ -15,4 +15,6 @@ public interface TireService {
 	public abstract Tire saveTire(Tire tire);
 
 	public abstract Tire updateTire(Long id, Tire tire);
+
+	public abstract List<Tire> findUnusedTires();
 }

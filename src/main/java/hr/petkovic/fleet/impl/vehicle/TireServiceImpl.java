@@ -64,4 +64,9 @@ public class TireServiceImpl implements TireService {
 		}
 	}
 
+	@Override
+	public List<Tire> findUnusedTires() {
+		return this.tireRepo.findByVehicleIsNull();
+	}
+
 }

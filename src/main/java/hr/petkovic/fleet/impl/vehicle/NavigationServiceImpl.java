@@ -62,4 +62,9 @@ public class NavigationServiceImpl implements NavigationService {
 			return this.navRepo.save(nav);
 		}
 	}
+
+	@Override
+	public Navigation findIntegratedNav() {
+		return this.navRepo.findByModel_Model("INTEGRATED");
+	}
 }
