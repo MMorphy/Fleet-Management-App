@@ -47,7 +47,9 @@
 						<td th:text="${vehicle.fuelType.type}"></td>
 						<td><a>Tires</a></td>
 						<td><a>Specification</a></td>
-						<td><a>Damages</a></td>
+						<td th:if="${vehicle.damages != null}"> <a  th:href="@{'/damage/administration/vehicle/' + ${dam.ra.id}}"></a></th>
+						<td th:if="${tire.vehicle == null}"> Not on vehicle</td>
+
 						<td th:text="${vehicle.navigation.model}"></td>
 
 

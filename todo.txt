@@ -1,10 +1,10 @@
 TODO: 
 	zavrsi grupe CarGroups
-	Zavrsi rest controllere za svaki entitet
 	Napravi validaciju za sve forme
 	Napravi job koji ce importati default vrijednosti u tablice
 	Napravi nad tires/edit pickanje vozila
 	Assign employees to office
-
+	finish damages
+	finish vehicles
 Improvements:
 	razdvoji htmlove u direktorije

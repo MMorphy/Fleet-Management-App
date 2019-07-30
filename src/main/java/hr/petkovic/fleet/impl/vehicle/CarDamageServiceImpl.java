@@ -1,5 +1,6 @@
 package hr.petkovic.fleet.impl.vehicle;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -69,6 +70,15 @@ public class CarDamageServiceImpl implements CarDamageService {
 			return this.damageRepo.save(dam);
 		} else {
 			return null;
+		}
+	}
+
+	@Override
+	public List<CarDamage> findDamagesForVehicle(Long vehicleId) {
+		if (vehicleId != null) {
+			return this.damageRepo.findByRa_rentedVehicle_id(vehicleId);
+		} else {
+			return new ArrayList<>();
 		}
 	}
 

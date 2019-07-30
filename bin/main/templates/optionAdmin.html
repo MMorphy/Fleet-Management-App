@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Option administration</title>
+</head>
+<body>
+
+
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<h1 class="col-md-3">Option administration</h1>
+		</div>
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Code</th>
+						<th>Name</th>
+						<th>Car Group</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="option : ${options}">
+						<td th:text="${option.id}"></td>
+						<td th:text="${option.code}"></td>
+						<td th:text="${option.name}"></td>
+						<td th:text="${option.carGroup.group}"></td>
+						<td th:text="${option.price}"></td>
+						<td>
+							<form th:action="@{'/option/delete/' + ${option.id}}"
+								method="post">
+								<button>Remove</button>
+							</form>
+						</td>
+						<td>
+							<form th:action="@{'/option/edit/' + ${option.id}}" method="get">
+								<button>Edit</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<form th:action="@{/option/add/}" method="get">
+			<button>Add new option</button>
+		</form>
+	</div>
+</body>
+</html>

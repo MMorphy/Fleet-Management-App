@@ -16,5 +16,7 @@ public interface CarDamageService {
 
 	public abstract CarDamage updateDamage(Long id, CarDamage damage);
 
+	public abstract List<CarDamage> findDamagesForVehicle(Long vehicleId);
+
 	public abstract CarDamage fixDamage(Long id);
 }
