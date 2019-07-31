@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -96,6 +97,9 @@ public class UserController {
 
 	@PostMapping("/edit/{id}")
 	public String updateUser(@PathVariable("id") Long id, Model model, HttpSession session, UserDTO user) {
+		if (!user.getPassword().startsWith("$2a")) {
+			user.setPassword(getEncoder().encode(user.getPassword()));
+		}
 		userService.updateUser(id, convertDTOToObject(user));
 		return "redirect:/user/administration";
 	}
@@ -104,6 +108,41 @@ public class UserController {
 	public String deleteUser(@PathVariable("id") Long id) {
 		userService.deleteUserById(id);
 		return "redirect:/user/administration";
+	}
+
+	@GetMapping("/registration/")
+	public String getUserRegistration(Model model, UserDTO regUser, HttpSession session) {
+		if (session.getAttribute("addingUser") == null || regUser == null) {
+			session.setAttribute("addingUser", new UserDTO());
+			model.addAttribute("addUser", new UserDTO());
+		} else {
+			session.setAttribute("addingUser", regUser);
+			model.addAttribute("addUser", regUser);
+		}
+		session.setAttribute("action", "adding");
+		return "register";
+	}
+
+	@PostMapping("/registration/")
+	public String registerUser(Model model, UserDTO regUser, String action, HttpSession session) {
+		model.addAttribute("oldUser", session.getAttribute("addingUser"));
+		if (action.equals("Submit")) {
+			LocalDateTime time = LocalDateTime.now();
+			regUser.setCreateTS(time);
+			regUser.setLastChangeTS(time);
+			regUser.setPassword(getEncoder().encode(regUser.getPassword()));
+			regUser.setAdmin(false);
+			regUser.setOper(false);
+			regUser.setUser(true);
+			userService.saveUser(convertDTOToObject(regUser));
+			session.removeAttribute("addingUser");
+			session.removeAttribute("action");
+		} else {
+			session.removeAttribute("addingUser");
+			session.removeAttribute("action");
+		}
+
+		return "index";
 	}
 
 	private User convertDTOToObject(UserDTO dto) {
@@ -163,5 +202,9 @@ public class UserController {
 			}
 		}
 		return dto;
+	}
+
+	private BCryptPasswordEncoder getEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 }

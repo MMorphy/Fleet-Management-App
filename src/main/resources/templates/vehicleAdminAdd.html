@@ -25,15 +25,9 @@
 		</div>
 
 		<div class="form-group">
-			<label for="manufactoringYear">Year:</label> <input type="text"
+			<label for="manufactoringYear">Year:</label> <input type="number"
 				class="form-control" id="manufactoringYear" th:field="*{manufactoringYear}"
-				th:value="${session.addingVehicle.manufactoringYear}">
-		</div>
-
-		<div class="form-group">
-			<label for="manufactoringYear">Year:</label> <input type="text"
-				class="form-control" id="manufactoringYear" th:field="*{manufactoringYear}"
-				th:value="${session.addingVehicle.manufactoringYear}">
+				th:value="${session.addingVehicle.manufactoringYear}" min="2000" max="2099" step="1">
 		</div>
 
 		<div class="form-group">

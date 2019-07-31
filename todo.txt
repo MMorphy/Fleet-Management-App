@@ -6,6 +6,6 @@ TODO:
 	Assign employees to office
 	finish damages
 	finish vehicles
-	napravi login
+	implement search and filter
 Improvements:
 	razdvoji htmlove u direktorije

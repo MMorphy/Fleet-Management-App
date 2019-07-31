@@ -8,6 +8,19 @@
 </head>
 <body>
 
+    <div style="text-align: center" sec:authorize="isAuthenticated()">
+        <form method="POST" th:action="@{/logout}">
+            <p><span> You are logged in as: </span><span sec:authentication="name"></span></p>
+            <input type="submit" value="Logout" class="btn btn-danger gumb">
+        </form>
+            
+    </div>
+    <div style="text-align: center" sec:authorize="!isAuthenticated()">
+		<a th:href="@{/user/registration/}">Register</a>
+		<a th:href="@{/login}">Login</a>      
+    </div>
+
+
 	<div>
 		<p>Test</p>
 	</div>

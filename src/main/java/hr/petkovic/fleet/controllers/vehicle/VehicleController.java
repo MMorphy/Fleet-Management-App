@@ -90,6 +90,10 @@ public class VehicleController {
 	public String addVehicle(Model model, Vehicle addVehicle, String action, HttpSession session) {
 		model.addAttribute("oldVehicle", session.getAttribute("addingVehicle"));
 		if (action.equals("Submit")) {
+			if(addVehicle.getCurrentKM()==null)
+			{
+				addVehicle.setCurrentKM(0);
+			}
 			vehicleService.saveVehicle(addVehicle);
 		}
 		session.removeAttribute("addingVehicle");
