@@ -47,11 +47,11 @@
 						<td th:text="${vehicle.fuelLevel}"></td>
 						<td><a
 							th:href="'/tires/administration/' + ${vehicle.tire.id}">Tires</a></td>
-<!-- 						<td><a -->
-<!-- 							th:href="'/specification/administration/' + ${vehicle.specification.id}">Specification</a></td> -->
-						<td th:if="${vehicle.damages != null}"><a
+						<td><a
+							th:href="'/specification/administration/' + ${vehicle.specification.id}">Specification</a></td>
+						<td th:if="${#lists.size(vehicle.damages) != 0}"><a
 							th:href="@{'/damage/administration/vehicle/' + ${vehicle.id}}">Damages</a></td>
-						<td th:if="${vehicle.damages == null}">No damages</td>
+						<td th:if="${#lists.size(vehicle.damages) == 0}">No damages</td>
 
 						<td th:if="${vehicle.navigation != null}" th:text="${vehicle.navigation.model}"></td>
 						<td th:if="${vehicle.navigation == null}">Pick navigation</td>

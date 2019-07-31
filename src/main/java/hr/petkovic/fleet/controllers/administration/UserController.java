@@ -71,6 +71,7 @@ public class UserController {
 			LocalDateTime time = LocalDateTime.now();
 			addUser.setCreateTS(time);
 			addUser.setLastChangeTS(time);
+			addUser.setPassword(getEncoder().encode(addUser.getPassword()));
 			userService.saveUser(convertDTOToObject(addUser));
 			session.removeAttribute("addingUser");
 			session.removeAttribute("action");

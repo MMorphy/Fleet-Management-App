@@ -42,7 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	.and()
     	.formLogin().loginPage("/login").defaultSuccessUrl("/", true)
     	.and()
-    	.logout().logoutSuccessUrl("/logout").logoutSuccessUrl("/");
+    	.logout().logoutSuccessUrl("/logout").logoutSuccessUrl("/")
+    	.and()
+    	.exceptionHandling().accessDeniedPage("/forbidden");
         http.cors().disable();
     }
 }

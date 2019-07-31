@@ -11,39 +11,72 @@
 	<h2>Office edit</h2>
 	<form method="POST" th:object="${editSpec}"
 		th:action="@{'/specification/edit/' + *{id}}">
-		<div class="form-group">
-			<label for="doors">Doors:</label> <input type="number"
-				class="form-control" id="doors" th:field="*{doors}"
-				th:value="${session.editedSpec.doors}" min="2" max="5" step="1">
-		</div>
-		<div class="form-group">
-			<label for="capacity">Fuel Tank Capacity:</label> <input
-				type="number" class="form-control" id="capacity"
-				th:field="*{fuelTankCapacity}"
-				th:value="${session.editedSpec.fuelTankCapacity}" min="10" max="100"
-				step="1">
+				<div class="form-group">
+			<label for="VIN">VIN:</label> <input type="text"
+				class="form-control" id="VIN" th:field="*{VIN}"
+				th:value="${session.addingVehicle.VIN}">
 		</div>
 
 		<div class="form-group">
-			<label for="seats">Seats:</label> <input type="number"
-				class="form-control" id="seats" th:field="*{numberOfSeats}"
-				th:value="${session.editedSpec.numberOfSeats}" min="2" max="10"
-				step="1">
+			<label for="registration">Registration plate:</label> <input type="text"
+				class="form-control" id="registration" th:field="*{registrationNumber}"
+				th:value="${session.addingVehicle.registrationNumber}">
 		</div>
 
 		<div class="form-group">
-			<label for="speed">Top Speed:</label> <input type="number"
-				class="form-control" id="speed" th:field="*{topSpeed}"
-				th:value="${session.editedSpec.topSpeed}" min="100" max="300"
-				step="1">
+			<label for="manufactoringYear">Year:</label> <input type="number"
+				class="form-control" id="manufactoringYear" th:field="*{manufactoringYear}"
+				th:value="${session.addingVehicle.manufactoringYear}" min="2000" max="2099" step="1">
 		</div>
 
 		<div class="form-group">
-			<select th:field="*{engine}" class="form-control">
-				<option th:each="engine : ${engines}" th:value="${engine.id}"
-					th:text="${engine.fuelType.type + ' ' + engine.Capacity}"></option>
+		<label>Manufacturer:</label>
+			<select th:field="*{manufacturer}" class="form-control">
+				<option th:each="man : ${manufacturers}" th:value="${man.id}"
+					th:text="${man.carManufacturer}"></option>
 			</select>
 		</div>
+
+		<div class="form-group">
+		<label>Model:</label>
+			<select th:field="*{model}" class="form-control">
+				<option th:each="model : ${models}" th:value="${model.id}"
+					th:text="${model.carModel}"></option>
+			</select>
+		</div>
+
+
+		<div class="form-group">
+		<label>Car Group:</label>
+			<select th:field="*{carGroup}" class="form-control">
+				<option th:each="group : ${groups}" th:value="${group.id}"
+					th:text="${group.group}"></option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="fuelLevel">Fuel level:</label> <input type="number"
+				class="form-control" id="fuelLevel" th:field="*{fuelLevel}"
+				th:value="${session.addingVehicle.fuelLevel}" min="0" max="8" step="1">
+		</div>
+
+		<div class="form-group">
+		<label>Specification:</label>
+			<input list="specifications" class="form-control" th:field="*{specification}">
+			<datalist id="specifications">
+				<option th:each="spec : ${specs}" th:text="${'Doors:' + spec.doors + ' FuelTank:' + spec.fuelTankCapacity + ' Seats:' + spec.numberOfSeats}" th:value="${spec.id}"></option>
+			</datalist>
+		</div>
+
+
+		<div class="form-group">
+		<label>Tires:</label>
+			<select th:field="*{tire}" class="form-control">
+				<option th:each="tire : ${tires}" th:value="${tire.id}"
+					th:text="${tire.manufacturingYear + ' ' + tire.tireType.type + ' ' + tire.tireBrand.brand + ' ' + tire.width + '/' + tire.aspectRatio + '/' + tire.wheelDiameter}"></option>
+			</select>
+		</div>
+
 		<input type="submit" th:value="Submit" name="action"> <input
 			type="submit" th:value="Cancel" name="action">
 	</form>

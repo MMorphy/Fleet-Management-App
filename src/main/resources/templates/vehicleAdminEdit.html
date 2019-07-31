@@ -9,24 +9,24 @@
 </head>
 <body>
 	<h2>Office edit</h2>
-	<form method="POST" th:object="${editSpec}"
-		th:action="@{'/specification/edit/' + *{id}}">
+	<form method="POST" th:object="${editVehicle}"
+		th:action="@{'/vehicle/edit/' + *{id}}">
 				<div class="form-group">
 			<label for="VIN">VIN:</label> <input type="text"
 				class="form-control" id="VIN" th:field="*{VIN}"
-				th:value="${session.addingVehicle.VIN}">
+				th:value="${session.editedVehicle.VIN}">
 		</div>
 
 		<div class="form-group">
 			<label for="registration">Registration plate:</label> <input type="text"
 				class="form-control" id="registration" th:field="*{registrationNumber}"
-				th:value="${session.addingVehicle.registrationNumber}">
+				th:value="${session.editedVehicle.registrationNumber}">
 		</div>
 
 		<div class="form-group">
 			<label for="manufactoringYear">Year:</label> <input type="number"
 				class="form-control" id="manufactoringYear" th:field="*{manufactoringYear}"
-				th:value="${session.addingVehicle.manufactoringYear}" min="2000" max="2099" step="1">
+				th:value="${session.editedVehicle.manufactoringYear}" min="2000" max="2099" step="1">
 		</div>
 
 		<div class="form-group">
@@ -57,7 +57,7 @@
 		<div class="form-group">
 			<label for="fuelLevel">Fuel level:</label> <input type="number"
 				class="form-control" id="fuelLevel" th:field="*{fuelLevel}"
-				th:value="${session.addingVehicle.fuelLevel}" min="0" max="8" step="1">
+				th:value="${session.editedVehicle.fuelLevel}" min="0" max="8" step="1">
 		</div>
 
 		<div class="form-group">
@@ -76,7 +76,6 @@
 					th:text="${tire.manufacturingYear + ' ' + tire.tireType.type + ' ' + tire.tireBrand.brand + ' ' + tire.width + '/' + tire.aspectRatio + '/' + tire.wheelDiameter}"></option>
 			</select>
 		</div>
-
 		<input type="submit" th:value="Submit" name="action"> <input
 			type="submit" th:value="Cancel" name="action">
 	</form>

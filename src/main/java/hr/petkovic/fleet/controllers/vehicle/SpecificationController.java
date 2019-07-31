@@ -63,14 +63,11 @@ public class SpecificationController {
 		model.addAttribute("oldSpec", session.getAttribute("addingSpec"));
 		if (action.equals("Submit")) {
 			specService.saveSpec(addSpec);
-			session.removeAttribute("addingSpec");
-			session.removeAttribute("action");
-			return "redirect:/specification/administration";
-		} else {
-			session.removeAttribute("addingOffice");
-			session.removeAttribute("action");
-			return "redirect:/specification/administration";
 		}
+		session.removeAttribute("addingOffice");
+		session.removeAttribute("action");
+		return "redirect:/specification/administration/";
+
 	}
 
 	// Editing

@@ -44,7 +44,7 @@ public class TireController {
 	@GetMapping({ "/administration/", "/administration/{id}" })
 	public String getTireAdministration(@PathVariable(name = "id", required = false) Long id, Model model) {
 		if (id != null) {
-			model.addAttribute("tires", tireService.findAllTires());
+			model.addAttribute("tires", tireService.findTireById(id));
 		} else {
 			model.addAttribute("tires", tireService.findAllTires());
 		}
@@ -105,7 +105,6 @@ public class TireController {
 		session.removeAttribute("editedTire");
 		session.removeAttribute("action");
 		return "redirect:/tires/administration/";
-
 	}
 
 	// Delete
