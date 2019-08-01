@@ -12,38 +12,40 @@
 
 	<div class="col-md-12">
 		<div class="col-md-12">
-			<h1 class="col-md-3">Option administration</h1>
+			<h1 class="col-md-3">Reservation administration</h1>
 		</div>
 		<div class="col-md-12">
 			<table class="table">
 				<thead>
 					<tr>
 						<th>ID</th>
+<!-- 						<th>User</th> -->
 						<th>Car Group</th>
 						<th>Check-out Time</th>
 						<th>Check-out Office</th>
 						<th>Check-in Time</th>
 						<th>Check-in Office</th>
 						<th>Options</th>
-						<th>User</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="res : ${reservations}">
 						<td th:text="${res.id}"></td>
+<!-- 						<td th:text="${res.user.username}"></td> -->
 						<td th:text="${res.carGroup.group}"></td>
-						<td th:text="${res.checkOutTime}"></td>
+						<td th:text="${{res.checkOutTime}}"></td>
 						<td th:text="${res.checkOutOffice.name}"></td>
-						<td th:text="${res.checkInTime}"></td>
-						<td th:text="${res.checkInOffice}"></td>
+						<td th:text="${{res.checkInTime}}"></td>
+						<td th:text="${res.checkInOffice.name}"></td>
+						<td><a th:href="@{'/option/reservation/' + ${res.id}}">Options</a></td>
 						<td>
-							<form th:action="@{'/option/delete/' + ${option.id}}"
+							<form th:action="@{'/reservation/delete/' + ${res.id}}"
 								method="post">
 								<button>Remove</button>
 							</form>
 						</td>
 						<td>
-							<form th:action="@{'/option/edit/' + ${option.id}}" method="get">
+							<form th:action="@{'/reservation/edit/' + ${res.id}}" method="get">
 								<button>Edit</button>
 							</form>
 						</td>
@@ -52,8 +54,8 @@
 			</table>
 
 		</div>
-		<form th:action="@{/option/add/}" method="get">
-			<button>Add new option</button>
+		<form th:action="@{/reservation/add/}" method="get">
+			<button>Add new reservation</button>
 		</form>
 	</div>
 </body>

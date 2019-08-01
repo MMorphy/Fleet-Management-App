@@ -6,6 +6,8 @@ TODO:
 	Assign employees to office
 	finish damages
 	finish vehicles
+	dodati addanje current usera u reservation
+	makni mogucnost cruda sa opcija od rezervacije
 	implement search and filter
 Improvements:
 	razdvoji htmlove u direktorije

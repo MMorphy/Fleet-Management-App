@@ -22,7 +22,25 @@ public class ReservationDTO {
 
 	private CarGroup carGroup;
 
-	private Collection<Option> options;
+	private boolean T;
+
+	private boolean TI;
+
+	private boolean GF;
+
+	private boolean TG;
+
+	private boolean TP;
+
+	private boolean PAP;
+
+	private boolean OW;
+
+	private boolean IT;
+
+	private boolean NV;
+
+	private boolean PF;
 
 	public Long getId() {
 		return id;
@@ -80,12 +98,84 @@ public class ReservationDTO {
 		this.carGroup = carGroup;
 	}
 
-	public Collection<Option> getOptions() {
-		return options;
+	public boolean isT() {
+		return T;
 	}
 
-	public void setOptions(Collection<Option> options) {
-		this.options = options;
+	public void setT(boolean t) {
+		T = t;
+	}
+
+	public boolean isTI() {
+		return TI;
+	}
+
+	public void setTI(boolean tI) {
+		TI = tI;
+	}
+
+	public boolean isGF() {
+		return GF;
+	}
+
+	public void setGF(boolean gF) {
+		GF = gF;
+	}
+
+	public boolean isTG() {
+		return TG;
+	}
+
+	public void setTG(boolean tG) {
+		TG = tG;
+	}
+
+	public boolean isTP() {
+		return TP;
+	}
+
+	public void setTP(boolean tP) {
+		TP = tP;
+	}
+
+	public boolean isPAP() {
+		return PAP;
+	}
+
+	public void setPAP(boolean pAP) {
+		PAP = pAP;
+	}
+
+	public boolean isOW() {
+		return OW;
+	}
+
+	public void setOW(boolean oW) {
+		OW = oW;
+	}
+
+	public boolean isIT() {
+		return IT;
+	}
+
+	public void setIT(boolean iT) {
+		IT = iT;
+	}
+
+	public boolean isNV() {
+		return NV;
+	}
+
+	public void setNV(boolean nV) {
+		NV = nV;
+	}
+
+	public boolean isPF() {
+		return PF;
+	}
+
+	public void setPF(boolean pF) {
+		PF = pF;
 	}
 
 }

@@ -19,6 +19,8 @@ public interface OptionService {
 
 	public abstract Option updateOption(Long id, Option option);
 
+	public abstract Option findOptionByGroupAndCode(CarGroup group, String code);
+
 	public abstract List<Option> findAllOptionsForGroup(CarGroup group);
 
 	public abstract List<Option> findAllOptionsForRent(RentalAgreement ra);

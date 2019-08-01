@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import hr.petkovic.fleet.entities.rent.Option;
 import hr.petkovic.fleet.impl.rent.OptionServiceImpl;
+import hr.petkovic.fleet.impl.rent.ReservationServiceImpl;
 import hr.petkovic.fleet.impl.vehicle.CarGroupServiceImpl;
 
 @Controller
@@ -22,10 +23,13 @@ public class OptionController {
 	private OptionServiceImpl optionService;
 	@Autowired
 	private CarGroupServiceImpl groupService;
+	@Autowired
+	private ReservationServiceImpl resService;
 
-	public OptionController(OptionServiceImpl optionService, CarGroupServiceImpl groupService) {
+	public OptionController(OptionServiceImpl optionService, CarGroupServiceImpl groupService, ReservationServiceImpl resService) {
 		this.optionService = optionService;
 		this.groupService = groupService;
+		this.resService = resService;
 	}
 
 	// Home admin page
@@ -96,5 +100,17 @@ public class OptionController {
 	public String deleteOption(@PathVariable("id") Long id) {
 		optionService.deleteOptionById(id);
 		return "redirect:/option/administration/";
+	}
+	
+	
+	// Options for res
+	@GetMapping("/reservation/{id}")
+	public String getOptionAdministrationForReservation(@PathVariable(name = "id", required = false) Long id, Model model) {
+		if (id != null) {
+			model.addAttribute("options", optionService.findAllOptionsForReservation(resService.findResById(id)));
+		} else {
+			model.addAttribute("options", optionService.findAllOptions());
+		}
+		return "optionAdmin";
 	}
 }

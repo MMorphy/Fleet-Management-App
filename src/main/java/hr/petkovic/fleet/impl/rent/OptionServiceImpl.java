@@ -79,4 +79,13 @@ public class OptionServiceImpl implements OptionService {
 	public List<Option> findAllOptionsForReservation(Reservation res) {
 		return this.optionRepo.findByReservation_id(res.getId());
 	}
+
+	@Override
+	public Option findOptionByGroupAndCode(CarGroup group, String code) {
+		try {
+			return this.optionRepo.findByCarGroup_carGroupAndCode(group.getGroup(), code).get();
+		} catch (NoSuchElementException ex) {
+			return null;
+		}
+	}
 }

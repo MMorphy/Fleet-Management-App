@@ -17,6 +17,8 @@ public interface OptionRepository extends JpaRepository<Option, Long>{
 
 	Option save(Option option);
 
+	Optional<Option> findByCarGroup_carGroupAndCode(String group, String code);
+
 	List<Option> findByCarGroup_carGroup(String group);
 
 	List<Option> findByReservation_id(Long id);
