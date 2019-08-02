@@ -55,6 +55,15 @@
 					th:text="${wheel.type}"></option>
 			</select>
 		</div>
+		
+		<div class="form-group">
+			<label>Vehicle:</label>
+			<input list="vehicles" class="form-control" th:field="*{vehicle}">
+			<datalist id="vehicles">				
+					<option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}"
+						th:text="${vehicle.registrationNumber}"></option>
+				</datalist>
+		</div>
 		<input type="submit" th:value="Submit" name="action"> <input
 			type="submit" th:value="Cancel" name="action">
 	</form>

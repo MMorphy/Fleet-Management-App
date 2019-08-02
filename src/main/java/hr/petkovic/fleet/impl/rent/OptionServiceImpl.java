@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hr.petkovic.fleet.entities.rent.Option;
-import hr.petkovic.fleet.entities.rent.RentalAgreement;
 import hr.petkovic.fleet.entities.rent.Reservation;
 import hr.petkovic.fleet.entities.vehicle.CarGroup;
 import hr.petkovic.fleet.repositories.rent.OptionRepository;
@@ -57,7 +56,6 @@ public class OptionServiceImpl implements OptionService {
 			opt.setCode(option.getCode());
 			opt.setName(option.getName());
 			opt.setPrice(option.getPrice());
-			opt.setRa(option.getRa());
 			opt.setReservation(option.getReservation());
 			return this.optionRepo.save(opt);
 		} else {
@@ -68,11 +66,6 @@ public class OptionServiceImpl implements OptionService {
 	@Override
 	public List<Option> findAllOptionsForGroup(CarGroup group) {
 		return this.optionRepo.findByCarGroup_carGroup(group.getGroup());
-	}
-
-	@Override
-	public List<Option> findAllOptionsForRent(RentalAgreement ra) {
-		return this.optionRepo.findByRa_id(ra.getId());
 	}
 
 	@Override

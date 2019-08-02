@@ -43,9 +43,6 @@ public class Option {
 	@ManyToMany(mappedBy = "options")
 	private Collection<Reservation> reservation;
 
-	@ManyToMany(mappedBy = "options")
-	private Collection<RentalAgreement> ra;
-
 	public Long getId() {
 		return id;
 	}
@@ -94,18 +91,10 @@ public class Option {
 		this.reservation = reservation;
 	}
 
-	public Collection<RentalAgreement> getRa() {
-		return ra;
-	}
-
-	public void setRa(Collection<RentalAgreement> ra) {
-		this.ra = ra;
-	}
-
 	@Override
 	public String toString() {
 		return "Option [id=" + id + ", code=" + code + ", name=" + name + ", carGroup=" + carGroup + ", price=" + price
-				+ ", reservation=" + reservation + ", ra=" + ra + "]";
+				+ ", reservation=" + reservation + "]";
 	}
 
 

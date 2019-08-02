@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hr.petkovic.fleet.entities.vehicle.Tire;
+import hr.petkovic.fleet.entities.vehicle.Vehicle;
 import hr.petkovic.fleet.impl.vehicle.TireBrandServiceImpl;
 import hr.petkovic.fleet.impl.vehicle.TireServiceImpl;
 import hr.petkovic.fleet.impl.vehicle.TireTypeServiceImpl;
+import hr.petkovic.fleet.impl.vehicle.VehicleServiceImpl;
 import hr.petkovic.fleet.impl.vehicle.WheelTypeServiceImpl;
 
 @Controller
@@ -32,13 +34,16 @@ public class TireController {
 	private TireBrandServiceImpl tireBrandService;
 	@Autowired
 	private WheelTypeServiceImpl wheelService;
+	@Autowired
+	private VehicleServiceImpl vehicleService;
 
 	public TireController(TireServiceImpl tireService, TireTypeServiceImpl tireTypeService,
-			TireBrandServiceImpl tireBrandService, WheelTypeServiceImpl wheelService) {
+			TireBrandServiceImpl tireBrandService, WheelTypeServiceImpl wheelService, VehicleServiceImpl vehicleService) {
 		this.tireService = tireService;
 		this.tireTypeService = tireTypeService;
 		this.tireBrandService = tireBrandService;
 		this.wheelService = wheelService;
+		this.vehicleService = vehicleService;
 	}
 
 	@GetMapping({ "/administration/", "/administration/{id}" })
@@ -64,6 +69,7 @@ public class TireController {
 		model.addAttribute("tireTypes", tireTypeService.findAllTypes());
 		model.addAttribute("tireBrands", tireBrandService.findAllBrands());
 		model.addAttribute("wheelTypes", wheelService.findAllTypes());
+		model.addAttribute("vehicles", vehicleService.findAllVehicles());
 		session.setAttribute("action", "adding");
 		return "tiresAdminAdd";
 	}
@@ -72,6 +78,9 @@ public class TireController {
 	public String addTire(Model model, Tire addTire, String action, HttpSession session) {
 		if (action.equalsIgnoreCase("Submit")) {
 			tireService.saveTire(addTire);
+			Vehicle vehicle = vehicleService.findVehicleById(addTire.getVehicle().getId());
+			vehicle.setTire(addTire);
+			vehicleService.updateVehicle(vehicle.getId(), vehicle);
 		}
 		session.removeAttribute("addingTire");
 		session.removeAttribute("action");
@@ -90,9 +99,11 @@ public class TireController {
 			model.addAttribute("editTire", editTire);
 		}
 		session.setAttribute("action", "editing");
+		model.addAttribute("vehicles", vehicleService);
 		model.addAttribute("tireTypes", tireTypeService.findAllTypes());
 		model.addAttribute("tireBrands", tireBrandService.findAllBrands());
 		model.addAttribute("wheelTypes", wheelService.findAllTypes());
+		model.addAttribute("vehicles", vehicleService.findAllVehicles());
 		return "tiresAdminEdit";
 	}
 
@@ -101,6 +112,9 @@ public class TireController {
 			HttpSession session) {
 		if (action.equals("Submit")) {
 			tireService.updateTire(id, editTire);
+			Vehicle vehicle = vehicleService.findVehicleById(editTire.getVehicle().getId());
+			vehicle.setTire(editTire);
+			vehicleService.updateVehicle(vehicle.getId(), vehicle);
 		}
 		session.removeAttribute("editedTire");
 		session.removeAttribute("action");

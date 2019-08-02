@@ -16,4 +16,6 @@ public interface CarModelRepository extends JpaRepository<CarModel, Long>{
 	void deleteById(Long id);
 
 	CarModel save(CarModel model);
+
+	List<CarModel> findByManufacturer_id(Long id);
 }

@@ -21,8 +21,8 @@
 						<th>ID</th>
 						<th>Type</th>
 						<th>Size</th>
+						<th>Location</th>
 						<th>Repaired</th>
-						<th>Rental Agreement</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,14 +30,11 @@
 						<td th:text="${dam.id}"></td>
 						<td th:text="${dam.type.type}"></td>
 						<td th:text="${dam.size.size}"></td>
+						<td th:text="${dam.location}"></td>
 						<td th:text="${dam.repaired}"></td>
 
 						<td>
-							<a th:href="@{'/ra/administration/' + ${dam.ra.id}}">Rental agreement</a>
-						</td>
-						<td>
-							<form th:action="@{'/damage/delete/' + ${dam.id}}"
-								method="post">
+							<form th:action="@{'/damage/delete/' + ${dam.id}}" method="post">
 								<button>Remove</button>
 							</form>
 						</td>
@@ -47,7 +44,7 @@
 							</form>
 						</td>
 						<td>
-							<form th:action="@{'/damage/fix/' + ${office.id}}" method="get">
+							<form th:action="@{'/damage/fix/' + ${dam.id}}" method="get">
 								<button>Fix</button>
 							</form>
 						</td>

@@ -62,4 +62,13 @@ public class UsersServiceImpl implements UsersService {
 			return user;
 		}
 	}
+
+	@Override
+	public User findUserByUsername(String username) {
+		try {
+			return this.userRepo.findByUsername(username).get();
+		} catch (NoSuchElementException ex) {
+			return null;
+		}
+	}
 }

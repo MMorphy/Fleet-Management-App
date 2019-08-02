@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import hr.petkovic.fleet.entities.vehicle.CarManufacturer;
 import hr.petkovic.fleet.entities.vehicle.CarModel;
 import hr.petkovic.fleet.repositories.vehicle.CarModelRepository;
 import hr.petkovic.fleet.service.vehicle.CarModelService;
@@ -56,5 +57,10 @@ public class CarModelServiceImpl implements CarModelService {
 		} else {
 			return this.modelRepo.save(model);
 		}
+	}
+
+	@Override
+	public List<CarModel> findAllModelsForManufacturer(CarManufacturer manufacturer) {
+		return this.modelRepo.findByManufacturer_id(manufacturer.getId());
 	}
 }

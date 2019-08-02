@@ -5,15 +5,16 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<title>Enter new office</title>
+<title>Enter new navigation</title>
 </head>
 <body>
-	<h2>Enter new office</h2>
+	<h2>Enter new navigation</h2>
 	<form method="POST" th:object="${addNav}"
 		th:action="@{/navigation/add/}">
 
 		<div class="form-group">
-			<select th:field="*{model}" class="form-control">
+		<label for="model">Navigation model</label>
+			<select th:field="*{model}" class="form-control" id="model">
 				<option th:each="model : ${models}" th:value="${model.id}"
 					th:text="${model.model}"></option>
 			</select>

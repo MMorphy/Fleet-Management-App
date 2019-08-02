@@ -36,23 +36,6 @@ public class CarGroupServiceImpl implements CarGroupService {
 	}
 
 	@Override
-	public List<CarGroup> findAllByGearShift(String gearShift) {
-		if (gearShift == null || gearShift.isEmpty()) {
-			return null;
-		} else if (gearShift.equalsIgnoreCase("manual")) {
-			return this.groupRepo.findByGearShift("M");
-		} else if (gearShift.equalsIgnoreCase("automatic")) {
-			return this.groupRepo.findByGearShift("A");
-		} else
-			return null;
-	}
-
-	@Override
-	public List<CarGroup> findAllSubgroups(String subgroupCode) {
-		return this.groupRepo.findByCarGroupStartsWith(subgroupCode);
-	}
-
-	@Override
 	public void deleteCarGroupById(Long id) {
 		this.groupRepo.deleteById(id);
 	}

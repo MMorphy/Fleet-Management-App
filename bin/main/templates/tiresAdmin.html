@@ -35,7 +35,9 @@
 						<td th:text="${tire.manufacturingYear}"></td>
 						<td th:text="${tire.tireType.type}"></td>
 						<td th:text="${tire.wheelType.type}"></td>
-						<td th:if="${tire.vehicle != null}" th:text="${tire.vehicle.VIN}"></th>
+						<td th:if="${tire.vehicle != null}">
+							<a th:href="@{'/vehicle/administration/' + ${tire.vehicle.id}}">Vehicle</a>
+						</td>
 						<td th:if="${tire.vehicle == null}"> Not on vehicle</td>
 
 						<td>

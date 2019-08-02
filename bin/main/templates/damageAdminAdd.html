@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Enter new damage</title>
+</head>
+<body>
+	<h2>Enter new damage</h2>
+	<form method="POST" th:object="${addDamage}" th:action="@{/damage/add/}">
+
+
+		<div class="form-group">
+			<label for="location">Location:</label> <input type="text"
+				class="form-control" id="location" th:field="*{location}"
+				th:value="${session.addingDamage.location}">
+		</div>
+
+		<div class="form-group">
+			<label for="type">Damage type:</label>
+			<select th:field="*{type}" class="form-control" id="type">
+				<option th:each="type : ${types}" th:value="${type.id}"
+					th:text="${type.type}"></option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="size">Damage size:</label>
+			<select th:field="*{size}" class="form-control" id="size">
+				<option th:each="size : ${sizes}" th:value="${size.id}"
+					th:text="${size.size}"></option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label>Vehicle:</label>
+			<input list="vehicles" class="form-control" th:field="*{vehicle}">
+			<datalist id="vehicles">				
+				<option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}"
+					th:text="${vehicle.VIN}"></option>
+			</datalist>
+		</div>
+
+
+		<input type="submit" th:value="Submit" name="action"> <input
+			type="submit" th:value="Cancel" name="action">
+	</form>
+</body>
+</html>

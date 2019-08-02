@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import hr.petkovic.fleet.entities.rent.RentalAgreement;
-
 @Entity
 @Table(name = "damages")
 public class CarDamage {
@@ -19,6 +17,9 @@ public class CarDamage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(nullable = false)
+	private String location;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "damage_type_id", nullable = false)
@@ -32,8 +33,8 @@ public class CarDamage {
 	private Boolean repaired = false;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ra_id", nullable = false)
-	private RentalAgreement ra;
+	@JoinColumn(name = "vehicle_id", nullable = false)
+	private Vehicle vehicle;
 
 	public Long getId() {
 		return id;
@@ -41,6 +42,14 @@ public class CarDamage {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public CarDamageType getType() {
@@ -67,11 +76,12 @@ public class CarDamage {
 		this.repaired = repaired;
 	}
 
-	public RentalAgreement getRa() {
-		return ra;
+	public Vehicle getVehicle() {
+		return vehicle;
 	}
 
-	public void setRa(RentalAgreement ra) {
-		this.ra = ra;
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
+
 }

@@ -31,19 +31,21 @@
 		</div>
 
 		<div class="form-group">
-		<label>Manufacturer:</label>
-			<select th:field="*{manufacturer}" class="form-control">
-				<option th:each="man : ${manufacturers}" th:value="${man.id}"
-					th:text="${man.carManufacturer}"></option>
-			</select>
-		</div>
+			<label>Manufacturer:</label>
+			<input list="manufacturers" class="form-control" th:field="*{manufacturer}">
+			<datalist id="manufacturers">				
+					<option th:each="man : ${manufacturers}" th:value="${man.id}"
+						th:text="${man.carManufacturer}"></option>
+				</datalist>
+			</div>
 
 		<div class="form-group">
 		<label>Model:</label>
-			<select th:field="*{model}" class="form-control">
+		<input list="models" class="form-control" th:field="*{model}">
+				<datalist id="models">				
 				<option th:each="model : ${models}" th:value="${model.id}"
 					th:text="${model.carModel}"></option>
-			</select>
+				</datalist>
 		</div>
 
 

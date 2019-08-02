@@ -31,18 +31,18 @@ public class Reservation {
 	@Column(nullable = false)
 	private LocalDateTime checkOutTime;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "checkOut_office_id")
 	private Office checkOutOffice;
 
 	@Column(nullable = false)
 	private LocalDateTime checkInTime;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER,  cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "checkIn_office_id")
 	private Office checkInOffice;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "user_id")
 	private User user;
 

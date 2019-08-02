@@ -38,23 +38,36 @@
 		</div>
 
 		<div class="form-group">
-			<select th:field="*{tireBrand}" class="form-control">
+			<label for="tireBrand">Tire brand:</label>
+			<select th:field="*{tireBrand}" class="form-control" id="tireBrand">
 				<option th:each="brand : ${tireBrands}" th:value="${brand.id}"
 					th:text="${brand.brand}"></option>
 			</select>
 		</div>
 		<div class="form-group">
-			<select th:field="*{tireType}" class="form-control">
+			<label for="tireType">Tire type:</label>
+			<select th:field="*{tireType}" class="form-control" id="tireType">
 				<option th:each="type : ${tireTypes}" th:value="${type.id}"
 					th:text="${type.type}"></option>
 			</select>
 		</div>
 		<div class="form-group">
-			<select th:field="*{wheelType}" class="form-control">
+			<label for="wheelType">Tire type:</label>
+			<select th:field="*{wheelType}" class="form-control" id="wheelType">
 				<option th:each="wheel : ${wheelTypes}" th:value="${wheel.id}"
 					th:text="${wheel.type}"></option>
 			</select>
 		</div>
+		
+		<div class="form-group">
+			<label>Vehicle:</label>
+			<input list="vehicles" class="form-control" th:field="*{vehicle}">
+			<datalist id="vehicles">				
+					<option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}"
+						th:text="${vehicle.registrationNumber}"></option>
+				</datalist>
+		</div>
+		
 		<input type="submit" th:value="Submit" name="action"> <input
 			type="submit" th:value="Cancel" name="action">
 	</form>

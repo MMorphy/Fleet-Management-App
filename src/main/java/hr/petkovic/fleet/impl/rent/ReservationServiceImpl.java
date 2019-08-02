@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import hr.petkovic.fleet.entities.office.Office;
 import hr.petkovic.fleet.entities.office.User;
@@ -48,6 +49,7 @@ public class ReservationServiceImpl implements ReservationService {
 		return this.resRepo.save(res);
 	}
 
+	@Transactional
 	@Override
 	public Reservation updateRes(Long id, Reservation res) {
 		Optional<Reservation> optRes = this.resRepo.findById(id);

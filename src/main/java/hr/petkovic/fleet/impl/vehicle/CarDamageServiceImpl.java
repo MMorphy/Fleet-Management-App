@@ -51,7 +51,7 @@ public class CarDamageServiceImpl implements CarDamageService {
 		Optional<CarDamage> optDam = this.damageRepo.findById(id);
 		if (optDam.isPresent()) {
 			CarDamage dam = optDam.get();
-			dam.setRa(damage.getRa());
+			dam.setVehicle(damage.getVehicle());
 			dam.setRepaired(damage.getRepaired());
 			dam.setSize(damage.getSize());
 			dam.setType(damage.getType());
@@ -76,7 +76,7 @@ public class CarDamageServiceImpl implements CarDamageService {
 	@Override
 	public List<CarDamage> findDamagesForVehicle(Long vehicleId) {
 		if (vehicleId != null) {
-			return this.damageRepo.findByRa_rentedVehicle_id(vehicleId);
+			return this.damageRepo.findByVehicle_id(vehicleId);
 		} else {
 			return new ArrayList<>();
 		}

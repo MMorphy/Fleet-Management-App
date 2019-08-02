@@ -32,14 +32,31 @@
 				<tbody>
 					<tr th:each="hour : ${hours}">
 						<td th:text="${{hour.id}}"></td>
-						<td th:text="${{hour.workdayST}}"></td>
-						<td th:text="${{hour.workdayET}}"></td>
-						<td th:text="${{hour.saturdayST}}"></td>
-						<td th:text="${{hour.saturdayET}}"></td>
-						<td th:text="${{hour.sundayST}}"></td>
-						<td th:text="${{hour.sundayET}}"></td>
-						<td th:text="${{hour.holidayST}}"></td>
-						<td th:text="${{hour.holidayET}}"></td>
+						
+						<td th:if="${hour.workdayST != null}" th:text="${{hour.workdayST}}"></td>
+						<td th:if="${hour.workdayST == null}">Not working</td>
+						
+						<td th:if="${hour.workdayET != null}" th:text="${{hour.workdayET}}"></td>
+						<td th:if="${hour.workdayET == null}">Not working</td>
+
+						<td th:if="${hour.saturdayST != null}" th:text="${{hour.saturdayST}}"></td>
+						<td th:if="${hour.saturdayST == null}">Not working</td>
+
+						<td th:if="${hour.saturdayET != null}" th:text="${{hour.saturdayET}}"></td>
+						<td th:if="${hour.saturdayET == null}">Not working</td>
+
+						<td th:if="${hour.sundayST != null}" th:text="${{hour.sundayST}}"></td>
+						<td th:if="${hour.sundayST == null}">Not working</td>
+
+						<td th:if="${hour.sundayET != null}" th:text="${{hour.sundayET}}"></td>
+						<td th:if="${hour.sundayET == null}">Not working</td>
+
+						<td th:if="${hour.holidayST != null}" th:text="${{hour.holidayST}}"></td>
+						<td th:if="${hour.holidayST == null}">Not working</td>
+
+						<td th:if="${hour.holidayET != null}" th:text="${{hour.holidayET}}"></td>
+						<td th:if="${hour.holidayET == null}">Not working</td>
+
 						<td>
 							<form th:action="@{/office/add/}" method="get"
 								th:object="${addOffice}" th:if="${session.action} == adding">

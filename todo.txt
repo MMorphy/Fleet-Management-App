@@ -1,13 +1,15 @@
 TODO: 
-	zavrsi grupe CarGroups
-	Napravi validaciju za sve forme
-	Napravi job koji ce importati default vrijednosti u tablice
-	Napravi nad tires/edit pickanje vozila
-	Assign employees to office
-	finish damages
-	finish vehicles
-	dodati addanje current usera u reservation
-	makni mogucnost cruda sa opcija od rezervacije
-	implement search and filter
+	BE:
+		Assign employees to office
+		dodaj da se u rezervacije dodaju auto opcije (T)
+		Dodaj vehicle status po poslovnici
+		Dodaj prebacivanje vozila iz jedne poslovnice u drugu
+	FE:	
+		Napravi validaciju za sve forme
+		Implement search and filter
+		Dodaj reservation maker (customer side)
+		Uljepsaj datalsitove
+	Package:
+		Napravi image 
 Improvements:
 	razdvoji htmlove u direktorije

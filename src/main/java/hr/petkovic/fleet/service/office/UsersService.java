@@ -15,4 +15,6 @@ public interface UsersService {
 	public abstract User saveUser(User user);
 
 	public abstract User updateUser(Long id, User user);
+
+	public abstract User findUserByUsername(String username);
 }

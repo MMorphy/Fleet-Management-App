@@ -10,10 +10,6 @@ public interface CarGroupService {
 
 	public abstract CarGroup findGroupById(Long id);
 
-	public abstract List<CarGroup> findAllByGearShift(String gearShift);
-
-	public abstract List<CarGroup> findAllSubgroups(String subgroup);
-
 	public abstract void deleteCarGroupById(Long id);
 
 	public abstract CarGroup saveGroup(CarGroup group);

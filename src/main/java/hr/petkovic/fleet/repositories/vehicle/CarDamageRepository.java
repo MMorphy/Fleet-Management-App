@@ -17,5 +17,5 @@ public interface CarDamageRepository extends JpaRepository<CarDamage, Long>{
 
 	CarDamage save(CarDamage damage);
 
-	List<CarDamage> findByRa_rentedVehicle_id(Long id);
+	List<CarDamage> findByVehicle_id(Long id);
 }

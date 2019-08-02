@@ -83,22 +83,55 @@ public class WorkingHoursController {
 		WorkingHours wh = new WorkingHours();
 		Date d;
 		try {
-			d = dateFormat.parse(whDTO.getHolidayET());
-			wh.setHolidayET(new Timestamp(d.getTime()).toLocalDateTime());
-			d = dateFormat.parse(whDTO.getHolidayST());
-			wh.setHolidayST(new Timestamp(d.getTime()).toLocalDateTime());
-			d = dateFormat.parse(whDTO.getSaturdayET());
-			wh.setSaturdayET(new Timestamp(d.getTime()).toLocalDateTime());
-			d = dateFormat.parse(whDTO.getSaturdayST());
-			wh.setSaturdayST(new Timestamp(d.getTime()).toLocalDateTime());
-			d = dateFormat.parse(whDTO.getSundayET());
-			wh.setSundayET(new Timestamp(d.getTime()).toLocalDateTime());
-			d = dateFormat.parse(whDTO.getSundayST());
-			wh.setSundayST(new Timestamp(d.getTime()).toLocalDateTime());
-			d = dateFormat.parse(whDTO.getWorkdayST());
-			wh.setWorkdayST(new Timestamp(d.getTime()).toLocalDateTime());
-			d = dateFormat.parse(whDTO.getWorkdayET());
-			wh.setWorkdayET(new Timestamp(d.getTime()).toLocalDateTime());
+			if (!whDTO.getHolidayET().isBlank()) {
+				d = dateFormat.parse(whDTO.getHolidayET());
+				wh.setHolidayET(new Timestamp(d.getTime()).toLocalDateTime());
+			} else {
+				wh.setHolidayET(null);
+			}
+			if (!whDTO.getHolidayST().isBlank()) {
+				d = dateFormat.parse(whDTO.getHolidayST());
+				wh.setHolidayST(new Timestamp(d.getTime()).toLocalDateTime());
+			} else {
+				wh.setHolidayST(null);
+			}
+			if (!whDTO.getSaturdayET().isBlank()) {
+				d = dateFormat.parse(whDTO.getSaturdayET());
+				wh.setSaturdayET(new Timestamp(d.getTime()).toLocalDateTime());
+			} else {
+				wh.setSaturdayET(null);
+			}
+			if (!whDTO.getSaturdayST().isBlank()) {
+				d = dateFormat.parse(whDTO.getSaturdayST());
+				wh.setSaturdayST(new Timestamp(d.getTime()).toLocalDateTime());
+			} else {
+				wh.setSaturdayST(null);
+			}
+			if (!whDTO.getSundayET().isBlank()) {
+				d = dateFormat.parse(whDTO.getSundayET());
+				wh.setSundayET(new Timestamp(d.getTime()).toLocalDateTime());
+			} else {
+				wh.setSundayET(null);
+			}
+			if (!whDTO.getSundayST().isBlank()) {
+				d = dateFormat.parse(whDTO.getSundayST());
+				wh.setSundayST(new Timestamp(d.getTime()).toLocalDateTime());
+			} else {
+				wh.setSundayST(null);
+			}
+			if (!whDTO.getWorkdayST().isBlank()) {
+				d = dateFormat.parse(whDTO.getWorkdayST());
+				wh.setWorkdayST(new Timestamp(d.getTime()).toLocalDateTime());
+			} else {
+				wh.setWorkdayST(null);
+			}
+			if (!whDTO.getWorkdayET().isBlank()) {
+				d = dateFormat.parse(whDTO.getWorkdayET());
+				wh.setWorkdayET(new Timestamp(d.getTime()).toLocalDateTime());
+			} else {
+				wh.setWorkdayET(null);
+			}
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
