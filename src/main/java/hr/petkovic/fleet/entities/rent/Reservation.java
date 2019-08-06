@@ -2,6 +2,7 @@ package hr.petkovic.fleet.entities.rent;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -50,9 +51,9 @@ public class Reservation {
 	@JoinColumn(name = "group_id", nullable = false)
 	private CarGroup carGroup;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "res_options", joinColumns = @JoinColumn(name = "res_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "option_id", referencedColumnName = "id"))
-	private Collection<Option> options;
+	private Set<Option> options;
 
 	public Long getId() {
 		return id;
@@ -110,12 +111,79 @@ public class Reservation {
 		this.carGroup = carGroup;
 	}
 
-	public Collection<Option> getOptions() {
+	public Set<Option> getOptions() {
 		return options;
 	}
 
-	public void setOptions(Collection<Option> options) {
+	public void setOptions(Set<Option> options) {
 		this.options = options;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((carGroup == null) ? 0 : carGroup.hashCode());
+		result = prime * result + ((checkInOffice == null) ? 0 : checkInOffice.hashCode());
+		result = prime * result + ((checkInTime == null) ? 0 : checkInTime.hashCode());
+		result = prime * result + ((checkOutOffice == null) ? 0 : checkOutOffice.hashCode());
+		result = prime * result + ((checkOutTime == null) ? 0 : checkOutTime.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((options == null) ? 0 : options.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Reservation other = (Reservation) obj;
+		if (carGroup == null) {
+			if (other.carGroup != null)
+				return false;
+		} else if (!carGroup.equals(other.carGroup))
+			return false;
+		if (checkInOffice == null) {
+			if (other.checkInOffice != null)
+				return false;
+		} else if (!checkInOffice.equals(other.checkInOffice))
+			return false;
+		if (checkInTime == null) {
+			if (other.checkInTime != null)
+				return false;
+		} else if (!checkInTime.equals(other.checkInTime))
+			return false;
+		if (checkOutOffice == null) {
+			if (other.checkOutOffice != null)
+				return false;
+		} else if (!checkOutOffice.equals(other.checkOutOffice))
+			return false;
+		if (checkOutTime == null) {
+			if (other.checkOutTime != null)
+				return false;
+		} else if (!checkOutTime.equals(other.checkOutTime))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (options == null) {
+			if (other.options != null)
+				return false;
+		} else if (!options.equals(other.options))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
 	}
 
 }

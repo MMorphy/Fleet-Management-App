@@ -1,11 +1,11 @@
 package hr.petkovic.fleet.entities.office;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class EmployeeDTO {
 
-	private List<User> employees;
+	private Set<User> employees;
 
 	private Long officeId;
 
@@ -13,19 +13,19 @@ public class EmployeeDTO {
 		this.employees.add(user);
 	}
 
-	public EmployeeDTO(List<User> employees) {
+	public EmployeeDTO(Set<User> employees) {
 		this.employees = employees;
 	}
 
 	public EmployeeDTO() {
-		this.employees = new ArrayList<>();
+		this.employees = new LinkedHashSet<>();
 	}
 
-	public List<User> getEmployees() {
+	public Set<User> getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(List<User> employees) {
+	public void setEmployees(Set<User> employees) {
 		this.employees = employees;
 	}
 

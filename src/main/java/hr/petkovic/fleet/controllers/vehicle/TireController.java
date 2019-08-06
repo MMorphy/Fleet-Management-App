@@ -38,7 +38,8 @@ public class TireController {
 	private VehicleServiceImpl vehicleService;
 
 	public TireController(TireServiceImpl tireService, TireTypeServiceImpl tireTypeService,
-			TireBrandServiceImpl tireBrandService, WheelTypeServiceImpl wheelService, VehicleServiceImpl vehicleService) {
+			TireBrandServiceImpl tireBrandService, WheelTypeServiceImpl wheelService,
+			VehicleServiceImpl vehicleService) {
 		this.tireService = tireService;
 		this.tireTypeService = tireTypeService;
 		this.tireBrandService = tireBrandService;
@@ -78,9 +79,11 @@ public class TireController {
 	public String addTire(Model model, Tire addTire, String action, HttpSession session) {
 		if (action.equalsIgnoreCase("Submit")) {
 			tireService.saveTire(addTire);
-			Vehicle vehicle = vehicleService.findVehicleById(addTire.getVehicle().getId());
-			vehicle.setTire(addTire);
-			vehicleService.updateVehicle(vehicle.getId(), vehicle);
+			if (addTire.getVehicle() != null) {
+				Vehicle vehicle = vehicleService.findVehicleById(addTire.getVehicle().getId());
+				vehicle.setTire(addTire);
+				vehicleService.updateVehicle(vehicle.getId(), vehicle);
+			}
 		}
 		session.removeAttribute("addingTire");
 		session.removeAttribute("action");

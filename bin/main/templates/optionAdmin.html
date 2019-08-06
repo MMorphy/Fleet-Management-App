@@ -30,7 +30,7 @@
 						<td th:text="${option.id}"></td>
 						<td th:text="${option.code}"></td>
 						<td th:text="${option.name}"></td>
-						<td th:text="${option.carGroup.group}"></td>
+						<td th:text="${option.carGroup.carGroup}"></td>
 						<td th:text="${option.price}"></td>
 						<td>
 							<form th:action="@{'/option/delete/' + ${option.id}}"

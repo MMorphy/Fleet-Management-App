@@ -36,11 +36,11 @@ public class Vehicle {
 	@ColumnDefault(value = "0")
 	private Integer currentKM;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "manufacturer_id")
 	private CarManufacturer manufacturer;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "model_id")
 	private CarModel model;
 
@@ -51,19 +51,19 @@ public class Vehicle {
 	@ColumnDefault(value = "0")
 	private Integer fuelLevel;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "tire_id", referencedColumnName = "id")
 	private Tire tire;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "spec_id")
 	private CarSpecification specification;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "vehicle_id")
 	private Set<CarDamage> damages;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "nagivation_id")
 	private Navigation navigation;
 
@@ -169,5 +169,101 @@ public class Vehicle {
 
 	public void setFuelLevel(Integer fuelLevel) {
 		this.fuelLevel = fuelLevel;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((VIN == null) ? 0 : VIN.hashCode());
+		result = prime * result + ((carGroup == null) ? 0 : carGroup.hashCode());
+		result = prime * result + ((currentKM == null) ? 0 : currentKM.hashCode());
+		result = prime * result + ((damages == null) ? 0 : damages.hashCode());
+		result = prime * result + ((fuelLevel == null) ? 0 : fuelLevel.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((manufactoringYear == null) ? 0 : manufactoringYear.hashCode());
+		result = prime * result + ((manufacturer == null) ? 0 : manufacturer.hashCode());
+		result = prime * result + ((model == null) ? 0 : model.hashCode());
+		result = prime * result + ((navigation == null) ? 0 : navigation.hashCode());
+		result = prime * result + ((registrationNumber == null) ? 0 : registrationNumber.hashCode());
+		result = prime * result + ((specification == null) ? 0 : specification.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vehicle other = (Vehicle) obj;
+		if (VIN == null) {
+			if (other.VIN != null)
+				return false;
+		} else if (!VIN.equals(other.VIN))
+			return false;
+		if (carGroup == null) {
+			if (other.carGroup != null)
+				return false;
+		} else if (!carGroup.equals(other.carGroup))
+			return false;
+		if (currentKM == null) {
+			if (other.currentKM != null)
+				return false;
+		} else if (!currentKM.equals(other.currentKM))
+			return false;
+		if (damages == null) {
+			if (other.damages != null)
+				return false;
+		} else if (!damages.equals(other.damages))
+			return false;
+		if (fuelLevel == null) {
+			if (other.fuelLevel != null)
+				return false;
+		} else if (!fuelLevel.equals(other.fuelLevel))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (manufactoringYear == null) {
+			if (other.manufactoringYear != null)
+				return false;
+		} else if (!manufactoringYear.equals(other.manufactoringYear))
+			return false;
+		if (manufacturer == null) {
+			if (other.manufacturer != null)
+				return false;
+		} else if (!manufacturer.equals(other.manufacturer))
+			return false;
+		if (model == null) {
+			if (other.model != null)
+				return false;
+		} else if (!model.equals(other.model))
+			return false;
+		if (navigation == null) {
+			if (other.navigation != null)
+				return false;
+		} else if (!navigation.equals(other.navigation))
+			return false;
+		if (registrationNumber == null) {
+			if (other.registrationNumber != null)
+				return false;
+		} else if (!registrationNumber.equals(other.registrationNumber))
+			return false;
+		if (specification == null) {
+			if (other.specification != null)
+				return false;
+		} else if (!specification.equals(other.specification))
+			return false;
+		if (tire == null) {
+			if (other.tire != null)
+				return false;
+		} else if (!tire.equals(other.tire))
+			return false;
+		return true;
 	}
 }

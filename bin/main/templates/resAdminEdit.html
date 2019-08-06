@@ -15,7 +15,7 @@
 			<label>Car Group:</label> <select th:field="*{carGroup}"
 				class="form-control">
 				<option th:each="group : ${carGroups}" th:value="${group.id}"
-					th:text="${group.group}"></option>
+					th:text="${group.carGroup}"></option>
 			</select>
 		</div>
 

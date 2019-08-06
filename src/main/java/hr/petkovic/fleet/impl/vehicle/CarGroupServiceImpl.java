@@ -50,7 +50,7 @@ public class CarGroupServiceImpl implements CarGroupService {
 		Optional<CarGroup> optGroup = this.groupRepo.findById(id);
 		if (optGroup.isPresent()) {
 			CarGroup grp = optGroup.get();
-			grp.setGroup(group.getGroup());
+			grp.setCarGroup(group.getCarGroup());
 			return this.groupRepo.save(grp);
 		} else {
 			return this.groupRepo.save(group);

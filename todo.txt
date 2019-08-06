@@ -4,8 +4,9 @@ TODO:
 		dodaj da se u rezervacije dodaju auto opcije (T)
 		Dodaj vehicle status po poslovnici
 		Dodaj prebacivanje vozila iz jedne poslovnice u drugu
+		Zavrsi dodavanje opcija u data.sql
 	FE:	
-		Napravi validaciju za sve forme
+		Napravi validaciju za sve forme (kroz html)
 		Implement search and filter
 		Dodaj reservation maker (customer side)
 		Uljepsaj datalsitove

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +42,7 @@ public class UsersServiceImpl implements UsersService {
 		this.userRepo.deleteById(id);
 	}
 
+	@Transactional
 	@Override
 	public User saveUser(User user) {
 		return this.userRepo.saveAndFlush(user);

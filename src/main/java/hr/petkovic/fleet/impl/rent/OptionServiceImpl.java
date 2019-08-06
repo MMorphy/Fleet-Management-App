@@ -65,7 +65,7 @@ public class OptionServiceImpl implements OptionService {
 
 	@Override
 	public List<Option> findAllOptionsForGroup(CarGroup group) {
-		return this.optionRepo.findByCarGroup_carGroup(group.getGroup());
+		return this.optionRepo.findByCarGroup_carGroup(group.getCarGroup());
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class OptionServiceImpl implements OptionService {
 	@Override
 	public Option findOptionByGroupAndCode(CarGroup group, String code) {
 		try {
-			return this.optionRepo.findByCarGroup_carGroupAndCode(group.getGroup(), code).get();
+			return this.optionRepo.findByCarGroup_carGroupAndCode(group.getCarGroup(), code).get();
 		} catch (NoSuchElementException ex) {
 			return null;
 		}

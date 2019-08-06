@@ -2,8 +2,9 @@ package hr.petkovic.fleet.controllers.rent;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import hr.petkovic.fleet.entities.office.User;
 import hr.petkovic.fleet.entities.rent.Option;
 import hr.petkovic.fleet.entities.rent.Reservation;
 import hr.petkovic.fleet.entities.rent.ReservationDTO;
@@ -155,7 +155,7 @@ public class ReservationController {
 		dto.setCheckOutOffice(res.getCheckOutOffice());
 		dto.setCheckOutTime(res.getCheckOutTime().toString());
 		dto.setUser(res.getUser());
-		List<Option> options = (List<Option>) res.getOptions();
+		Set<Option> options = (Set<Option>) res.getOptions();
 		for (Option option : options) {
 			switch (option.getCode()) {
 			case "GF":
@@ -199,7 +199,7 @@ public class ReservationController {
 		res.setCheckOutOffice(obj.getCheckOutOffice());
 		res.setCheckOutTime(LocalDateTime.parse(obj.getCheckOutTime()));
 		res.setUser(obj.getUser());
-		List<Option> options = new ArrayList<>();
+		Set<Option> options = new LinkedHashSet<Option>();
 		Option option;
 		if (obj.isGF()) {
 			option = optionService.findOptionByGroupAndCode(group, "GF");

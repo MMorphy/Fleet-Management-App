@@ -30,6 +30,12 @@
 		</div>
 
 		<div class="form-group">
+			<label for="currentKM">KM:</label> <input type="number"
+				class="form-control" id="currentKM" th:field="*{currentKM}"
+				th:value="${session.editedVehicle.currentKM}" min="0" max="250000" step="1">
+		</div>
+
+		<div class="form-group">
 		<label>Manufacturer:</label>
 			<select th:field="*{manufacturer}" class="form-control">
 				<option th:each="man : ${manufacturers}" th:value="${man.id}"
@@ -50,7 +56,7 @@
 		<label>Car Group:</label>
 			<select th:field="*{carGroup}" class="form-control">
 				<option th:each="group : ${groups}" th:value="${group.id}"
-					th:text="${group.group}"></option>
+					th:text="${group.carGroup}"></option>
 			</select>
 		</div>
 

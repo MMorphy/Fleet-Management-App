@@ -38,4 +38,35 @@ public class CarManufacturer {
 	public String toString() {
 		return "CarManufacturer [id=" + id + ", carManufacturer=" + carManufacturer + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((carManufacturer == null) ? 0 : carManufacturer.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CarManufacturer other = (CarManufacturer) obj;
+		if (carManufacturer == null) {
+			if (other.carManufacturer != null)
+				return false;
+		} else if (!carManufacturer.equals(other.carManufacturer))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 }

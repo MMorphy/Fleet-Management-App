@@ -21,7 +21,7 @@ public class CarModel {
 	@Column(nullable = false)
 	private String carModel;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "manufacturer_id")
 	private CarManufacturer manufacturer;
 
@@ -52,5 +52,42 @@ public class CarModel {
 
 	public void setManufacturer(CarManufacturer manufacturer) {
 		this.manufacturer = manufacturer;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((carModel == null) ? 0 : carModel.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((manufacturer == null) ? 0 : manufacturer.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CarModel other = (CarModel) obj;
+		if (carModel == null) {
+			if (other.carModel != null)
+				return false;
+		} else if (!carModel.equals(other.carModel))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (manufacturer == null) {
+			if (other.manufacturer != null)
+				return false;
+		} else if (!manufacturer.equals(other.manufacturer))
+			return false;
+		return true;
 	}
 }

@@ -32,7 +32,7 @@
 					<tr th:each="res : ${reservations}">
 						<td th:text="${res.id}"></td>
 <!-- 						<td th:text="${res.user.username}"></td> -->
-						<td th:text="${res.carGroup.group}"></td>
+						<td th:text="${res.carGroup.carGroup}"></td>
 						<td th:text="${{res.checkOutTime}}"></td>
 						<td th:text="${res.checkOutOffice.name}"></td>
 						<td th:text="${{res.checkInTime}}"></td>

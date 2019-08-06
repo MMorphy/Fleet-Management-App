@@ -113,4 +113,77 @@ public class Tire {
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aspectRatio == null) ? 0 : aspectRatio.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((manufacturingYear == null) ? 0 : manufacturingYear.hashCode());
+		result = prime * result + ((tireBrand == null) ? 0 : tireBrand.hashCode());
+		result = prime * result + ((tireType == null) ? 0 : tireType.hashCode());
+		result = prime * result + ((vehicle == null) ? 0 : vehicle.hashCode());
+		result = prime * result + ((wheelDiameter == null) ? 0 : wheelDiameter.hashCode());
+		result = prime * result + ((wheelType == null) ? 0 : wheelType.hashCode());
+		result = prime * result + ((width == null) ? 0 : width.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tire other = (Tire) obj;
+		if (aspectRatio == null) {
+			if (other.aspectRatio != null)
+				return false;
+		} else if (!aspectRatio.equals(other.aspectRatio))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (manufacturingYear == null) {
+			if (other.manufacturingYear != null)
+				return false;
+		} else if (!manufacturingYear.equals(other.manufacturingYear))
+			return false;
+		if (tireBrand == null) {
+			if (other.tireBrand != null)
+				return false;
+		} else if (!tireBrand.equals(other.tireBrand))
+			return false;
+		if (tireType == null) {
+			if (other.tireType != null)
+				return false;
+		} else if (!tireType.equals(other.tireType))
+			return false;
+		if (vehicle == null) {
+			if (other.vehicle != null)
+				return false;
+		} else if (!vehicle.equals(other.vehicle))
+			return false;
+		if (wheelDiameter == null) {
+			if (other.wheelDiameter != null)
+				return false;
+		} else if (!wheelDiameter.equals(other.wheelDiameter))
+			return false;
+		if (wheelType == null) {
+			if (other.wheelType != null)
+				return false;
+		} else if (!wheelType.equals(other.wheelType))
+			return false;
+		if (width == null) {
+			if (other.width != null)
+				return false;
+		} else if (!width.equals(other.width))
+			return false;
+		return true;
+	}
 }
