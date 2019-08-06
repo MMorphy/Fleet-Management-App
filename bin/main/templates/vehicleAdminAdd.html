@@ -14,31 +14,31 @@
 		
 		<div class="form-group">
 			<label for="VIN">VIN:</label> <input type="text"
-				class="form-control" id="VIN" th:field="*{VIN}"
-				th:value="${session.addingVehicle.VIN}">
+				class="form-control" id="VIN" th:field="*{vehicle.VIN}"
+				>
 		</div>
 
 		<div class="form-group">
 			<label for="registration">Registration plate:</label> <input type="text"
-				class="form-control" id="registration" th:field="*{registrationNumber}"
-				th:value="${session.addingVehicle.registrationNumber}">
+				class="form-control" id="registration" th:field="*{vehicle.registrationNumber}"
+				>
 		</div>
 
 		<div class="form-group">
 			<label for="manufactoringYear">Year:</label> <input type="number"
-				class="form-control" id="manufactoringYear" th:field="*{manufactoringYear}"
-				th:value="${session.addingVehicle.manufactoringYear}" min="2000" max="2099" step="1">
+				class="form-control" id="manufactoringYear" th:field="*{vehicle.manufactoringYear}"
+				 min="2000" max="2099" step="1">
 		</div>
 
 		<div class="form-group">
 			<label for="currentKM">KM:</label> <input type="number"
-				class="form-control" id="currentKM" th:field="*{currentKM}"
-				th:value="${session.addingVehicle.currentKM}" min="0" max="250000" step="1">
+				class="form-control" id="currentKM" th:field="*{vehicle.currentKM}"
+				min="0" max="250000" step="1">
 		</div>
 
 		<div class="form-group">
 			<label>Manufacturer:</label>
-			<input list="manufacturers" class="form-control" th:field="*{manufacturer}">
+			<input list="manufacturers" class="form-control" th:field="*{vehicle.manufacturer}">
 			<datalist id="manufacturers">				
 					<option th:each="man : ${manufacturers}" th:value="${man.id}"
 						th:text="${man.carManufacturer}"></option>
@@ -47,7 +47,7 @@
 
 		<div class="form-group">
 		<label>Model:</label>
-		<input list="models" class="form-control" th:field="*{model}">
+		<input list="models" class="form-control" th:field="*{vehicle.model}">
 				<datalist id="models">				
 				<option th:each="model : ${models}" th:value="${model.id}"
 					th:text="${model.carModel}"></option>
@@ -57,7 +57,7 @@
 
 		<div class="form-group">
 		<label>Car Group:</label>
-			<select th:field="*{carGroup}" class="form-control">
+			<select th:field="*{vehicle.carGroup}" class="form-control">
 				<option th:each="group : ${groups}" th:value="${group.id}"
 					th:text="${group.carGroup}"></option>
 			</select>
@@ -65,13 +65,13 @@
 
 		<div class="form-group">
 			<label for="fuelLevel">Fuel level:</label> <input type="number"
-				class="form-control" id="fuelLevel" th:field="*{fuelLevel}"
-				th:value="${session.addingVehicle.fuelLevel}" min="0" max="8" step="1">
+				class="form-control" id="fuelLevel" th:field="*{vehicle.fuelLevel}"
+				 min="0" max="8" step="1">
 		</div>
 
 		<div class="form-group">
 		<label>Specification:</label>
-			<input list="specifications" class="form-control" th:field="*{specification}">
+			<input list="specifications" class="form-control" th:field="*{vehicle.specification}">
 			<datalist id="specifications">
 				<option th:each="spec : ${specs}" th:text="${'Doors:' + spec.doors + ' FuelTank:' + spec.fuelTankCapacity + ' Seats:' + spec.numberOfSeats}" th:value="${spec.id}"></option>
 			</datalist>
@@ -80,9 +80,16 @@
 
 		<div class="form-group">
 		<label>Tires:</label>
-			<select th:field="*{tire}" class="form-control">
+			<select th:field="*{vehicle.tire}" class="form-control">
 				<option th:each="tire : ${tires}" th:value="${tire.id}"
 					th:text="${tire.manufacturingYear + ' ' + tire.tireType.type + ' ' + tire.tireBrand.brand + ' ' + tire.width + '/' + tire.aspectRatio + '/' + tire.wheelDiameter}"></option>
+			</select>
+		</div>
+
+		<label>Office:</label>
+			<select th:field="*{office}" class="form-control">
+				<option th:each="office : ${offices}" th:value="${office.id}"
+					th:text="${office.name}"></option>
 			</select>
 		</div>
 

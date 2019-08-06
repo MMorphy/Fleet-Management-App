@@ -67,6 +67,9 @@ public class Vehicle {
 	@JoinColumn(name = "nagivation_id")
 	private Navigation navigation;
 
+	@Column(nullable = false)
+	private boolean rented = false;
+
 	public Long getId() {
 		return id;
 	}
@@ -171,6 +174,14 @@ public class Vehicle {
 		this.fuelLevel = fuelLevel;
 	}
 
+	public boolean isRented() {
+		return rented;
+	}
+
+	public void setRented(boolean rented) {
+		this.rented = rented;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -186,6 +197,7 @@ public class Vehicle {
 		result = prime * result + ((model == null) ? 0 : model.hashCode());
 		result = prime * result + ((navigation == null) ? 0 : navigation.hashCode());
 		result = prime * result + ((registrationNumber == null) ? 0 : registrationNumber.hashCode());
+		result = prime * result + (rented ? 1231 : 1237);
 		result = prime * result + ((specification == null) ? 0 : specification.hashCode());
 		return result;
 	}
@@ -254,15 +266,12 @@ public class Vehicle {
 				return false;
 		} else if (!registrationNumber.equals(other.registrationNumber))
 			return false;
+		if (rented != other.rented)
+			return false;
 		if (specification == null) {
 			if (other.specification != null)
 				return false;
 		} else if (!specification.equals(other.specification))
-			return false;
-		if (tire == null) {
-			if (other.tire != null)
-				return false;
-		} else if (!tire.equals(other.tire))
 			return false;
 		return true;
 	}

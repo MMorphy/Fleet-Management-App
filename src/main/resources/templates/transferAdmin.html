@@ -62,14 +62,9 @@
 						<td th:text="${vehicle.office.name}"></td>
 
 						<td>
-							<form th:action="@{'/vehicle/delete/' + ${vehicle.vehicle.id}}"
+							<form th:action="@{'/office/requestVehicle/' + ${carGroup} + '/' + ${officeID} + '/' + ${vehicle.vehicle.id}}"
 								method="post">
-								<button>Remove</button>
-							</form>
-						</td>
-						<td>
-							<form th:action="@{'/vehicle/edit/' + ${vehicle.vehicle.id}}" method="get">
-								<button>Edit</button>
+								<button>Transfer</button>
 							</form>
 						</td>
 					</tr>
@@ -77,9 +72,6 @@
 			</table>
 
 		</div>
-		<form th:action="@{/vehicle/add/}" method="get">
-			<button>Add new vehicle</button>
-		</form>
 	</div>
 </body>
 </html>

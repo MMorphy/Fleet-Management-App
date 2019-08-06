@@ -16,4 +16,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long>{
 	void deleteById(Long id);
 
 	Vehicle save(Vehicle vehicle);
+
+	List<Vehicle> findByRentedAndCarGroup_carGroup(boolean rented, String carGroup);
 }

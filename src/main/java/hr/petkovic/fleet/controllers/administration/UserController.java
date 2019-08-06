@@ -45,7 +45,7 @@ public class UserController {
 		List<User> users = userService.findAllUsers();
 		List<UserDTO> userDTOs = new ArrayList<>();
 		for (User user : users) {
-			userDTOs.add(convertObjectToDTO(user));
+			userDTOs.add(convertUserToDTO(user));
 		}
 		model.addAttribute("users", userDTOs);
 		return "userAdmin";
@@ -72,7 +72,7 @@ public class UserController {
 			addUser.setCreateTS(time);
 			addUser.setLastChangeTS(time);
 			addUser.setPassword(getEncoder().encode(addUser.getPassword()));
-			userService.saveUser(convertDTOToObject(addUser));
+			userService.saveUser(convertDTOToUser(addUser));
 			session.removeAttribute("addingUser");
 			session.removeAttribute("action");
 		} else {
@@ -86,8 +86,8 @@ public class UserController {
 	@GetMapping("/edit/{id}")
 	public String getUpdateUser(@PathVariable("id") Long id, Model model, HttpSession session, UserDTO editUser) {
 		if (session.getAttribute("editedUser") == null || editUser == null || editUser.getUsername() == null) {
-			session.setAttribute("editedUser", convertObjectToDTO(userService.findUserById(id)));
-			model.addAttribute("editUser", convertObjectToDTO(userService.findUserById(id)));
+			session.setAttribute("editedUser", convertUserToDTO(userService.findUserById(id)));
+			model.addAttribute("editUser", convertUserToDTO(userService.findUserById(id)));
 		} else {
 			session.setAttribute("editedUser", editUser);
 			model.addAttribute("editUser", editUser);
@@ -101,7 +101,7 @@ public class UserController {
 		if (!user.getPassword().startsWith("$2a")) {
 			user.setPassword(getEncoder().encode(user.getPassword()));
 		}
-		userService.updateUser(id, convertDTOToObject(user));
+		userService.updateUser(id, convertDTOToUser(user));
 		return "redirect:/user/administration";
 	}
 
@@ -135,7 +135,7 @@ public class UserController {
 			regUser.setAdmin(false);
 			regUser.setOper(false);
 			regUser.setUser(true);
-			userService.saveUser(convertDTOToObject(regUser));
+			userService.saveUser(convertDTOToUser(regUser));
 			session.removeAttribute("addingUser");
 			session.removeAttribute("action");
 		} else {
@@ -146,7 +146,7 @@ public class UserController {
 		return "index";
 	}
 
-	private User convertDTOToObject(UserDTO dto) {
+	private User convertDTOToUser(UserDTO dto) {
 		User user = new User();
 		user.setCreateTS(dto.getCreateTS());
 		user.setLastChangeTS(dto.getLastChangeTS());
@@ -178,7 +178,7 @@ public class UserController {
 		return user;
 	}
 
-	private UserDTO convertObjectToDTO(User user) {
+	private UserDTO convertUserToDTO(User user) {
 		UserDTO dto = new UserDTO();
 		dto.setCreateTS(user.getCreateTS());
 		dto.setEmail(user.getEmail());

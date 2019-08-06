@@ -1,15 +1,15 @@
 TODO: 
 	BE:
-		Assign employees to office
-		dodaj da se u rezervacije dodaju auto opcije (T)
-		Dodaj vehicle status po poslovnici
-		Dodaj prebacivanje vozila iz jedne poslovnice u drugu
-		Zavrsi dodavanje opcija u data.sql
+		Dodaj rezervacije za danas
+		vehicle navigation picker
 	FE:	
+		Dodaj done button u request transfer
 		Napravi validaciju za sve forme (kroz html)
 		Implement search and filter
 		Dodaj reservation maker (customer side)
-		Uljepsaj datalsitove
+		Uljepsaj datalistove u thymeleafu
+		Filter rented/unrented vehicles on /office/vehicles/{id}
+		Uljepsaj frontend
 	Package:
 		Napravi image 
 Improvements:

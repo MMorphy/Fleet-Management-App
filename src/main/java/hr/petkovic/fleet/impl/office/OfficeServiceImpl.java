@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hr.petkovic.fleet.entities.office.Office;
+import hr.petkovic.fleet.entities.vehicle.Vehicle;
 import hr.petkovic.fleet.repositories.office.OfficeRepository;
 import hr.petkovic.fleet.service.office.OfficeService;
 
@@ -59,6 +60,16 @@ public class OfficeServiceImpl implements OfficeService {
 		} else {
 			return this.officeRepo.save(office);
 		}
+	}
+
+	@Override
+	public Office findOfficeByVehicle(Vehicle vehicle) {
+		Optional<Office> optOff = this.officeRepo.findByVehiclePool_id(vehicle.getId());
+		if(optOff.isPresent())
+		{
+			return optOff.get();
+		}
+		return null;
 	}
 
 }

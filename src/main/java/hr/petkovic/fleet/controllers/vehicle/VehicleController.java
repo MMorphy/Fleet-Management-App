@@ -1,5 +1,6 @@
 package hr.petkovic.fleet.controllers.vehicle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import hr.petkovic.fleet.entities.vehicle.CarModel;
+import hr.petkovic.fleet.entities.office.Office;
 import hr.petkovic.fleet.entities.vehicle.Tire;
 import hr.petkovic.fleet.entities.vehicle.Vehicle;
+import hr.petkovic.fleet.entities.vehicle.VehicleAndOfficeDTO;
+import hr.petkovic.fleet.impl.office.OfficeServiceImpl;
 import hr.petkovic.fleet.impl.vehicle.CarDamageServiceImpl;
 import hr.petkovic.fleet.impl.vehicle.CarGroupServiceImpl;
 import hr.petkovic.fleet.impl.vehicle.CarManufacturerServiceImpl;
@@ -48,11 +51,13 @@ public class VehicleController {
 	private NavigationServiceImpl navService;
 	@Autowired
 	private CarDamageServiceImpl damageService;
+	@Autowired
+	private OfficeServiceImpl officeService;
 
 	public VehicleController(VehicleServiceImpl vehicleService, TireServiceImpl tireService,
 			CarManufacturerServiceImpl manufacturerService, CarModelServiceImpl modelService,
 			CarGroupServiceImpl groupService, CarSpecificationServiceImpl specService, NavigationServiceImpl navService,
-			CarDamageServiceImpl damageService) {
+			CarDamageServiceImpl damageService, OfficeServiceImpl officeService) {
 		this.vehicleService = vehicleService;
 		this.tireService = tireService;
 		this.manufacturerService = manufacturerService;
@@ -61,25 +66,33 @@ public class VehicleController {
 		this.specService = specService;
 		this.navService = navService;
 		this.damageService = damageService;
+		this.officeService = officeService;
 	}
 
 	// Home admin page
 	@GetMapping({ "/administration/", "/administration/{id}" })
 	public String getVehicleAdministration(@PathVariable(name = "id", required = false) Long id, Model model) {
 		if (id != null) {
-			model.addAttribute("vehicles", vehicleService.findVehicleById(id));
+			Vehicle vehicle = vehicleService.findVehicleById(id);
+			Office office = officeService.findOfficeByVehicle(vehicle);
+			model.addAttribute("vehicles", new VehicleAndOfficeDTO(vehicle, office));
 		} else {
-			model.addAttribute("vehicles", vehicleService.findAllVehicles());
+			List<Vehicle> vehicles = vehicleService.findAllVehicles();
+			List<VehicleAndOfficeDTO> dtos = new ArrayList<>();
+			for (Vehicle vehicle : vehicles) {
+				dtos.add(new VehicleAndOfficeDTO(vehicle, officeService.findOfficeByVehicle(vehicle)));
+			}
+			model.addAttribute("vehicles", dtos);
 		}
 		return "vehicleAdmin";
 	}
 
 	// Adding
 	@GetMapping("/add")
-	public String getVehicleAdding(Model model, Vehicle addVehicle, HttpSession session) {
+	public String getVehicleAdding(Model model, VehicleAndOfficeDTO addVehicle, HttpSession session) {
 		if (session.getAttribute("addingVehicle") == null || addVehicle == null) {
-			session.setAttribute("addingVehicle", new Vehicle());
-			model.addAttribute("addVehicle", new Vehicle());
+			session.setAttribute("addingVehicle", new VehicleAndOfficeDTO());
+			model.addAttribute("addVehicle", new VehicleAndOfficeDTO());
 		} else {
 			session.setAttribute("addingVehicle", addVehicle);
 			model.addAttribute("addVehicle", addVehicle);
@@ -90,17 +103,22 @@ public class VehicleController {
 		model.addAttribute("groups", groupService.findAllGroups());
 		model.addAttribute("tires", tireService.findUnusedTires());
 		model.addAttribute("specs", specService.findAllSpecs());
+		model.addAttribute("navs", navService.findAllNavs());
+		model.addAttribute("offices", officeService.findAllOffices());
 		return "vehicleAdminAdd";
 	}
 
 	@PostMapping("/add/")
-	public String addVehicle(Model model, Vehicle addVehicle, String action, HttpSession session) {
+	public String addVehicle(Model model, VehicleAndOfficeDTO addVehicle, String action, HttpSession session) {
 		model.addAttribute("oldVehicle", session.getAttribute("addingVehicle"));
 		if (action.equals("Submit")) {
-			if (addVehicle.getCurrentKM() == null) {
-				addVehicle.setCurrentKM(0);
+			if (addVehicle.getVehicle().getCurrentKM() == null) {
+				addVehicle.getVehicle().setCurrentKM(0);
 			}
-			vehicleService.saveVehicle(addVehicle);
+			vehicleService.saveVehicle(addVehicle.getVehicle());
+			Office office = addVehicle.getOffice();
+			office.addVehicle(addVehicle.getVehicle());
+			officeService.saveOffice(office);
 		}
 		session.removeAttribute("addingVehicle");
 		session.removeAttribute("action");
@@ -125,8 +143,9 @@ public class VehicleController {
 		model.addAttribute("manufacturers", manufacturerService.findAllManufacturers());
 		model.addAttribute("models", modelService.findAllModels());
 		model.addAttribute("groups", groupService.findAllGroups());
-		model.addAttribute("tires",tires);
+		model.addAttribute("tires", tires);
 		model.addAttribute("specs", specService.findAllSpecs());
+		model.addAttribute("navs", navService.findAllNavs());
 		return "vehicleAdminEdit";
 	}
 

@@ -1,5 +1,9 @@
 package hr.petkovic.fleet.controllers.administration;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,10 +16,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import hr.petkovic.fleet.entities.office.EmployeeDTO;
 import hr.petkovic.fleet.entities.office.Office;
+import hr.petkovic.fleet.entities.office.Role;
+import hr.petkovic.fleet.entities.office.User;
+import hr.petkovic.fleet.entities.office.UserDTO;
+import hr.petkovic.fleet.entities.vehicle.Vehicle;
+import hr.petkovic.fleet.entities.vehicle.VehicleAndOfficeDTO;
 import hr.petkovic.fleet.impl.office.OfficeServiceImpl;
+import hr.petkovic.fleet.impl.office.RoleServiceImpl;
+import hr.petkovic.fleet.impl.office.UsersServiceImpl;
 import hr.petkovic.fleet.impl.office.WorkingHoursServiceImpl;
+import hr.petkovic.fleet.impl.vehicle.VehicleServiceImpl;
 
 @Controller
 @RequestMapping("/office")
@@ -27,11 +38,17 @@ public class OfficeController {
 	private OfficeServiceImpl officeService;
 	@Autowired
 	private WorkingHoursServiceImpl whService;
+	@Autowired
+	private RoleServiceImpl roleService;
+	@Autowired
+	private VehicleServiceImpl vehicleService;
 
-	public OfficeController(OfficeServiceImpl officeService, WorkingHoursServiceImpl whService) {
+	public OfficeController(OfficeServiceImpl officeService, WorkingHoursServiceImpl whService,
+			RoleServiceImpl roleService, VehicleServiceImpl vehicleService) {
 		this.officeService = officeService;
 		this.whService = whService;
-
+		this.roleService = roleService;
+		this.vehicleService = vehicleService;
 	}
 
 	// Home admin page
@@ -122,13 +139,143 @@ public class OfficeController {
 		return "workingHoursPicker";
 	}
 
-	@GetMapping("/employees/{id}")
-	public String getEmployees(@PathVariable("id") Long id, Model model) {
-		EmployeeDTO dto = new EmployeeDTO();
-		dto.setEmployees(officeService.findOfficeById(id).getEmployees());
-		dto.setOfficeId(id);
-		model.addAttribute("dto", dto);
-		return "employeePicker";
+	@GetMapping("/vehicles/{id}")
+	public String getOfficeVehicles(@PathVariable(name = "id", required = true) Long id, Model model) {
+		model.addAttribute("officeID", id);
+		Set<Vehicle> vehicles = officeService.findOfficeById(id).getVehiclePool();
+		List<Vehicle> miniVehicles = new ArrayList<>();
+		List<Vehicle> economyVehicles = new ArrayList<>();
+		List<Vehicle> compactVehicles = new ArrayList<>();
+		List<Vehicle> intermediateVehicles = new ArrayList<>();
+		List<Vehicle> familyVehicles = new ArrayList<>();
+		List<Vehicle> premiumVehicles = new ArrayList<>();
+		for (Vehicle vehicle : vehicles) {
+			switch (vehicle.getCarGroup().getCarGroup()) {
+			case "Mini":
+				miniVehicles.add(vehicle);
+				break;
+			case "Economy":
+				economyVehicles.add(vehicle);
+				break;
+			case "Compact":
+				compactVehicles.add(vehicle);
+				break;
+			case "Intermediate":
+				intermediateVehicles.add(vehicle);
+				break;
+			case "Family":
+				familyVehicles.add(vehicle);
+				break;
+			case "Premium":
+				premiumVehicles.add(vehicle);
+				break;
+			}
+		}
+		model.addAttribute("mVehicles", miniVehicles);
+		model.addAttribute("eVehicles", economyVehicles);
+		model.addAttribute("cVehicles", compactVehicles);
+		model.addAttribute("iVehicles", intermediateVehicles);
+		model.addAttribute("fVehicles", familyVehicles);
+		model.addAttribute("pVehicles", premiumVehicles);
+		return "officeVehicles";
 	}
 
+	@GetMapping("/requestVehicle/{group}/{officeID}")
+	public String getRequestVehicle(@PathVariable(name = "group") String carGroup,
+			@PathVariable(name = "officeID", required = true) Long officeID, Model model) {
+		List<Vehicle> vehicles = vehicleService.findAllUnrentedVehiclesByCarGroup(carGroup);
+		vehicles.removeAll(officeService.findOfficeById(officeID).getVehiclePool());
+		logger.info(vehicles.toString());
+		List<VehicleAndOfficeDTO> dtos = new ArrayList<>();
+		Office office = null;
+		for (Vehicle vehicle : vehicles) {
+			office = officeService.findOfficeByVehicle(vehicle);
+			dtos.add(new VehicleAndOfficeDTO(vehicle, office));
+		}
+		model.addAttribute("vehicles", dtos);
+		model.addAttribute("officeID", officeID);
+		model.addAttribute("carGroup", carGroup);
+		return "transferAdmin";
+	}
+
+	@PostMapping("/requestVehicle/{group}/{officeID}/{vehicleID}")
+	public String getTransferVehicle(@PathVariable(name = "group") String carGroup,
+			@PathVariable(name = "officeID", required = true) Long officeID,
+			@PathVariable(name = "vehicleID", required = true) Long vehicleID, Model model) {
+		List<Vehicle> vehicles = vehicleService.findAllUnrentedVehiclesByCarGroup(carGroup);
+		vehicles.removeAll(officeService.findOfficeById(officeID).getVehiclePool());
+		List<VehicleAndOfficeDTO> dtos = new ArrayList<>();
+		Office office = null;
+		for (Vehicle vehicle : vehicles) {
+			office = officeService.findOfficeByVehicle(vehicle);
+			dtos.add(new VehicleAndOfficeDTO(vehicle, office));
+		}
+		office = officeService.findOfficeById(officeID);
+		Vehicle vehicle = vehicleService.findVehicleById(vehicleID);
+		office.addVehicle(vehicle);
+		officeService.updateOffice(officeID, office);
+		model.addAttribute("vehicles", dtos);
+		model.addAttribute("officeID", officeID);
+		model.addAttribute("carGroup", carGroup);
+		return "redirect:/office/vehicles/{officeID}";
+	}
+
+	public User convertDTOToUser(UserDTO dto) {
+		User user = new User();
+		user.setCreateTS(dto.getCreateTS());
+		user.setLastChangeTS(dto.getLastChangeTS());
+		user.setEmail(dto.getEmail());
+		user.setId(dto.getId());
+		user.setPassword(dto.getPassword());
+		user.setUsername(dto.getUsername());
+		Role role = new Role();
+		List<Role> roles = new ArrayList<>();
+		if (dto.isAdmin()) {
+			role = roleService.findRoleByName("ROLE_ADMIN");
+			if (role != null) {
+				roles.add(role);
+			}
+		}
+		if (dto.isOper()) {
+			role = roleService.findRoleByName("ROLE_OPER");
+			if (role != null) {
+				roles.add(role);
+			}
+		}
+		if (dto.isUser()) {
+			role = roleService.findRoleByName("ROLE_USER");
+			if (role != null) {
+				roles.add(role);
+			}
+		}
+		user.setRoles(roles);
+		return user;
+	}
+
+	public UserDTO convertUserToDTO(User user) {
+		UserDTO dto = new UserDTO();
+		dto.setCreateTS(user.getCreateTS());
+		dto.setEmail(user.getEmail());
+		dto.setId(user.getId());
+		dto.setLastChangeTS(user.getLastChangeTS());
+		dto.setPassword(user.getPassword());
+		dto.setUsername(user.getUsername());
+		dto.setAdmin(false);
+		dto.setOper(false);
+		dto.setUser(false);
+		for (Role role : user.getRoles()) {
+			switch (role.getName()) {
+			case "ROLE_ADMIN":
+				dto.setAdmin(true);
+				break;
+			case "ROLE_OPER":
+				dto.setOper(true);
+				break;
+			case "ROLE_USER":
+				dto.setUser(true);
+				break;
+			}
+		}
+		return dto;
+	}
 }

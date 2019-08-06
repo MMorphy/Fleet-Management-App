@@ -22,7 +22,6 @@
 						<th>Name</th>
 						<th>Address</th>
 						<th>Working Hours</th>
-						<th>Employees</th>
 						<th>Vehicles</th>
 					</tr>
 				</thead>
@@ -32,14 +31,16 @@
 						<td th:text="${office.name}"></td>
 						<td th:text="${office.address}"></td>
 						<td>
-							<a th:href="@{'/workingHours/administration/' + ${office.workingHours.id}}">Working Hours</a>
+							<a
+							th:href="@{'/workingHours/administration/' + ${office.workingHours.id}}">Working
+								Hours
+							</a>
 						</td>
 						<td>
-							<a th:href="@{'/office/employees/' + ${office.id}}">Employees</a>
-						</td>
-						<td>Vehicles link</td>
+							<a th:href="@{'/office/vehicles/' + ${office.id}}">Vehicles</a></td>
 						<td>
-							<form th:action="@{'/office/delete/' + ${office.id}}" method="post">
+							<form th:action="@{'/office/delete/' + ${office.id}}"
+								method="post">
 								<button>Remove</button>
 							</form>
 						</td>

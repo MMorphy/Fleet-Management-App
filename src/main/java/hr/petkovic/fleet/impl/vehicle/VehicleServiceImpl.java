@@ -62,10 +62,16 @@ public class VehicleServiceImpl implements VehicleService {
 			veh.setSpecification(vehicle.getSpecification());
 			veh.setTire(vehicle.getTire());
 			veh.setVIN(vehicle.getVIN());
+			veh.setRented(vehicle.isRented());
 			return this.vehicleRepo.save(veh);
 		} else {
 			return this.vehicleRepo.save(vehicle);
 		}
+	}
+
+	@Override
+	public List<Vehicle> findAllUnrentedVehiclesByCarGroup(String carGroup) {
+		return this.vehicleRepo.findByRentedAndCarGroup_carGroup(false, carGroup);
 	}
 
 }

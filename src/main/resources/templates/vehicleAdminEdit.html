@@ -82,6 +82,13 @@
 					th:text="${tire.manufacturingYear + ' ' + tire.tireType.type + ' ' + tire.tireBrand.brand + ' ' + tire.width + '/' + tire.aspectRatio + '/' + tire.wheelDiameter}"></option>
 			</select>
 		</div>
+		
+		<div class="form-group">
+			<label for="rented">In rent:</label> <input type="checkbox"
+				class="form-control" id="rented" th:field="*{rented}" th:checked="*{rented}"
+				th:value="${session.editedVehicle.rented}">
+		</div>
+		
 		<input type="submit" th:value="Submit" name="action"> <input
 			type="submit" th:value="Cancel" name="action">
 	</form>

@@ -15,4 +15,6 @@ public interface VehicleService {
 	public abstract Vehicle saveVehicle(Vehicle vehicle);
 
 	public abstract Vehicle updateVehicle(Long id, Vehicle vehicle);
+
+	public abstract List<Vehicle> findAllUnrentedVehiclesByCarGroup(String carGroup);
 }

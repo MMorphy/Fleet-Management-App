@@ -31,40 +31,44 @@
 						<th>Specification</th>
 						<th>Damages</th>
 						<th>Navigation</th>
-
+						<th>In rent</th>
+						<th>Office</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="vehicle : ${vehicles}">
-						<td th:text="${vehicle.id}"></td>
-						<td th:text="${vehicle.VIN}"></td>
-						<td th:text="${vehicle.registrationNumber}"></td>
-						<td th:text="${vehicle.manufactoringYear}"></td>
-						<td th:text="${vehicle.currentKM}"></td>
-						<td th:text="${vehicle.manufacturer.carManufacturer}"></td>
-						<td th:text="${vehicle.model.carModel}"></td>
-						<td th:text="${vehicle.carGroup.carGroup}"></td>
-						<td th:text="${vehicle.fuelLevel}"></td>
+						<td th:text="${vehicle.vehicle.id}"></td>
+						<td th:text="${vehicle.vehicle.VIN}"></td>
+						<td th:text="${vehicle.vehicle.registrationNumber}"></td>
+						<td th:text="${vehicle.vehicle.manufactoringYear}"></td>
+						<td th:text="${vehicle.vehicle.currentKM}"></td>
+						<td th:text="${vehicle.vehicle.manufacturer.carManufacturer}"></td>
+						<td th:text="${vehicle.vehicle.model.carModel}"></td>
+						<td th:text="${vehicle.vehicle.carGroup.carGroup}"></td>
+						<td th:text="${vehicle.vehicle.fuelLevel}"></td>
 						<td><a
-							th:href="'/tires/administration/' + ${vehicle.tire.id}">Tires</a></td>
+							th:href="'/tires/administration/' + ${vehicle.vehicle.tire.id}">Tires</a></td>
 						<td><a
-							th:href="'/specification/administration/' + ${vehicle.specification.id}">Specification</a></td>
-						<td th:if="${#lists.size(vehicle.damages) != 0}"><a
-							th:href="@{'/damage/administration/vehicle/' + ${vehicle.id}}">Damages</a></td>
-						<td th:if="${#lists.size(vehicle.damages) == 0}">No damages</td>
+							th:href="'/specification/administration/' + ${vehicle.vehicle.specification.id}">Specification</a></td>
+						<td th:if="${#lists.size(vehicle.vehicle.damages) != 0}"><a
+							th:href="@{'/damage/administration/vehicle/' + ${vehicle.vehicle.id}}">Damages</a></td>
+						<td th:if="${#lists.size(vehicle.vehicle.damages) == 0}">No damages</td>
 
-						<td th:if="${vehicle.navigation != null}" th:text="${vehicle.navigation.model}"></td>
-						<td th:if="${vehicle.navigation == null}">Pick navigation</td>
-
+						<td th:if="${vehicle.vehicle.navigation != null}" th:text="${vehicle.vehicle.navigation.model}"></td>
+						<td th:if="${vehicle.vehicle.navigation == null}">Pick navigation</td>
+						
+						<td th:text="${vehicle.vehicle.rented}"></td>
+						
+						<td th:text="${vehicle.office.name}"></td>
 
 						<td>
-							<form th:action="@{'/vehicle/delete/' + ${vehicle.id}}"
+							<form th:action="@{'/vehicle/delete/' + ${vehicle.vehicle.id}}"
 								method="post">
 								<button>Remove</button>
 							</form>
 						</td>
 						<td>
-							<form th:action="@{'/vehicle/edit/' + ${vehicle.id}}" method="get">
+							<form th:action="@{'/vehicle/edit/' + ${vehicle.vehicle.id}}" method="get">
 								<button>Edit</button>
 							</form>
 						</td>

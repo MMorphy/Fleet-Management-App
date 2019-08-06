@@ -35,7 +35,7 @@ public class Office {
 	@JoinColumn(name = "workingHours_id")
 	private WorkingHours workingHours;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "office_id")
 	private Set<Vehicle> vehiclePool = new LinkedHashSet<>();
 
@@ -89,6 +89,14 @@ public class Office {
 
 	public void setEmployees(Set<User> employees) {
 		this.employees = employees;
+	}
+
+	public void addVehicle(Vehicle vehicle) {
+		this.vehiclePool.add(vehicle);
+	}
+
+	public void removeVehicle(Vehicle vehicle) {
+		this.vehiclePool.remove(vehicle);
 	}
 
 	@Override

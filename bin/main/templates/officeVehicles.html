@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Office vehicles</title>
+</head>
+<body>
+
+
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<h1 class="col-md-3">Office vehicles</h1>
+		</div>
+		<div class="col-md-12">
+			<h2>Mini Vehicles</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>VIN</th>
+						<th>Registration</th>
+						<th>Year</th>
+						<th>KM</th>
+						<th>Manufacturer</th>
+						<th>Model</th>
+						<th>Group</th>
+						<th>Fuel Level</th>
+						<th>Tire</th>
+						<th>Specification</th>
+						<th>Damages</th>
+						<th>Navigation</th>
+						<th>In rent</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="mVehicle : ${mVehicles}">
+						<td th:text="${mVehicle.id}"></td>
+						<td th:text="${mVehicle.VIN}"></td>
+						<td th:text="${mVehicle.registrationNumber}"></td>
+						<td th:text="${mVehicle.manufactoringYear}"></td>
+						<td th:text="${mVehicle.currentKM}"></td>
+						<td th:text="${mVehicle.manufacturer.carManufacturer}"></td>
+						<td th:text="${mVehicle.model.carModel}"></td>
+						<td th:text="${mVehicle.carGroup.carGroup}"></td>
+						<td th:text="${mVehicle.fuelLevel}"></td>
+						<td><a
+							th:href="'/tires/administration/' + ${mVehicle.tire.id}">Tires</a></td>
+						<td><a
+							th:href="'/specification/administration/' + ${mVehicle.specification.id}">Specification</a></td>
+						<td th:if="${#lists.size(mVehicle.damages) != 0}"><a
+							th:href="@{'/damage/administration/vehicle/' + ${mVehicle.id}}">Damages</a></td>
+						<td th:if="${#lists.size(mVehicle.damages) == 0}">No damages</td>
+
+						<td th:if="${mVehicle.navigation != null}" th:text="${mVehicle.navigation.model}"></td>
+						<td th:if="${mVehicle.navigation == null}">Pick navigation</td>
+						
+						<td th:text="${mVehicle.rented}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<a th:href="@{'/office/requestVehicle/Mini/' + ${officeID}}">Request transfer</a>
+		</div>
+		
+		
+		<div class="col-md-12">
+			<h2>Economy Vehicles</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>VIN</th>
+						<th>Registration</th>
+						<th>Year</th>
+						<th>KM</th>
+						<th>Manufacturer</th>
+						<th>Model</th>
+						<th>Group</th>
+						<th>Fuel Level</th>
+						<th>Tire</th>
+						<th>Specification</th>
+						<th>Damages</th>
+						<th>Navigation</th>
+						<th>In rent</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="eVehicle : ${eVehicles}">
+						<td th:text="${eVehicle.id}"></td>
+						<td th:text="${eVehicle.VIN}"></td>
+						<td th:text="${eVehicle.registrationNumber}"></td>
+						<td th:text="${eVehicle.manufactoringYear}"></td>
+						<td th:text="${eVehicle.currentKM}"></td>
+						<td th:text="${eVehicle.manufacturer.carManufacturer}"></td>
+						<td th:text="${eVehicle.model.carModel}"></td>
+						<td th:text="${eVehicle.carGroup.carGroup}"></td>
+						<td th:text="${eVehicle.fuelLevel}"></td>
+						<td><a
+							th:href="'/tires/administration/' + ${eVehicle.tire.id}">Tires</a></td>
+						<td><a
+							th:href="'/specification/administration/' + ${eVehicle.specification.id}">Specification</a></td>
+						<td th:if="${#lists.size(eVehicle.damages) != 0}"><a
+							th:href="@{'/damage/administration/vehicle/' + ${eVehicle.id}}">Damages</a></td>
+						<td th:if="${#lists.size(eVehicle.damages) == 0}">No damages</td>
+
+						<td th:if="${eVehicle.navigation != null}" th:text="${eVehicle.navigation.model}"></td>
+						<td th:if="${eVehicle.navigation == null}">Pick navigation</td>
+						
+						<td th:text="${eVehicle.rented}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<a th:href="@{'/office/requestVehicle/Economy/' + ${officeID}}">Request transfer</a>
+		</div>
+		
+		
+		<div class="col-md-12">
+			<h2>Compact Vehicles</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>VIN</th>
+						<th>Registration</th>
+						<th>Year</th>
+						<th>KM</th>
+						<th>Manufacturer</th>
+						<th>Model</th>
+						<th>Group</th>
+						<th>Fuel Level</th>
+						<th>Tire</th>
+						<th>Specification</th>
+						<th>Damages</th>
+						<th>Navigation</th>
+						<th>In rent</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="cVehicle : ${cVehicles}">
+						<td th:text="${cVehicle.id}"></td>
+						<td th:text="${cVehicle.VIN}"></td>
+						<td th:text="${cVehicle.registrationNumber}"></td>
+						<td th:text="${cVehicle.manufactoringYear}"></td>
+						<td th:text="${cVehicle.currentKM}"></td>
+						<td th:text="${cVehicle.manufacturer.carManufacturer}"></td>
+						<td th:text="${cVehicle.model.carModel}"></td>
+						<td th:text="${cVehicle.carGroup.carGroup}"></td>
+						<td th:text="${cVehicle.fuelLevel}"></td>
+						<td><a
+							th:href="'/tires/administration/' + ${cVehicle.tire.id}">Tires</a></td>
+						<td><a
+							th:href="'/specification/administration/' + ${cVehicle.specification.id}">Specification</a></td>
+						<td th:if="${#lists.size(cVehicle.damages) != 0}"><a
+							th:href="@{'/damage/administration/vehicle/' + ${cVehicle.id}}">Damages</a></td>
+						<td th:if="${#lists.size(cVehicle.damages) == 0}">No damages</td>
+
+						<td th:if="${cVehicle.navigation != null}" th:text="${cVehicle.navigation.model}"></td>
+						<td th:if="${cVehicle.navigation == null}">Pick navigation</td>
+						
+						<td th:text="${cVehicle.rented}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<a th:href="@{'/office/requestVehicle/Compact/' + ${officeID}}">Request transfer</a>
+		</div>
+		
+		
+		<div class="col-md-12">
+			<h2>Intermediate Vehicles</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>VIN</th>
+						<th>Registration</th>
+						<th>Year</th>
+						<th>KM</th>
+						<th>Manufacturer</th>
+						<th>Model</th>
+						<th>Group</th>
+						<th>Fuel Level</th>
+						<th>Tire</th>
+						<th>Specification</th>
+						<th>Damages</th>
+						<th>Navigation</th>
+						<th>In rent</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="iVehicle : ${iVehicles}">
+						<td th:text="${iVehicle.id}"></td>
+						<td th:text="${iVehicle.VIN}"></td>
+						<td th:text="${iVehicle.registrationNumber}"></td>
+						<td th:text="${iVehicle.manufactoringYear}"></td>
+						<td th:text="${iVehicle.currentKM}"></td>
+						<td th:text="${iVehicle.manufacturer.carManufacturer}"></td>
+						<td th:text="${iVehicle.model.carModel}"></td>
+						<td th:text="${iVehicle.carGroup.carGroup}"></td>
+						<td th:text="${iVehicle.fuelLevel}"></td>
+						<td><a
+							th:href="'/tires/administration/' + ${iVehicle.tire.id}">Tires</a></td>
+						<td><a
+							th:href="'/specification/administration/' + ${iVehicle.specification.id}">Specification</a></td>
+						<td th:if="${#lists.size(iVehicle.damages) != 0}"><a
+							th:href="@{'/damage/administration/vehicle/' + ${iVehicle.id}}">Damages</a></td>
+						<td th:if="${#lists.size(iVehicle.damages) == 0}">No damages</td>
+
+						<td th:if="${iVehicle.navigation != null}" th:text="${iVehicle.navigation.model}"></td>
+						<td th:if="${iVehicle.navigation == null}">Pick navigation</td>
+						
+						<td th:text="${iVehicle.rented}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<a th:href="@{'/office/requestVehicle/Intermediate/' + ${officeID}}">Request transfer</a>
+		</div>
+		
+		
+		<div class="col-md-12">
+			<h2>Family Vehicles</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>VIN</th>
+						<th>Registration</th>
+						<th>Year</th>
+						<th>KM</th>
+						<th>Manufacturer</th>
+						<th>Model</th>
+						<th>Group</th>
+						<th>Fuel Level</th>
+						<th>Tire</th>
+						<th>Specification</th>
+						<th>Damages</th>
+						<th>Navigation</th>
+						<th>In rent</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="fVehicle : ${fVehicles}">
+						<td th:text="${fVehicle.id}"></td>
+						<td th:text="${fVehicle.VIN}"></td>
+						<td th:text="${fVehicle.registrationNumber}"></td>
+						<td th:text="${fVehicle.manufactoringYear}"></td>
+						<td th:text="${fVehicle.currentKM}"></td>
+						<td th:text="${fVehicle.manufacturer.carManufacturer}"></td>
+						<td th:text="${fVehicle.model.carModel}"></td>
+						<td th:text="${fVehicle.carGroup.carGroup}"></td>
+						<td th:text="${fVehicle.fuelLevel}"></td>
+						<td><a
+							th:href="'/tires/administration/' + ${fVehicle.tire.id}">Tires</a></td>
+						<td><a
+							th:href="'/specification/administration/' + ${fVehicle.specification.id}">Specification</a></td>
+						<td th:if="${#lists.size(fVehicle.damages) != 0}"><a
+							th:href="@{'/damage/administration/vehicle/' + ${fVehicle.id}}">Damages</a></td>
+						<td th:if="${#lists.size(fVehicle.damages) == 0}">No damages</td>
+
+						<td th:if="${fVehicle.navigation != null}" th:text="${fVehicle.navigation.model}"></td>
+						<td th:if="${fVehicle.navigation == null}">Pick navigation</td>
+						
+						<td th:text="${fVehicle.rented}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<a th:href="@{'/office/requestVehicle/Family/' + ${officeID}}">Request transfer</a>
+		</div>
+		
+		
+		<div class="col-md-12">
+			<h2>Premium Vehicles</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>VIN</th>
+						<th>Registration</th>
+						<th>Year</th>
+						<th>KM</th>
+						<th>Manufacturer</th>
+						<th>Model</th>
+						<th>Group</th>
+						<th>Fuel Level</th>
+						<th>Tire</th>
+						<th>Specification</th>
+						<th>Damages</th>
+						<th>Navigation</th>
+						<th>In rent</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="pVehicle : ${pVehicles}">
+						<td th:text="${pVehicle.id}"></td>
+						<td th:text="${pVehicle.VIN}"></td>
+						<td th:text="${pVehicle.registrationNumber}"></td>
+						<td th:text="${pVehicle.manufactoringYear}"></td>
+						<td th:text="${pVehicle.currentKM}"></td>
+						<td th:text="${pVehicle.manufacturer.carManufacturer}"></td>
+						<td th:text="${pVehicle.model.carModel}"></td>
+						<td th:text="${pVehicle.carGroup.carGroup}"></td>
+						<td th:text="${pVehicle.fuelLevel}"></td>
+						<td><a
+							th:href="'/tires/administration/' + ${pVehicle.tire.id}">Tires</a></td>
+						<td><a
+							th:href="'/specification/administration/' + ${pVehicle.specification.id}">Specification</a></td>
+						<td th:if="${#lists.size(pVehicle.damages) != 0}"><a
+							th:href="@{'/damage/administration/vehicle/' + ${pVehicle.id}}">Damages</a></td>
+						<td th:if="${#lists.size(pVehicle.damages) == 0}">No damages</td>
+
+						<td th:if="${pVehicle.navigation != null}" th:text="${pVehicle.navigation.model}"></td>
+						<td th:if="${pVehicle.navigation == null}">Pick navigation</td>
+						
+						<td th:text="${mVehicle.rented}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<a th:href="@{'/office/requestVehicle/Premium/' + ${officeID}}">Request transfer</a>
+		</div>
+	</div>
+</body>
+</html>

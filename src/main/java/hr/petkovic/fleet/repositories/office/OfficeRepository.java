@@ -17,6 +17,8 @@ public interface OfficeRepository extends JpaRepository<Office, Long> {
 
 	Optional<Office> findByAddress(String address);
 
+	Optional<Office> findByVehiclePool_id(Long id);
+
 	void deleteById(Long id);
 
 	Office save(Office office);

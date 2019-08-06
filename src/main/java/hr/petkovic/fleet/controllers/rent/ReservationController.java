@@ -68,7 +68,7 @@ public class ReservationController {
 
 	// Adding
 	@GetMapping("/add")
-	public String getOptionAdding(Model model, ReservationDTO addRes, HttpSession session) {
+	public String getReservationAdding(Model model, ReservationDTO addRes, HttpSession session) {
 		if (session.getAttribute("addingReservation") == null || addRes == null) {
 			session.setAttribute("addingReservation", new ReservationDTO());
 			model.addAttribute("addRes", new ReservationDTO());
@@ -83,7 +83,7 @@ public class ReservationController {
 	}
 
 	@PostMapping("/add/")
-	public String addEngine(Model model, ReservationDTO addRes, String action, HttpSession session) {
+	public String addReservation(Model model, ReservationDTO addRes, String action, HttpSession session) {
 		model.addAttribute("oldRes", session.getAttribute("addingReservation"));
 		if (action.equals("Submit")) {
 			addRes.setUser(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
@@ -255,6 +255,8 @@ public class ReservationController {
 				options.add(option);
 			}
 		}
+		option = optionService.findOptionByGroupAndCode(group, "T");
+		options.add(option);
 		res.setOptions(options);
 		return res;
 	}
