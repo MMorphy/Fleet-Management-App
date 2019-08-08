@@ -6,5 +6,4 @@ TODO:
 		Implement search and filter
 		Uljepsaj datalistove u thymeleafu
 		Filter rented/unrented vehicles on /office/vehicles/{id}
-		Security
 		Uljepsaj frontend

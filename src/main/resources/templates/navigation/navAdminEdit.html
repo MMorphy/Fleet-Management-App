@@ -5,10 +5,14 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<title>Office edit</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>Navigation edit</title>
 </head>
 <body>
-	<h2>Office edit</h2>
+	<h2>Navigation edit</h2>
 	<form method="POST" th:object="${editNav}"
 		th:action="@{'/navigation/edit/' + *{id}}">
 

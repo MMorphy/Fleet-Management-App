@@ -5,29 +5,106 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <title>Enter new vehicle</title>
 </head>
 <body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Fleet</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li class="dropdown" sec:authorize="hasRole('ROLE_OPER')"><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#">Office
+							administration <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a th:href="@{/office/administration/}"> Office</a></li>
+							<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+								th:href="@{/workingHours/administration/}"> Working hours</a></li>
+							<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+								th:href="@{/user/administration}"> User Admin</a></li>
+						</ul></li>
+					<li class="dropdown" sec:authorize="hasRole('ROLE_OPER')"><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#">Rent
+							administration <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a th:href="@{/reservation/administration/}">Reservations</a></li>
+							<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+								th:href="@{/option/administration/}"> Options</a></li>
+						</ul></li>
+					<li class="dropdown" sec:authorize="hasRole('ROLE_OPER')"><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#">Vehicle
+							administration <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a th:href="@{/vehicle/administration/}"> Vehicles</a></li>
+							<li><a th:href="@{/damage/administration/}"> Damages</a></li>
+							<li><a th:href="@{/tires/administration/}"> Tires</a></li>
+							<li><a th:href="@{/navigation/administration/}">
+									Navigation</a></li>
+							<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+								th:href="@{/specification/administration/}"> Vehicle
+									specification</a></li>
+							<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+								th:href="@{/engine/administration/}"> Engine Admin</a></li>
+						</ul></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li sec:authorize="!isAuthenticated()"><a
+						th:href="@{/user/registration/}"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">
+							<span class="glyphicon glyphicon-log-in"></span> Login
+					</a></li>
+					<li sec:authorize="isAuthenticated()"><a
+						href="javascript: document.logoutForm.submit()"> <span
+							class="glyphicon glyphicon-log-out"></span> Logout
+					</a></li>
+				</ul>
+			</div>
+			<form name="logoutForm" th:action="@{/logout}" method="post"
+				th:hidden="true">
+				<input hidden="hidden" type="submit" value="Sign Out" />
+			</form>
+		</div>
+	</nav>
+
+
+
+
 	<h2>Enter new vehicle</h2>
 	<form method="POST" th:object="${addVehicle}"
 		th:action="@{/vehicle/add/}">
-		
+
 		<div class="form-group">
-			<label for="VIN">VIN:</label> <input type="text"
-				class="form-control" id="VIN" th:field="*{vehicle.VIN}"
-				>
+			<label for="VIN">VIN:</label> <input type="text" class="form-control"
+				id="VIN" th:field="*{vehicle.VIN}">
 		</div>
 
 		<div class="form-group">
-			<label for="registration">Registration plate:</label> <input type="text"
-				class="form-control" id="registration" th:field="*{vehicle.registrationNumber}"
-				>
+			<label for="registration">Registration plate:</label> <input
+				type="text" class="form-control" id="registration"
+				th:field="*{vehicle.registrationNumber}">
 		</div>
 
 		<div class="form-group">
 			<label for="manufactoringYear">Year:</label> <input type="number"
-				class="form-control" id="manufactoringYear" th:field="*{vehicle.manufactoringYear}"
-				 min="2000" max="2099" step="1">
+				class="form-control" id="manufactoringYear"
+				th:field="*{vehicle.manufactoringYear}" min="2000" max="2099"
+				step="1">
 		</div>
 
 		<div class="form-group">
@@ -37,27 +114,27 @@
 		</div>
 
 		<div class="form-group">
-			<label>Manufacturer:</label>
-			<input list="manufacturers" class="form-control" th:field="*{vehicle.manufacturer}">
-			<datalist id="manufacturers">				
-					<option th:each="man : ${manufacturers}" th:value="${man.id}"
-						th:text="${man.carManufacturer}"></option>
-				</datalist>
-			</div>
+			<label>Manufacturer:</label> <input list="manufacturers"
+				class="form-control" th:field="*{vehicle.manufacturer}">
+			<datalist id="manufacturers">
+				<option th:each="man : ${manufacturers}" th:value="${man.id}"
+					th:text="${man.carManufacturer}"></option>
+			</datalist>
+		</div>
 
 		<div class="form-group">
-		<label>Model:</label>
-		<input list="models" class="form-control" th:field="*{vehicle.model}">
-				<datalist id="models">				
+			<label>Model:</label> <input list="models" class="form-control"
+				th:field="*{vehicle.model}">
+			<datalist id="models">
 				<option th:each="model : ${models}" th:value="${model.id}"
 					th:text="${model.carModel}"></option>
-				</datalist>
+			</datalist>
 		</div>
 
 
 		<div class="form-group">
-		<label>Car Group:</label>
-			<select th:field="*{vehicle.carGroup}" class="form-control">
+			<label>Car Group:</label> <select th:field="*{vehicle.carGroup}"
+				class="form-control">
 				<option th:each="group : ${groups}" th:value="${group.id}"
 					th:text="${group.carGroup}"></option>
 			</select>
@@ -66,39 +143,41 @@
 		<div class="form-group">
 			<label for="fuelLevel">Fuel level:</label> <input type="number"
 				class="form-control" id="fuelLevel" th:field="*{vehicle.fuelLevel}"
-				 min="0" max="8" step="1">
+				min="0" max="8" step="1">
 		</div>
 
 		<div class="form-group">
-		<label>Specification:</label>
-			<input list="specifications" class="form-control" th:field="*{vehicle.specification}">
+			<label>Specification:</label> <input list="specifications"
+				class="form-control" th:field="*{vehicle.specification}">
 			<datalist id="specifications">
-				<option th:each="spec : ${specs}" th:text="${'Doors:' + spec.doors + ' FuelTank:' + spec.fuelTankCapacity + ' Seats:' + spec.numberOfSeats}" th:value="${spec.id}"></option>
+				<option th:each="spec : ${specs}"
+					th:text="${'Doors:' + spec.doors + ' FuelTank:' + spec.fuelTankCapacity + ' Seats:' + spec.numberOfSeats}"
+					th:value="${spec.id}"></option>
 			</datalist>
 		</div>
 
 
 		<div class="form-group">
-		<label>Tires:</label>
-			<select th:field="*{vehicle.tire}" class="form-control">
+			<label>Tires:</label> <select th:field="*{vehicle.tire}"
+				class="form-control">
 				<option th:each="tire : ${tires}" th:value="${tire.id}"
 					th:text="${tire.manufacturingYear + ' ' + tire.tireType.type + ' ' + tire.tireBrand.brand + ' ' + tire.width + '/' + tire.aspectRatio + '/' + tire.wheelDiameter}"></option>
 			</select>
 		</div>
 
 		<div class="form-group">
-		<label>Navigation:</label>
-			<select th:field="*{navigation}" class="form-control">
+			<label>Navigation:</label> <select th:field="*{navigation}"
+				class="form-control">
 				<option th:each="nav : ${navs}" th:value="${nav.id}"
 					th:text="${nav.model.model}"></option>
 			</select>
-		</div>		
+		</div>
 
-		<label>Office:</label>
-			<select th:field="*{office}" class="form-control">
-				<option th:each="office : ${offices}" th:value="${office.id}"
-					th:text="${office.name}"></option>
-			</select>
+		<label>Office:</label> <select th:field="*{office}"
+			class="form-control">
+			<option th:each="office : ${offices}" th:value="${office.id}"
+				th:text="${office.name}"></option>
+		</select>
 		</div>
 
 		<input type="submit" th:value="Submit" name="action"> <input
