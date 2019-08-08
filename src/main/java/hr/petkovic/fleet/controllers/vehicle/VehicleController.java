@@ -84,7 +84,7 @@ public class VehicleController {
 			}
 			model.addAttribute("vehicles", dtos);
 		}
-		return "vehicleAdmin";
+		return "vehicle/vehicleAdmin";
 	}
 
 	// Adding
@@ -105,7 +105,7 @@ public class VehicleController {
 		model.addAttribute("specs", specService.findAllSpecs());
 		model.addAttribute("navs", navService.findAllNavs());
 		model.addAttribute("offices", officeService.findAllOffices());
-		return "vehicleAdminAdd";
+		return "vehicle/vehicleAdminAdd";
 	}
 
 	@PostMapping("/add/")
@@ -146,7 +146,7 @@ public class VehicleController {
 		model.addAttribute("tires", tires);
 		model.addAttribute("specs", specService.findAllSpecs());
 		model.addAttribute("navs", navService.findAllNavs());
-		return "vehicleAdminEdit";
+		return "vehicle/vehicleAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")

@@ -50,14 +50,14 @@ public class DamageController {
 		} else {
 			model.addAttribute("damages", damageService.findAllDamages());
 		}
-		return "damageAdmin";
+		return "damage/damageAdmin";
 	}
 
 	// Damages for vehicle
 	@GetMapping("/administration/vehicle/{id}")
 	public String getDamageAdministrationForVehicle(@PathVariable(name = "id", required = true) Long id, Model model) {
 		model.addAttribute("damages", damageService.findDamagesForVehicle(id));
-		return "damageAdmin";
+		return "damage/damageAdmin";
 	}
 
 	// Adding
@@ -74,7 +74,7 @@ public class DamageController {
 		model.addAttribute("vehicles", vehicleService.findAllVehicles());
 		model.addAttribute("types", damageTypeService.findAllDamageTypes());
 		model.addAttribute("sizes", damageSizeService.findAllDamageSizes());
-		return "damageAdminAdd";
+		return "damage/damageAdminAdd";
 	}
 
 	@PostMapping("/add/")
@@ -102,7 +102,7 @@ public class DamageController {
 		model.addAttribute("vehicles", vehicleService.findAllVehicles());
 		model.addAttribute("types", damageTypeService.findAllDamageTypes());
 		model.addAttribute("sizes", damageSizeService.findAllDamageSizes());
-		return "damageAdminEdit";
+		return "damage/damageAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")

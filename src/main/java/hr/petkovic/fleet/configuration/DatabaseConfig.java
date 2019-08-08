@@ -34,10 +34,13 @@ public class DatabaseConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-//		dataSource.setUrl("jdbc:mysql://localhost:3306/fleet?useTimezone=true&serverTimezone=UTC");
-		dataSource.setUrl("jdbc:mysql://192.168.178.101:3306/fleet?useTimezone=true&serverTimezone=UTC");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/fleet?useTimezone=true&serverTimezone=UTC");
+//		Za deploy
+//		dataSource.setUsername("admin");
+//		dataSource.setPassword("wdqWR7j^#6hy43D@");
+//		Za local tomcat
 		dataSource.setUsername("root");
-		dataSource.setPassword("wdqWR7j^#6hy43D@");
+		dataSource.setPassword("root");
 		return dataSource;
 	}
 
@@ -55,7 +58,7 @@ public class DatabaseConfig {
 		Properties hibernateProperties = new Properties();
 //		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
 		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
-		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "none");
 		hibernateProperties.setProperty("hibernate.dialect.storage_engine", "innodb");
 		return hibernateProperties;
 	}

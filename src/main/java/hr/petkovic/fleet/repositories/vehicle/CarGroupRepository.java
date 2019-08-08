@@ -14,6 +14,8 @@ public interface CarGroupRepository extends JpaRepository<CarGroup, Long>{
 
 	Optional<CarGroup> findById(Long id);
 
+	Optional<CarGroup> findByCarGroup(String carGroup);
+
 	void deleteById(Long id);
 
 	CarGroup save(CarGroup group);

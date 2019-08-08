@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Working Hours</title>
+</head>
+<body>
+
+
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<h1 class="col-md-3">Working Hours</h1>
+		</div>
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Workday From</th>
+						<th>Workday To</th>
+						<th>Saturday From</th>
+						<th>Saturday To</th>
+						<th>Sunday From</th>
+						<th>Sunday To</th>
+						<th>Holiday From</th>
+						<th>Holiday To</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="hour : ${hours}">
+						<td th:text="${{hour.id}}"></td>
+						
+						<td th:if="${hour.workdayST != null}" th:text="${{hour.workdayST}}"></td>
+						<td th:if="${hour.workdayST == null}">Not working</td>
+						
+						<td th:if="${hour.workdayET != null}" th:text="${{hour.workdayET}}"></td>
+						<td th:if="${hour.workdayET == null}">Not working</td>
+
+						<td th:if="${hour.saturdayST != null}" th:text="${{hour.saturdayST}}"></td>
+						<td th:if="${hour.saturdayST == null}">Not working</td>
+
+						<td th:if="${hour.saturdayET != null}" th:text="${{hour.saturdayET}}"></td>
+						<td th:if="${hour.saturdayET == null}">Not working</td>
+
+						<td th:if="${hour.sundayST != null}" th:text="${{hour.sundayST}}"></td>
+						<td th:if="${hour.sundayST == null}">Not working</td>
+
+						<td th:if="${hour.sundayET != null}" th:text="${{hour.sundayET}}"></td>
+						<td th:if="${hour.sundayET == null}">Not working</td>
+
+						<td th:if="${hour.holidayST != null}" th:text="${{hour.holidayST}}"></td>
+						<td th:if="${hour.holidayST == null}">Not working</td>
+
+						<td th:if="${hour.holidayET != null}" th:text="${{hour.holidayET}}"></td>
+						<td th:if="${hour.holidayET == null}">Not working</td>
+
+						<td>
+							<form th:action="@{/office/add/}" method="get"
+								th:object="${addOffice}" th:if="${session.action} == adding">
+								<div hidden="hidden">
+									<input th:value="${session.addingOffice.name}"
+										th:field="*{name}"> <input
+										th:value="${session.addingOffice.address}"
+										th:field="*{address}"> <select
+										th:field="*{workingHours}">
+										<option th:value="${hour.id}" th:text=${hour.id}></option>
+									</select>
+								</div>
+								<button>Pick Add</button>
+							</form>
+
+							<form
+								th:action="@{@{'/office/edit/' + ${session.editedOffice.id}}}"
+								method="get" th:object="${editOffice}"
+								th:if="${session.action} == editing">
+								<div hidden="hidden">
+									<input th:value="${session.editedOffice.name}"
+										th:field="*{name}"> <input
+										th:value="${session.editedOffice.address}"
+										th:field="*{address}"> <select
+										th:field="*{workingHours}">
+										<option th:value="${hour.id}" th:text=${hour.id}></option>
+									</select>
+								</div>
+								<button>Pick Edit</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

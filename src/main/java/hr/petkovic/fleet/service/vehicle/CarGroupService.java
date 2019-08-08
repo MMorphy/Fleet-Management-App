@@ -10,6 +10,8 @@ public interface CarGroupService {
 
 	public abstract CarGroup findGroupById(Long id);
 
+	public abstract CarGroup findGroupByName(String groupName);
+
 	public abstract void deleteCarGroupById(Long id);
 
 	public abstract CarGroup saveGroup(CarGroup group);

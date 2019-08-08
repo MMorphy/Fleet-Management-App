@@ -41,7 +41,7 @@ public class NavigationController {
 		} else {
 			model.addAttribute("navs", navigationService.findAllNavs());
 		}
-		return "navAdmin";
+		return "navigation/navAdmin";
 	}
 
 	// Adding
@@ -56,7 +56,7 @@ public class NavigationController {
 		}
 		session.setAttribute("action", "adding");
 		model.addAttribute("models", modelService.findAllNavModels());
-		return "navAdminAdd";
+		return "navigation/navAdminAdd";
 	}
 
 	@PostMapping("/add/")
@@ -82,7 +82,7 @@ public class NavigationController {
 		}
 		session.setAttribute("action", "editing");
 		model.addAttribute("models", modelService.findAllNavModels());
-		return "navAdminEdit";
+		return "navigation/navAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")

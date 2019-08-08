@@ -40,7 +40,7 @@ public class SpecificationController {
 		} else {
 			model.addAttribute("specs", specService.findAllSpecs());
 		}
-		return "specAdmin";
+		return "specification/specAdmin";
 	}
 
 	// Adding
@@ -55,7 +55,7 @@ public class SpecificationController {
 		}
 		session.setAttribute("action", "adding");
 		model.addAttribute("engines", engineService.findAllEngines());
-		return "specAdminAdd";
+		return "specification/specAdminAdd";
 	}
 
 	@PostMapping("/add/")
@@ -83,7 +83,7 @@ public class SpecificationController {
 		}
 		model.addAttribute("engines", engineService.findAllEngines());
 		session.setAttribute("action", "editing");
-		return "specAdminEdit";
+		return "specification/specAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")
@@ -94,13 +94,13 @@ public class SpecificationController {
 		}
 		session.removeAttribute("editedSpec");
 		session.removeAttribute("action");
-		return "redirect:/specification/administration";
+		return "redirect:/specification/administration/";
 	}
 
 	// Delete
 	@PostMapping("/delete/{id}")
 	public String deleteSpec(@PathVariable("id") Long id) {
 		specService.deleteSpecById(id);
-		return "redirect:/specification/administration";
+		return "redirect:/specification/administration/";
 	}
 }

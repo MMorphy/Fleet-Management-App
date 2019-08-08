@@ -55,7 +55,7 @@ public class OfficeController {
 	@GetMapping("/administration")
 	public String getOfficeAdministration(Model model) {
 		model.addAttribute("offices", officeService.findAllOffices());
-		return "officeAdmin";
+		return "office/officeAdmin";
 	}
 
 	// Adding
@@ -69,7 +69,7 @@ public class OfficeController {
 			model.addAttribute("addOffice", addOffice);
 		}
 		session.setAttribute("action", "adding");
-		return "officeAdminAdd";
+		return "office/officeAdminAdd";
 	}
 
 	@PostMapping("/add/")
@@ -79,7 +79,7 @@ public class OfficeController {
 			model.addAttribute("addOffice", addOffice);
 			session.setAttribute("addingOffice", addOffice);
 			model.addAttribute("hours", whService.findAllWorkingHours());
-			return "workingHoursPicker";
+			return "office/workingHoursPicker";
 		} else if (action.equals("Submit")) {
 			officeService.saveOffice(addOffice);
 			session.removeAttribute("addingOffice");
@@ -103,7 +103,7 @@ public class OfficeController {
 			model.addAttribute("editOffice", editOffice);
 		}
 		session.setAttribute("action", "editing");
-		return "officeAdminEdit";
+		return "office/officeAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")
@@ -113,7 +113,7 @@ public class OfficeController {
 			session.setAttribute("editedOffice", editOffice);
 			model.addAttribute("editOffice", editOffice);
 			model.addAttribute("hours", whService.findAllWorkingHours());
-			return "workingHoursPicker";
+			return "office/workingHoursPicker";
 		} else if (action.equals("Submit")) {
 			officeService.updateOffice(id, editOffice);
 			session.removeAttribute("editedOffice");
@@ -136,7 +136,7 @@ public class OfficeController {
 	public String getWorkingHoursPicker(Model model, Office officeInEdit) {
 		logger.info(officeInEdit.getName());
 		model.addAttribute("hours", whService.findAllWorkingHours());
-		return "workingHoursPicker";
+		return "office/workingHoursPicker";
 	}
 
 	@GetMapping("/vehicles/{id}")
@@ -177,7 +177,7 @@ public class OfficeController {
 		model.addAttribute("iVehicles", intermediateVehicles);
 		model.addAttribute("fVehicles", familyVehicles);
 		model.addAttribute("pVehicles", premiumVehicles);
-		return "officeVehicles";
+		return "office/officeVehicles";
 	}
 
 	@GetMapping("/requestVehicle/{group}/{officeID}")
@@ -195,7 +195,7 @@ public class OfficeController {
 		model.addAttribute("vehicles", dtos);
 		model.addAttribute("officeID", officeID);
 		model.addAttribute("carGroup", carGroup);
-		return "transferAdmin";
+		return "office/transferAdmin";
 	}
 
 	@PostMapping("/requestVehicle/{group}/{officeID}/{vehicleID}")

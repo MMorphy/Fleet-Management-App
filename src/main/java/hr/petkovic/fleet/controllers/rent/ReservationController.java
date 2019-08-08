@@ -63,41 +63,52 @@ public class ReservationController {
 		} else {
 			model.addAttribute("reservations", resService.findAllRes());
 		}
-		return "resAdmin";
+		return "reservation/resAdmin";
 	}
 
 	// Adding
-	@GetMapping("/add")
-	public String getReservationAdding(Model model, ReservationDTO addRes, HttpSession session) {
-		if (session.getAttribute("addingReservation") == null || addRes == null) {
-			session.setAttribute("addingReservation", new ReservationDTO());
-			model.addAttribute("addRes", new ReservationDTO());
-		} else {
-			session.setAttribute("addingReservation", addRes);
-			model.addAttribute("addRes", addRes);
+	@GetMapping({ "/add/", "/add/{groupName}" })
+	public String getReservationAdding(@PathVariable(name = "groupName", required = false) String groupName,
+			Model model, ReservationDTO addRes, HttpSession session) {
+		if (groupName == null || groupName.isBlank()) {
+			if (session.getAttribute("addingReservation") == null || addRes == null) {
+				session.setAttribute("addingReservation", new ReservationDTO());
+				model.addAttribute("addRes", new ReservationDTO());
+			} else {
+				session.setAttribute("addingReservation", addRes);
+				model.addAttribute("addRes", addRes);
+			}
+		}
+		else {
+			ReservationDTO dto = new ReservationDTO();
+			dto.setCarGroup(groupService.findGroupByName(groupName));
+			session.setAttribute("addingReservation", dto);
+			model.addAttribute("addRes", dto);
 		}
 		session.setAttribute("action", "adding");
 		model.addAttribute("carGroups", groupService.findAllGroups());
 		model.addAttribute("offices", officeService.findAllOffices());
-		return "resAdminAdd";
+		return "reservation/resAdminAdd";
 	}
 
 	@PostMapping("/add/")
 	public String addReservation(Model model, ReservationDTO addRes, String action, HttpSession session) {
 		model.addAttribute("oldRes", session.getAttribute("addingReservation"));
 		if (action.equals("Submit")) {
-			addRes.setUser(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+			addRes.setUser(
+					userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
 			resService.saveRes(convertDTOToObject(addRes));
 		}
 		session.removeAttribute("addingReservation");
 		session.removeAttribute("action");
-		return "redirect:/reservation/administration/";
+		return "redirect:/";
 	}
 
 	// Editing
 	@GetMapping("/edit/{id}")
-	public String getUpdateReservation(@PathVariable("id") Long id, Model model, HttpSession session, ReservationDTO editRes) {
-		if (session.getAttribute("editedReservation") == null || editRes== null || editRes.getCarGroup() == null) {
+	public String getUpdateReservation(@PathVariable("id") Long id, Model model, HttpSession session,
+			ReservationDTO editRes) {
+		if (session.getAttribute("editedReservation") == null || editRes == null || editRes.getCarGroup() == null) {
 			session.setAttribute("editedReservation", convertObjectToDTO(resService.findResById(id)));
 			model.addAttribute("editRes", convertObjectToDTO(resService.findResById(id)));
 		} else {
@@ -107,14 +118,15 @@ public class ReservationController {
 		session.setAttribute("action", "editing");
 		model.addAttribute("carGroups", groupService.findAllGroups());
 		model.addAttribute("offices", officeService.findAllOffices());
-		return "resAdminEdit";
+		return "reservation/resAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")
 	public String updateEngine(@PathVariable("id") Long id, Model model, ReservationDTO editRes, String action,
 			HttpSession session) {
 		if (action.equals("Submit")) {
-			editRes.setUser(userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+			editRes.setUser(
+					userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
 			resService.updateRes(id, convertDTOToObject(editRes));
 		}
 		session.removeAttribute("editedReservation");
@@ -123,7 +135,6 @@ public class ReservationController {
 		return "redirect:/reservation/administration/";
 	}
 
-	
 	// Delete
 	@PostMapping("/delete/{id}")
 	public String deleteReservation(@PathVariable("id") Long id) {
@@ -142,7 +153,7 @@ public class ReservationController {
 			model.addAttribute("reservations",
 					resService.findAllResForCheckInOffice(officeService.findOfficeById(officeId)));
 		}
-		return "resAdmin";
+		return "reservation/resAdmin";
 	}
 
 	// Util
@@ -189,6 +200,7 @@ public class ReservationController {
 		}
 		return dto;
 	}
+
 	private Reservation convertDTOToObject(ReservationDTO obj) {
 		Reservation res = new Reservation();
 		CarGroup group = obj.getCarGroup();
@@ -262,13 +274,13 @@ public class ReservationController {
 	}
 
 	private long calculateDays(LocalDateTime start, LocalDateTime stop) {
-		LocalDateTime tempDateTime = LocalDateTime.from( start );
+		LocalDateTime tempDateTime = LocalDateTime.from(start);
 		long years = tempDateTime.until(stop, ChronoUnit.YEARS);
 		long months = tempDateTime.until(stop, ChronoUnit.MONTHS);
 		long days = tempDateTime.until(stop, ChronoUnit.DAYS);
 		long hours = tempDateTime.until(stop, ChronoUnit.HOURS);
 		if (hours > 1) {
-			days +=1;
+			days += 1;
 		}
 		return years * 365 + months * 30 + days;
 	}

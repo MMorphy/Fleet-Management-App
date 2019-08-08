@@ -40,7 +40,7 @@ public class OptionController {
 		} else {
 			model.addAttribute("options", optionService.findAllOptions());
 		}
-		return "optionAdmin";
+		return "option/optionAdmin";
 	}
 
 	// Adding
@@ -55,7 +55,7 @@ public class OptionController {
 		}
 		session.setAttribute("action", "adding");
 		model.addAttribute("carGroups", groupService.findAllGroups());
-		return "optionAdminAdd";
+		return "option/optionAdminAdd";
 	}
 
 	@PostMapping("/add/")
@@ -81,7 +81,7 @@ public class OptionController {
 		}
 		session.setAttribute("action", "editing");
 		model.addAttribute("carGroups", groupService.findAllGroups());
-		return "optionAdminEdit";
+		return "option/optionAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")
@@ -111,6 +111,6 @@ public class OptionController {
 		} else {
 			model.addAttribute("options", optionService.findAllOptions());
 		}
-		return "optionAdmin";
+		return "option/optionAdmin";
 	}
 }

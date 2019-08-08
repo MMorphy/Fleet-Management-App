@@ -48,7 +48,7 @@ public class UserController {
 			userDTOs.add(convertUserToDTO(user));
 		}
 		model.addAttribute("users", userDTOs);
-		return "userAdmin";
+		return "user/userAdmin";
 	}
 
 	@GetMapping("/add")
@@ -61,7 +61,7 @@ public class UserController {
 			model.addAttribute("addUser", addUser);
 		}
 		session.setAttribute("action", "adding");
-		return "userAdminAdd";
+		return "user/userAdminAdd";
 	}
 
 	@PostMapping("/add")
@@ -93,7 +93,7 @@ public class UserController {
 			model.addAttribute("editUser", editUser);
 		}
 		session.setAttribute("action", "editing");
-		return "userAdminEdit";
+		return "user/userAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")

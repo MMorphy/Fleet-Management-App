@@ -5,36 +5,234 @@
 <head>
 <meta charset="UTF-8">
 <title>Index</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Fleet</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li class="dropdown" sec:authorize="hasRole('ROLE_ADMIN')"><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#">Office
+							administration <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a th:href="@{/office/administration}"> Office</a></li>
+							<li><a th:href="@{/workingHours/administration/}">
+									Working hours</a></li>
+							<li><a th:href="@{/user/administration}"> User Admin</a></li>
+						</ul></li>
+					<li class="dropdown" sec:authorize="hasRole('ROLE_ADMIN')"><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#">Rent
+							administration <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a th:href="@{/reservation/administration/}">Reservations</a></li>
+							<li><a th:href="@{/option/administration/}"> Options</a></li>
+						</ul></li>
+					<li class="dropdown" sec:authorize="hasRole('ROLE_ADMIN')"><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#">Vehicle
+							administration <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a th:href="@{/vehicle/administration/}"> Vehicles</a></li>
+							<li><a th:href="@{/damage/administration/}"> Damages</a></li>
+							<li><a th:href="@{/tires/administration/}"> Tires</a></li>
+							<li><a th:href="@{/navigation/administration/}">
+									Navigation</a></li>
+							<li><a th:href="@{/specification/administration/}">
+									Vehicle specification</a></li>
+							<li><a th:href="@{/engine/administration/}"> Engine
+									Admin</a></li>
+						</ul></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li sec:authorize="!isAuthenticated()"><a
+						th:href="@{/user/registration/}"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">
+							<span class="glyphicon glyphicon-log-in"></span> Login
+					</a></li>
+					<li sec:authorize="isAuthenticated()"><a
+						href="javascript: document.logoutForm.submit()"> <span
+							class="glyphicon glyphicon-log-out"></span> Logout
+					</a></li>
+				</ul>
+			</div>
+			<form name="logoutForm" th:action="@{/logout}" method="post"
+				th:hidden="true">
+				<input hidden="hidden" type="submit" value="Sign Out" />
+			</form>
+		</div>
+	</nav>
 
-    <div style="text-align: center" sec:authorize="isAuthenticated()">
-        <form method="POST" th:action="@{/logout}">
-            <p><span> You are logged in as: </span><span sec:authentication="name"></span></p>
-            <input type="submit" value="Logout" class="btn btn-danger gumb">
-        </form>
-            
-    </div>
-    <div style="text-align: center" sec:authorize="!isAuthenticated()">
-		<a th:href="@{/user/registration/}">Register</a>
-		<a th:href="@{/login}">Login</a>      
-    </div>
-
-
-	<div>
-		<p>Test</p>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-lg-offset-2">
+				<h1>
+					Make a reservation
+					</h2>
+			</div>
+		</div>
 	</div>
-	<a th:href="@{/vehicle/administration/}"> Vehicle Admin</a>
-	<a th:href="@{/user/administration}"> User Admin</a>
-	<a th:href="@{/office/administration}"> Office Admin</a>
-	<a th:href="@{/workingHours/administration/}"> WH Admin</a>
-	<a th:href="@{/tires/administration/}"> Tires Admin</a>
-	<a th:href="@{/engine/administration/}"> Engine Admin</a>
-	<a th:href="@{/specification/administration/}"> Spec Admin</a>
-	<a th:href="@{/navigation/administration/}"> Nav Admin</a>
-	<a th:href="@{/damage/administration/}"> Damage Admin</a>
-	<a th:href="@{/option/administration/}"> Option Admin</a>
-	<a th:href="@{/reservation/administration/}">Reservation admin</a>
-
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-2">
+				<div class="row">
+					<div>
+						<img class="col-lg-4" src="../static/img/Mini.png"
+							th:src="@{/img/Mini.png}">
+					</div>
+					<div class="col-lg-4">
+						<h4>Fiat 500</h4>
+						<p>or similar (Mini group)</p>
+						<p>Doors:3</p>
+						<p>People:4</p>
+						<p>Baggage:1</p>
+					</div>
+					<div class="col-lg-4">
+						<form th:action="@{/reservation/add/Mini}" method="get">
+							<button class="btn btn-default" type="submit">Reserve</button>
+						</form>
+						<p>Included unlimited mileage</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-2">
+				<div class="row">
+					<div>
+						<img class="col-lg-4" src="../static/img/Economy.png"
+							th:src="@{/img/Economy.png}">
+					</div>
+					<div class="col-lg-4">
+						<h4>Volkswagen Polo</h4>
+						<p>or similar (Economy group)</p>
+						<p>Doors:5</p>
+						<p>People:5</p>
+						<p>Baggage:1</p>
+					</div>
+					<div class="col-lg-4">
+						<form th:action="@{/reservation/add/Economy}" method="get">
+							<button class="btn btn-default" type="submit">Reserve</button>
+						</form>
+						<p>Included unlimited mileage</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-2">
+				<div class="row">
+					<div>
+						<img class="col-lg-4" src="../static/img/Compact.png"
+							th:src="@{/img/Compact.png}">
+					</div>
+					<div class="col-lg-4">
+						<h4>Opel Astra SW</h4>
+						<p>or similar (Compact group)</p>
+						<p>Doors:5</p>
+						<p>People:5</p>
+						<p>Baggage:2</p>
+					</div>
+					<div class="col-lg-4">
+						<form th:action="@{/reservation/add/Compact}" method="get">
+							<button class="btn btn-default" type="submit">Reserve</button>
+						</form>
+						<p>Included unlimited mileage</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-2">
+				<div class="row">
+					<div>
+						<img class="col-lg-4" src="../static/img/Intermediate.png"
+							th:src="@{/img/Intermediate.png}">
+					</div>
+					<div class="col-lg-4">
+						<h4>Škoda Octavia</h4>
+						<p>or similar (Intermediate group)</p>
+						<p>Doors:5</p>
+						<p>People:4</p>
+						<p>Baggage:2</p>
+					</div>
+					<div class="col-lg-4">
+						<form th:action="@{/reservation/add/Intermediate}" method="get">
+							<button class="btn btn-default" type="submit">Reserve</button>
+						</form>
+						<p>Included unlimited mileage</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-2">
+				<div class="row">
+					<div>
+						<img class="col-lg-4" src="../static/img/Family.png"
+							th:src="@{/img/Family.png}">
+					</div>
+					<div class="col-lg-4">
+						<h4>Mercedes C class</h4>
+						<p>or similar (Family group)</p>
+						<p>Doors:5</p>
+						<p>People:4</p>
+						<p>Baggage:2</p>
+					</div>
+					<div class="col-lg-4">
+						<form th:action="@{/reservation/add/Family}" method="get">
+							<button class="btn btn-default" type="submit">Reserve</button>
+						</form>
+						<p>Included unlimited mileage</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-2">
+				<div class="row">
+					<div>
+						<img class="col-lg-4" src="../static/img/Premium.png"
+							th:src="@{/img/Premium.png}">
+					</div>
+					<div class="col-lg-4">
+						<h4>BMW 5 series</h4>
+						<p>or similar (Premium group)</p>
+						<p>Doors:5</p>
+						<p>People:4</p>
+						<p>Baggage:2</p>
+					</div>
+					<div class="col-lg-4">
+						<form th:action="@{/reservation/add/Premium}" method="get">
+							<button class="btn btn-default" type="submit">Reserve</button>
+						</form>
+						<p>Included unlimited mileage</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

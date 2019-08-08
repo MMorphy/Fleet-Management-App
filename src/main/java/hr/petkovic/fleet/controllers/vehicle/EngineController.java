@@ -40,7 +40,7 @@ public class EngineController {
 		} else {
 			model.addAttribute("engines", engineService.findAllEngines());
 		}
-		return "engineAdmin";
+		return "engine/engineAdmin";
 	}
 
 	// Adding
@@ -55,7 +55,7 @@ public class EngineController {
 		}
 		session.setAttribute("action", "adding");
 		model.addAttribute("fuelTypes", fuelService.findAllFuelTypes());
-		return "engineAdminAdd";
+		return "engine/engineAdminAdd";
 	}
 
 	@PostMapping("/add/")
@@ -82,7 +82,7 @@ public class EngineController {
 		}
 		session.setAttribute("action", "editing");
 		model.addAttribute("fuelTypes", fuelService.findAllFuelTypes());
-		return "engineAdminEdit";
+		return "engine/engineAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")

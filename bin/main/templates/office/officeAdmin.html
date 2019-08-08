@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Office administration</title>
+</head>
+<body>
+
+
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<h1 class="col-md-3">Office administration</h1>
+		</div>
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Address</th>
+						<th>Working Hours</th>
+						<th>Vehicles</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="office : ${offices}">
+						<td th:text="${office.id}"></td>
+						<td th:text="${office.name}"></td>
+						<td th:text="${office.address}"></td>
+						<td>
+							<a
+							th:href="@{'/workingHours/administration/' + ${office.workingHours.id}}">Working
+								Hours
+							</a>
+						</td>
+						<td>
+							<a th:href="@{'/office/vehicles/' + ${office.id}}">Vehicles</a></td>
+						<td>
+							<form th:action="@{'/office/delete/' + ${office.id}}"
+								method="post">
+								<button>Remove</button>
+							</form>
+						</td>
+						<td>
+							<form th:action="@{'/office/edit/' + ${office.id}}" method="get">
+								<button>Edit</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<form th:action="@{/office/add/}" method="get">
+			<button>Add new office</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -42,14 +42,14 @@ public class WorkingHoursController {
 		} else {
 			model.addAttribute("hours", whService.findAllWorkingHours());
 		}
-		return "workingHoursAdmin";
+		return "wh/workingHoursAdmin";
 	}
 
 	// Adding
 	@GetMapping("/add")
 	public String getWorkingHoursAdding(Model model) {
 		model.addAttribute("whours", new WorkingHoursDTO());
-		return "workingHoursAdminAdd";
+		return "wh/workingHoursAdminAdd";
 	}
 
 	@PostMapping("/add")
@@ -62,7 +62,7 @@ public class WorkingHoursController {
 	@GetMapping("/edit/{id}")
 	public String getWorkingHoursEdit(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("whours", whService.findWorkingHoursById(id));
-		return "workingHoursAdminEdit";
+		return "wh/workingHoursAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")

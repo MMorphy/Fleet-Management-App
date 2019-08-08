@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<title>Enter new office</title>
+</head>
+<body>
+	<h2>Enter new office</h2>
+	<form method="POST" th:object="${addOffice}"
+		th:action="@{/office/add/}">
+		<div class="form-group">
+			<label for="name">Name:</label> <input type="text"
+				class="form-control" id="name" th:field="*{name}"
+				th:value="${session.addingOffice.name}">
+		</div>
+		<div class="form-group">
+			<label for="address">Address:</label> <input type="text"
+				class="form-control" id="address" th:field="*{address}"
+				th:value="${session.addingOffice.address}">
+		</div>
+		<div th:if="${session.addingOffice.workingHours != null}"
+			hidden="hidden">
+			<select th:field="*{workingHours}">
+				<option th:value="${session.addingOffice.workingHours.id}"></option>
+			</select>
+		</div>
+		<input type="submit" th:value="Pick" name="action"> <input
+			type="submit" th:value="Submit" name="action"> <input
+			type="submit" th:value="Cancel" name="action">
+	</form>
+</body>
+</html>

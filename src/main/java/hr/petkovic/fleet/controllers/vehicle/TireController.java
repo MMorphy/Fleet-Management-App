@@ -54,7 +54,7 @@ public class TireController {
 		} else {
 			model.addAttribute("tires", tireService.findAllTires());
 		}
-		return "tiresAdmin";
+		return "tires/tiresAdmin";
 	}
 
 	// Adding
@@ -72,7 +72,7 @@ public class TireController {
 		model.addAttribute("wheelTypes", wheelService.findAllTypes());
 		model.addAttribute("vehicles", vehicleService.findAllVehicles());
 		session.setAttribute("action", "adding");
-		return "tiresAdminAdd";
+		return "tires/tiresAdminAdd";
 	}
 
 	@PostMapping("/add/")
@@ -107,7 +107,7 @@ public class TireController {
 		model.addAttribute("tireBrands", tireBrandService.findAllBrands());
 		model.addAttribute("wheelTypes", wheelService.findAllTypes());
 		model.addAttribute("vehicles", vehicleService.findAllVehicles());
-		return "tiresAdminEdit";
+		return "tires/tiresAdminEdit";
 	}
 
 	@PostMapping("/edit/{id}")
@@ -115,9 +115,11 @@ public class TireController {
 			HttpSession session) {
 		if (action.equals("Submit")) {
 			tireService.updateTire(id, editTire);
-			Vehicle vehicle = vehicleService.findVehicleById(editTire.getVehicle().getId());
-			vehicle.setTire(editTire);
-			vehicleService.updateVehicle(vehicle.getId(), vehicle);
+			if (editTire.getVehicle() != null) {
+				Vehicle vehicle = vehicleService.findVehicleById(editTire.getVehicle().getId());
+				vehicle.setTire(editTire);
+				vehicleService.updateVehicle(vehicle.getId(), vehicle);
+			}
 		}
 		session.removeAttribute("editedTire");
 		session.removeAttribute("action");

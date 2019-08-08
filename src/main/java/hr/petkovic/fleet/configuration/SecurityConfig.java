@@ -38,11 +38,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	http
     	.authorizeRequests()
     	.antMatchers("/user/registration/**").permitAll()
+    	.antMatchers("/reservation/add/**").authenticated()
     	.antMatchers("/user/**").hasRole("ADMIN")
     	.and()
     	.formLogin().loginPage("/login").defaultSuccessUrl("/", true)
     	.and()
-    	.logout().logoutSuccessUrl("/logout").logoutSuccessUrl("/")
+    	.logout().logoutUrl("/logout").logoutSuccessUrl("/")
     	.and()
     	.exceptionHandling().accessDeniedPage("/forbidden");
         http.cors().disable();

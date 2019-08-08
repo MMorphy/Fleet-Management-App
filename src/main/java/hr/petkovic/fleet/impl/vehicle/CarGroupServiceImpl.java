@@ -46,6 +46,15 @@ public class CarGroupServiceImpl implements CarGroupService {
 	}
 
 	@Override
+	public CarGroup findGroupByName(String groupName) {
+		try {
+			return this.groupRepo.findByCarGroup(groupName).get();
+		} catch (NoSuchElementException ex) {
+			return null;
+		}
+	}
+
+	@Override
 	public CarGroup updateGroup(Long id, CarGroup group) {
 		Optional<CarGroup> optGroup = this.groupRepo.findById(id);
 		if (optGroup.isPresent()) {
@@ -56,4 +65,5 @@ public class CarGroupServiceImpl implements CarGroupService {
 			return this.groupRepo.save(group);
 		}
 	}
+
 }
