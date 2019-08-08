@@ -54,12 +54,17 @@
 							th:href="@{'/damage/administration/vehicle/' + ${vehicle.vehicle.id}}">Damages</a></td>
 						<td th:if="${#lists.size(vehicle.vehicle.damages) == 0}">No damages</td>
 
-						<td th:if="${vehicle.vehicle.navigation != null}" th:text="${vehicle.vehicle.navigation.model}"></td>
-						<td th:if="${vehicle.vehicle.navigation == null}">Pick navigation</td>
+						<td th:if="${vehicle.vehicle.navigation != null}">
+						<a
+							th:href="@{'/navigation/administration/' + ${vehicle.vehicle.navigation.id}}">Navigation</a>
+						</td>
+						<td th:if="${vehicle.vehicle.navigation == null}">No navigation</td>
 						
 						<td th:text="${vehicle.vehicle.rented}"></td>
 						
-						<td th:text="${vehicle.office.name}"></td>
+						<td>
+							<a th:href="@{'/office/administration/' + ${vehicle.office.id}}">Office</a>
+						</td>
 
 						<td>
 							<form th:action="@{'/vehicle/delete/' + ${vehicle.vehicle.id}}"

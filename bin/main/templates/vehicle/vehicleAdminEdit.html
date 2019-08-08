@@ -84,6 +84,14 @@
 		</div>
 		
 		<div class="form-group">
+		<label>Navigation:</label>
+			<select th:field="*{navigation}" class="form-control">
+				<option th:each="nav : ${navs}" th:value="${nav.id}"
+					th:text="${nav.model.model}"></option>
+			</select>
+		</div>		
+		
+		<div class="form-group">
 			<label for="rented">In rent:</label> <input type="checkbox"
 				class="form-control" id="rented" th:field="*{rented}" th:checked="*{rented}"
 				th:value="${session.editedVehicle.rented}">

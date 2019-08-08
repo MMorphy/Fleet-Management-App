@@ -1,11 +1,10 @@
 TODO: 
 	BE:
 		Dodaj rezervacije za danas (vehicle statusu)
-		vehicle navigation picker
 	FE:	
-		Dodaj done button u request transfer
 		Napravi validaciju za sve forme (kroz html)
 		Implement search and filter
 		Uljepsaj datalistove u thymeleafu
 		Filter rented/unrented vehicles on /office/vehicles/{id}
+		Security
 		Uljepsaj frontend

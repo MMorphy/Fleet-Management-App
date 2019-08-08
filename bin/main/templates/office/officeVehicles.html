@@ -54,17 +54,25 @@
 							th:href="@{'/damage/administration/vehicle/' + ${mVehicle.id}}">Damages</a></td>
 						<td th:if="${#lists.size(mVehicle.damages) == 0}">No damages</td>
 
-						<td th:if="${mVehicle.navigation != null}" th:text="${mVehicle.navigation.model}"></td>
+						<td th:if="${mVehicle.navigation != null}"
+							th:text="${mVehicle.navigation.model}"></td>
 						<td th:if="${mVehicle.navigation == null}">Pick navigation</td>
-						
+
+						<td th:if="${mVehicle.navigation != null}"><a
+							th:href="@{'/navigation/administration/' + ${mVehicle.navigation.id}}">Navigation</a>
+						</td>
+						<td th:if="${mVehicle.navigation == null}">No navigation</td>
+
+
 						<td th:text="${mVehicle.rented}"></td>
 					</tr>
 				</tbody>
 			</table>
-			<a th:href="@{'/office/requestVehicle/Mini/' + ${officeID}}">Request transfer</a>
+			<a th:href="@{'/office/requestVehicle/Mini/' + ${officeID}}">Request
+				transfer</a>
 		</div>
-		
-		
+
+
 		<div class="col-md-12">
 			<h2>Economy Vehicles</h2>
 			<table class="table">
@@ -105,17 +113,20 @@
 							th:href="@{'/damage/administration/vehicle/' + ${eVehicle.id}}">Damages</a></td>
 						<td th:if="${#lists.size(eVehicle.damages) == 0}">No damages</td>
 
-						<td th:if="${eVehicle.navigation != null}" th:text="${eVehicle.navigation.model}"></td>
-						<td th:if="${eVehicle.navigation == null}">Pick navigation</td>
-						
+						<td th:if="${eVehicle.navigation != null}"><a
+							th:href="@{'/navigation/administration/' + ${eVehicle.navigation.id}}">Navigation</a>
+						</td>
+						<td th:if="${eVehicle.navigation == null}">No navigation</td>
+
 						<td th:text="${eVehicle.rented}"></td>
 					</tr>
 				</tbody>
 			</table>
-			<a th:href="@{'/office/requestVehicle/Economy/' + ${officeID}}">Request transfer</a>
+			<a th:href="@{'/office/requestVehicle/Economy/' + ${officeID}}">Request
+				transfer</a>
 		</div>
-		
-		
+
+
 		<div class="col-md-12">
 			<h2>Compact Vehicles</h2>
 			<table class="table">
@@ -156,17 +167,20 @@
 							th:href="@{'/damage/administration/vehicle/' + ${cVehicle.id}}">Damages</a></td>
 						<td th:if="${#lists.size(cVehicle.damages) == 0}">No damages</td>
 
-						<td th:if="${cVehicle.navigation != null}" th:text="${cVehicle.navigation.model}"></td>
-						<td th:if="${cVehicle.navigation == null}">Pick navigation</td>
-						
+						<td th:if="${cVehicle.navigation != null}"><a
+							th:href="@{'/navigation/administration/' + ${cVehicle.navigation.id}}">Navigation</a>
+						</td>
+						<td th:if="${cVehicle.navigation == null}">No navigation</td>
+
 						<td th:text="${cVehicle.rented}"></td>
 					</tr>
 				</tbody>
 			</table>
-			<a th:href="@{'/office/requestVehicle/Compact/' + ${officeID}}">Request transfer</a>
+			<a th:href="@{'/office/requestVehicle/Compact/' + ${officeID}}">Request
+				transfer</a>
 		</div>
-		
-		
+
+
 		<div class="col-md-12">
 			<h2>Intermediate Vehicles</h2>
 			<table class="table">
@@ -207,17 +221,20 @@
 							th:href="@{'/damage/administration/vehicle/' + ${iVehicle.id}}">Damages</a></td>
 						<td th:if="${#lists.size(iVehicle.damages) == 0}">No damages</td>
 
-						<td th:if="${iVehicle.navigation != null}" th:text="${iVehicle.navigation.model}"></td>
-						<td th:if="${iVehicle.navigation == null}">Pick navigation</td>
-						
+						<td th:if="${iVehicle.navigation != null}"><a
+							th:href="@{'/navigation/administration/' + ${iVehicle.navigation.id}}">Navigation</a>
+						</td>
+						<td th:if="${iVehicle.navigation == null}">No navigation</td>
+
 						<td th:text="${iVehicle.rented}"></td>
 					</tr>
 				</tbody>
 			</table>
-			<a th:href="@{'/office/requestVehicle/Intermediate/' + ${officeID}}">Request transfer</a>
+			<a th:href="@{'/office/requestVehicle/Intermediate/' + ${officeID}}">Request
+				transfer</a>
 		</div>
-		
-		
+
+
 		<div class="col-md-12">
 			<h2>Family Vehicles</h2>
 			<table class="table">
@@ -258,17 +275,20 @@
 							th:href="@{'/damage/administration/vehicle/' + ${fVehicle.id}}">Damages</a></td>
 						<td th:if="${#lists.size(fVehicle.damages) == 0}">No damages</td>
 
-						<td th:if="${fVehicle.navigation != null}" th:text="${fVehicle.navigation.model}"></td>
-						<td th:if="${fVehicle.navigation == null}">Pick navigation</td>
-						
+						<td th:if="${fVehicle.navigation != null}"><a
+							th:href="@{'/navigation/administration/' + ${fVehicle.navigation.id}}">Navigation</a>
+						</td>
+						<td th:if="${fVehicle.navigation == null}">No navigation</td>
+
 						<td th:text="${fVehicle.rented}"></td>
 					</tr>
 				</tbody>
 			</table>
-			<a th:href="@{'/office/requestVehicle/Family/' + ${officeID}}">Request transfer</a>
+			<a th:href="@{'/office/requestVehicle/Family/' + ${officeID}}">Request
+				transfer</a>
 		</div>
-		
-		
+
+
 		<div class="col-md-12">
 			<h2>Premium Vehicles</h2>
 			<table class="table">
@@ -309,14 +329,17 @@
 							th:href="@{'/damage/administration/vehicle/' + ${pVehicle.id}}">Damages</a></td>
 						<td th:if="${#lists.size(pVehicle.damages) == 0}">No damages</td>
 
-						<td th:if="${pVehicle.navigation != null}" th:text="${pVehicle.navigation.model}"></td>
-						<td th:if="${pVehicle.navigation == null}">Pick navigation</td>
-						
+						<td th:if="${pVehicle.navigation != null}"><a
+							th:href="@{'/navigation/administration/' + ${pVehicle.navigation.id}}">Navigation</a>
+						</td>
+						<td th:if="${pVehicle.navigation == null}">No navigation</td>
+
 						<td th:text="${mVehicle.rented}"></td>
 					</tr>
 				</tbody>
 			</table>
-			<a th:href="@{'/office/requestVehicle/Premium/' + ${officeID}}">Request transfer</a>
+			<a th:href="@{'/office/requestVehicle/Premium/' + ${officeID}}">Request
+				transfer</a>
 		</div>
 	</div>
 </body>

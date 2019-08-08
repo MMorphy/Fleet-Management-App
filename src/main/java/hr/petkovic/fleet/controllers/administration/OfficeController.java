@@ -52,9 +52,13 @@ public class OfficeController {
 	}
 
 	// Home admin page
-	@GetMapping("/administration")
-	public String getOfficeAdministration(Model model) {
-		model.addAttribute("offices", officeService.findAllOffices());
+	@GetMapping({ "/administration/", "/administration/{id}" })
+	public String getOfficeAdministration(@PathVariable(name = "id", required = false) Long id, Model model) {
+		if (id != null) {
+			model.addAttribute("offices", officeService.findOfficeById(id));
+		} else {
+			model.addAttribute("offices", officeService.findAllOffices());
+		}
 		return "office/officeAdmin";
 	}
 
