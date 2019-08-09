@@ -9,9 +9,20 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css" />
+
+<script type="text/javascript"
+	src="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
 <title>Reservation administration</title>
 </head>
 <body>
+	<script>
+		$(document).ready(function() {
+			$('#resTable').DataTable();
+		});
+	</script>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -24,7 +35,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/}">Home</a></li>
 					<li class="dropdown" sec:authorize="hasRole('ROLE_OPER')"><a
 						class="dropdown-toggle" data-toggle="dropdown" href="#">Office
 							administration <span class="caret"></span>
@@ -41,7 +52,8 @@
 							administration <span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a th:href="@{/reservation/administration/}">Reservations</a></li>
+							<li class="active"><a
+								th:href="@{/reservation/administration/}">Reservations</a></li>
 							<li sec:authorize="hasRole('ROLE_ADMIN')"><a
 								th:href="@{/option/administration/}"> Options</a></li>
 						</ul></li>
@@ -89,23 +101,25 @@
 			<h1 class="col-md-3">Reservation administration</h1>
 		</div>
 		<div class="col-md-12">
-			<table class="table">
+			<table class="table" id="resTable">
 				<thead>
 					<tr>
 						<th>ID</th>
-						<!-- 						<th>User</th> -->
+						<th>User</th>
 						<th>Car Group</th>
 						<th>Check-out Time</th>
 						<th>Check-out Office</th>
 						<th>Check-in Time</th>
 						<th>Check-in Office</th>
 						<th>Options</th>
+						<th>Remove</th>
+						<th>Edit</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="res : ${reservations}">
 						<td th:text="${res.id}"></td>
-						<!-- 						<td th:text="${res.user.username}"></td> -->
+						<td th:text="${res.user.username}"></td>
 						<td th:text="${res.carGroup.carGroup}"></td>
 						<td th:text="${{res.checkOutTime}}"></td>
 						<td th:text="${res.checkOutOffice.name}"></td>

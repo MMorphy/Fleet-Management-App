@@ -86,14 +86,11 @@ public class OfficeController {
 			return "office/workingHoursPicker";
 		} else if (action.equals("Submit")) {
 			officeService.saveOffice(addOffice);
-			session.removeAttribute("addingOffice");
-			session.removeAttribute("action");
-			return "redirect:/office/administration";
-		} else {
-			session.removeAttribute("addingOffice");
-			session.removeAttribute("action");
-			return "redirect:/office/administration";
 		}
+		session.removeAttribute("addingOffice");
+		session.removeAttribute("action");
+		return "redirect:/office/administration/";
+
 	}
 
 	// Editing
@@ -120,20 +117,16 @@ public class OfficeController {
 			return "office/workingHoursPicker";
 		} else if (action.equals("Submit")) {
 			officeService.updateOffice(id, editOffice);
-			session.removeAttribute("editedOffice");
-			session.removeAttribute("action");
-			return "redirect:/office/administration";
-		} else {
-			session.removeAttribute("editedOffice");
-			session.removeAttribute("action");
-			return "redirect:/office/administration";
 		}
+		session.removeAttribute("editedOffice");
+		session.removeAttribute("action");
+		return "redirect:/office/administration/";
 	}
 
 	@PostMapping("/delete/{id}")
 	public String deleteOffice(@PathVariable("id") Long id) {
 		officeService.deleteOfficeById(id);
-		return "redirect:/office/administration";
+		return "redirect:/office/administration/";
 	}
 
 	@GetMapping("/whpick/")

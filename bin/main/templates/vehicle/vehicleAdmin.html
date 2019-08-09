@@ -9,9 +9,20 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css" />
+
+<script type="text/javascript"
+	src="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
 <title>Vehicle administration</title>
 </head>
 <body>
+	<script>
+		$(document).ready(function() {
+			$('#vehicleTable').DataTable();
+		});
+	</script>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -24,7 +35,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/}">Home</a></li>
 					<li class="dropdown" sec:authorize="hasRole('ROLE_OPER')"><a
 						class="dropdown-toggle" data-toggle="dropdown" href="#">Office
 							administration <span class="caret"></span>
@@ -50,7 +61,8 @@
 							administration <span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a th:href="@{/vehicle/administration/}"> Vehicles</a></li>
+							<li class="active"><a th:href="@{/vehicle/administration/}">
+									Vehicles</a></li>
 							<li><a th:href="@{/damage/administration/}"> Damages</a></li>
 							<li><a th:href="@{/tires/administration/}"> Tires</a></li>
 							<li><a th:href="@{/navigation/administration/}">
@@ -88,17 +100,15 @@
 		<div class="col-md-12">
 			<h1 class="col-md-3">Vehicle administration</h1>
 		</div>
-		<div class="col-md-12">
-			<table class="table">
+		<div class="col-lg-12">
+			<table class="table" id="vehicleTable">
 				<thead>
 					<tr>
 						<th>ID</th>
 						<th>VIN</th>
 						<th>Registration</th>
-						<th>Year</th>
-						<th>KM</th>
-						<th>Manufacturer</th>
 						<th>Model</th>
+						<th>KM</th>
 						<th>Group</th>
 						<th>Fuel Level</th>
 						<th>Tire</th>
@@ -107,6 +117,8 @@
 						<th>Navigation</th>
 						<th>In rent</th>
 						<th>Office</th>
+						<th>Remove</th>
+						<th>Edit</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -114,10 +126,8 @@
 						<td th:text="${vehicle.vehicle.id}"></td>
 						<td th:text="${vehicle.vehicle.VIN}"></td>
 						<td th:text="${vehicle.vehicle.registrationNumber}"></td>
-						<td th:text="${vehicle.vehicle.manufactoringYear}"></td>
+						<td th:text="${vehicle.vehicle.manufactoringYear + ' ' + vehicle.vehicle.manufacturer.carManufacturer + ' ' + vehicle.vehicle.model.carModel}"></td>
 						<td th:text="${vehicle.vehicle.currentKM}"></td>
-						<td th:text="${vehicle.vehicle.manufacturer.carManufacturer}"></td>
-						<td th:text="${vehicle.vehicle.model.carModel}"></td>
 						<td th:text="${vehicle.vehicle.carGroup.carGroup}"></td>
 						<td th:text="${vehicle.vehicle.fuelLevel}"></td>
 						<td><a

@@ -9,9 +9,20 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css" />
+
+<script type="text/javascript"
+	src="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
 <title>Working Hours</title>
 </head>
 <body>
+	<script>
+		$(document).ready(function() {
+			$('#whTable').DataTable();
+		});
+	</script>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -24,7 +35,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/}">Home</a></li>
 					<li class="dropdown" sec:authorize="hasRole('ROLE_OPER')"><a
 						class="dropdown-toggle" data-toggle="dropdown" href="#">Office
 							administration <span class="caret"></span>
@@ -89,7 +100,7 @@
 			<h1 class="col-md-3">Working Hours</h1>
 		</div>
 		<div class="col-md-12">
-			<table class="table">
+			<table class="table" id="whTable">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -101,22 +112,27 @@
 						<th>Sunday To</th>
 						<th>Holiday From</th>
 						<th>Holiday To</th>
+						<th>Pick</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="hour : ${hours}">
 						<td th:text="${{hour.id}}"></td>
-						
-						<td th:if="${hour.workdayST != null}" th:text="${{hour.workdayST}}"></td>
+
+						<td th:if="${hour.workdayST != null}"
+							th:text="${{hour.workdayST}}"></td>
 						<td th:if="${hour.workdayST == null}">Not working</td>
-						
-						<td th:if="${hour.workdayET != null}" th:text="${{hour.workdayET}}"></td>
+
+						<td th:if="${hour.workdayET != null}"
+							th:text="${{hour.workdayET}}"></td>
 						<td th:if="${hour.workdayET == null}">Not working</td>
 
-						<td th:if="${hour.saturdayST != null}" th:text="${{hour.saturdayST}}"></td>
+						<td th:if="${hour.saturdayST != null}"
+							th:text="${{hour.saturdayST}}"></td>
 						<td th:if="${hour.saturdayST == null}">Not working</td>
 
-						<td th:if="${hour.saturdayET != null}" th:text="${{hour.saturdayET}}"></td>
+						<td th:if="${hour.saturdayET != null}"
+							th:text="${{hour.saturdayET}}"></td>
 						<td th:if="${hour.saturdayET == null}">Not working</td>
 
 						<td th:if="${hour.sundayST != null}" th:text="${{hour.sundayST}}"></td>
@@ -125,10 +141,12 @@
 						<td th:if="${hour.sundayET != null}" th:text="${{hour.sundayET}}"></td>
 						<td th:if="${hour.sundayET == null}">Not working</td>
 
-						<td th:if="${hour.holidayST != null}" th:text="${{hour.holidayST}}"></td>
+						<td th:if="${hour.holidayST != null}"
+							th:text="${{hour.holidayST}}"></td>
 						<td th:if="${hour.holidayST == null}">Not working</td>
 
-						<td th:if="${hour.holidayET != null}" th:text="${{hour.holidayET}}"></td>
+						<td th:if="${hour.holidayET != null}"
+							th:text="${{hour.holidayET}}"></td>
 						<td th:if="${hour.holidayET == null}">Not working</td>
 
 						<td>
@@ -143,7 +161,7 @@
 										<option th:value="${hour.id}" th:text=${hour.id}></option>
 									</select>
 								</div>
-								<button>Pick Add</button>
+								<button>Pick</button>
 							</form>
 
 							<form
@@ -159,7 +177,7 @@
 										<option th:value="${hour.id}" th:text=${hour.id}></option>
 									</select>
 								</div>
-								<button>Pick Edit</button>
+								<button>Pick</button>
 							</form>
 						</td>
 					</tr>

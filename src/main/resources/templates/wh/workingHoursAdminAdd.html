@@ -24,7 +24,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/}">Home</a></li>
 					<li class="dropdown" sec:authorize="hasRole('ROLE_OPER')"><a
 						class="dropdown-toggle" data-toggle="dropdown" href="#">Office
 							administration <span class="caret"></span>
@@ -83,40 +83,48 @@
 	</nav>
 
 
+	<div class="col-lg-12">
+		<h2>Enter new working hours</h2>
+	</div>
 
-	<h2>Enter new working hours</h2>
 	<form method="POST" th:object="${whours}"
 		th:action="@{/workingHours/add/}">
 
-		<div class="form-group">
-			<label for="workdayST">Workday From:</label> <input type="time"
-				class="form-control" id="workdayST" th:field="${{whours.workdayST}}">
-			<label for="workdayET">Workday To:</label> <input type="time"
-				class="form-control" id="workdayET" th:field="${{whours.workdayET}}">
+		<div class="form-group col-lg-3">
+			<label for="workdayST" class="control-label">Workday From:</label> <input
+				type="time" class="form-control" id="workdayST"
+				th:field="${{whours.workdayST}}" required="required"> <label for="workdayET"
+				class="control-label">Workday To:</label> <input type="time"
+				class="form-control" id="workdayET" th:field="${{whours.workdayET}}" required="required">
 		</div>
 
-		<div class="form-group">
-			<label for="saturdayST">Saturday From:</label> <input type="time"
-				class="form-control" id="saturdayST"
-				th:field="${{whours.saturdayST}}"> <label for="saturdayET">Saturday
-				To:</label> <input type="time" class="form-control" id="saturdayET"
+		<div class="form-group col-lg-3">
+			<label for="saturdayST" class="control-label">Saturday From:</label>
+			<input type="time" class="form-control" id="saturdayST"
+				th:field="${{whours.saturdayST}}"> <label for="saturdayET"
+				class="control-label">Saturday To:</label> <input type="time"
+				class="form-control" id="saturdayET"
 				th:field="${{whours.saturdayET}}">
 		</div>
 
-		<div class="form-group">
-			<label for="sundayST">Sunday From:</label> <input type="time"
-				class="form-control" id="sundayST" th:field="${{whours.sundayST}}">
-			<label for="sundayET">Sunday To:</label> <input type="time"
+		<div class="form-group col-lg-3">
+			<label for="sundayST" class="control-label">Sunday From:</label> <input
+				type="time" class="form-control" id="sundayST"
+				th:field="${{whours.sundayST}}"> <label for="sundayET"
+				class="control-label">Sunday To:</label> <input type="time"
 				class="form-control" id="sundayET" th:field="${{whours.sundayET}}">
 		</div>
 
-		<div class="form-group">
-			<label for="holidayST">Holiday From:</label> <input type="time"
-				class="form-control" id="holidayST" th:field="${{whours.holidayST}}">
-			<label for="holidayET">Holiday To:</label> <input type="time"
+		<div class="form-group col-lg-3">
+			<label for="holidayST" class="control-label">Holiday From:</label> <input
+				type="time" class="form-control" id="holidayST"
+				th:field="${{whours.holidayST}}"> <label for="holidayET"
+				class="control-label">Holiday To:</label> <input type="time"
 				class="form-control" id="holidayET" th:field="${{whours.holidayET}}">
 		</div>
-		<input type="submit" th:value="Enter">
+		<div class="col-lg-offset-9 col-lg-3">
+			<input type="submit" th:value="Enter">
+		</div>
 	</form>
 </body>
 </html>

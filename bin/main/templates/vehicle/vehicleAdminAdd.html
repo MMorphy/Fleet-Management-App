@@ -24,7 +24,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/}">Home</a></li>
 					<li class="dropdown" sec:authorize="hasRole('ROLE_OPER')"><a
 						class="dropdown-toggle" data-toggle="dropdown" href="#">Office
 							administration <span class="caret"></span>
@@ -166,18 +166,20 @@
 		</div>
 
 		<div class="form-group">
-			<label>Navigation:</label> <select th:field="*{navigation}"
+			<label>Navigation:</label> <select th:field="*{vehicle.navigation}"
 				class="form-control">
 				<option th:each="nav : ${navs}" th:value="${nav.id}"
-					th:text="${nav.model.model}"></option>
+					th:text="${nav.id + ' ' +nav.model.model}"></option>
 			</select>
 		</div>
 
-		<label>Office:</label> <select th:field="*{office}"
-			class="form-control">
-			<option th:each="office : ${offices}" th:value="${office.id}"
-				th:text="${office.name}"></option>
-		</select>
+		<div class="form-group">
+
+			<label>Office:</label> <select th:field="*{office}"
+				class="form-control">
+				<option th:each="office : ${offices}" th:value="${office.id}"
+					th:text="${office.name}"></option>
+			</select>
 		</div>
 
 		<input type="submit" th:value="Submit" name="action"> <input

@@ -9,10 +9,20 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css" />
+
+<script type="text/javascript"
+	src="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
 <title>Engine administration</title>
 </head>
 <body>
-
+	<script>
+		$(document).ready(function() {
+			$('#engineTable').DataTable();
+		});
+	</script>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -25,7 +35,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/}">Home</a></li>
 					<li class="dropdown" sec:authorize="hasRole('ROLE_OPER')"><a
 						class="dropdown-toggle" data-toggle="dropdown" href="#">Office
 							administration <span class="caret"></span>
@@ -59,7 +69,7 @@
 							<li sec:authorize="hasRole('ROLE_ADMIN')"><a
 								th:href="@{/specification/administration/}"> Vehicle
 									specification</a></li>
-							<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+							<li sec:authorize="hasRole('ROLE_ADMIN')" class="active"><a
 								th:href="@{/engine/administration/}"> Engine Admin</a></li>
 						</ul></li>
 				</ul>
@@ -89,7 +99,7 @@
 			<h1 class="col-md-3">Engine administration</h1>
 		</div>
 		<div class="col-md-12">
-			<table class="table">
+			<table class="table" id="engineTable">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -97,6 +107,8 @@
 						<th>Consumption</th>
 						<th>Max Power</th>
 						<th>Fuel Type</th>
+						<th>Remove</th>
+						<th>Edit</th>
 					</tr>
 				</thead>
 				<tbody>

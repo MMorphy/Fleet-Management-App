@@ -104,6 +104,7 @@ public class VehicleController {
 		model.addAttribute("tires", tireService.findUnusedTires());
 		model.addAttribute("specs", specService.findAllSpecs());
 		model.addAttribute("navs", navService.findAllNavs());
+		logger.info("NAVS:" + navService.findAllNavs().toString());
 		model.addAttribute("offices", officeService.findAllOffices());
 		return "vehicle/vehicleAdminAdd";
 	}

@@ -9,9 +9,22 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css" />
+
+<script type="text/javascript"
+	src="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
 <title>Office administration</title>
 </head>
 <body>
+
+	<script>
+		$(document).ready(function() {
+			$('#officeTable').DataTable();
+		});
+	</script>
+
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -24,13 +37,13 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/}">Home</a></li>
 					<li class="dropdown" sec:authorize="hasRole('ROLE_OPER')"><a
 						class="dropdown-toggle" data-toggle="dropdown" href="#">Office
 							administration <span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a th:href="@{/office/administration/}"> Office</a></li>
+							<li class="active"><a th:href="@{/office/administration/}"> Office</a></li>
 							<li sec:authorize="hasRole('ROLE_ADMIN')"><a
 								th:href="@{/workingHours/administration/}"> Working hours</a></li>
 							<li sec:authorize="hasRole('ROLE_ADMIN')"><a
@@ -89,7 +102,7 @@
 			<h1 class="col-md-3">Office administration</h1>
 		</div>
 		<div class="col-md-12">
-			<table class="table">
+			<table class="table" id="officeTable">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -97,6 +110,8 @@
 						<th>Address</th>
 						<th>Working Hours</th>
 						<th>Vehicles</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')">Remove</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')">Edit</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -104,14 +119,10 @@
 						<td th:text="${office.id}"></td>
 						<td th:text="${office.name}"></td>
 						<td th:text="${office.address}"></td>
-						<td>
-							<a
+						<td><a
 							th:href="@{'/workingHours/administration/' + ${office.workingHours.id}}">Working
-								Hours
-							</a>
-						</td>
-						<td>
-							<a th:href="@{'/office/vehicles/' + ${office.id}}">Vehicles</a></td>
+								Hours </a></td>
+						<td><a th:href="@{'/office/vehicles/' + ${office.id}}">Vehicles</a></td>
 						<td sec:authorize="hasRole('ROLE_ADMIN')">
 							<form th:action="@{'/office/delete/' + ${office.id}}"
 								method="post">
@@ -128,7 +139,8 @@
 			</table>
 
 		</div>
-		<form th:action="@{/office/add/}" method="get" sec:authorize="hasRole('ROLE_ADMIN')">
+		<form th:action="@{/office/add/}" method="get"
+			sec:authorize="hasRole('ROLE_ADMIN')">
 			<button>Add new office</button>
 		</form>
 	</div>

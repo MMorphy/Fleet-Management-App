@@ -24,7 +24,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/}">Home</a></li>
 					<li class="dropdown" sec:authorize="hasRole('ROLE_OPER')"><a
 						class="dropdown-toggle" data-toggle="dropdown" href="#">Office
 							administration <span class="caret"></span>
@@ -83,70 +83,126 @@
 	</nav>
 
 
-
-	<h2>Enter new reservation</h2>
+	<div class="col-lg-12">
+		<h2>Enter new reservation</h2>
+	</div>
 	<form method="POST" th:object="${editRes}"
 		th:action="@{'/reservation/edit/' + ${editRes.id}}">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="form-group col-lg-4">
+					<label>Car Group:</label> <select th:field="*{carGroup}"
+						class="form-control" required="required">
+						<option th:each="group : ${carGroups}" th:value="${group.id}"
+							th:text="${group.carGroup}"></option>
+					</select>
+				</div>
+			</div>
 
-		<div class="form-group">
-			<label>Car Group:</label> <select th:field="*{carGroup}"
-				class="form-control">
-				<option th:each="group : ${carGroups}" th:value="${group.id}"
-					th:text="${group.carGroup}"></option>
-			</select>
+			<div class="row">
+				<div class="form-group col-lg-3">
+					<label for="checkOutTime">From:</label> <input
+						type="datetime-local" class="form-control" id="checkOutTime"
+						th:field="*{checkOutTime}" required="required">
+				</div>
+
+				<div class="form-group col-lg-3">
+					<label>Check-out office:</label> <select
+						th:field="*{checkOutOffice}" class="form-control"
+						required="required">
+						<option th:each="office : ${offices}" th:value="${office.id}"
+							th:text="${office.name}"></option>
+					</select>
+				</div>
+
+				<div class="form-group col-lg-3">
+					<label for="checkInTime">TO:</label> <input type="datetime-local"
+						class="form-control" id="checkInTime" th:field="*{checkInTime}"
+						required="required">
+				</div>
+
+				<div class="form-group col-lg-3">
+					<label>Check-in office:</label> <select th:field="*{checkInOffice}"
+						class="form-control" required="required">
+						<option th:each="office : ${offices}" th:value="${office.id}"
+							th:text="${office.name}"></option>
+					</select>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-4">
+					<h3>Options:</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4">
+					<h4>Insurances:</h4>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-lg-4">
+					<label for="GF">Body insurance:</label> <input type="checkbox"
+						class="form-control" id="GF" th:field="*{GF}"
+						th:value="${session.editedReservation.GF}">
+				</div>
+				<div class="form-group col-lg-4">
+					<label for="TG">Tire and glass insurance:</label> <input
+						type="checkbox" class="form-control" id="TG" th:field="*{TG}"
+						th:value="${session.editedReservation.TG}">
+				</div>
+				<div class="form-group col-lg-4">
+
+					<label for="TI">Third party insurance:</label> <input
+						type="checkbox" class="form-control" id="TI" th:field="*{TI}"
+						th:value="${session.editedReservation.TI}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-lg-4">
+					<label for="TP">Theft protection:</label> <input type="checkbox"
+						class="form-control" id="TP" th:field="*{TP}"
+						th:value="${session.editedReservation.TP}">
+				</div>
+				<div class="form-group col-lg-4">
+
+					<label for="PAP">Personal accident protection:</label> <input
+						type="checkbox" class="form-control" id="PAP" th:field="*{PAP}"
+						th:value="${session.editedReservation.PAP}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4">
+					<h4>Commodities:</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-lg-4">
+					<label for="IT">International travel:</label> <input
+						type="checkbox" class="form-control" id="IT" th:field="*{IT}"
+						th:value="${session.editedReservation.IT}">
+				</div>
+				<div class="form-group col-lg-4">
+
+					<label for="NV">Navigation:</label> <input type="checkbox"
+						class="form-control" id="NV" th:field="*{NV}"
+						th:value="${session.editedReservation.NV}">
+				</div>
+				<div class="form-group col-lg-4">
+
+					<label for="PF">Prepaid fuel:</label> <input type="checkbox"
+						class="form-control" id="PF" th:field="*{PF}"
+						th:value="${session.editedReservation.PF}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-lg-4">
+					<input type="submit" th:value="Submit" name="action"> <input
+						type="submit" th:value="Cancel" name="action">
+				</div>
+			</div>
 		</div>
-
-		<div class="form-group">
-			<label for="checkOutTime">From:</label> <input type="datetime-local"
-				class="form-control" id="checkOutTime" th:field="*{checkOutTime}">
-		</div>
-
-		<div class="form-group">
-			<label>Check-out office:</label> <select th:field="*{checkOutOffice}"
-				class="form-control">
-				<option th:each="office : ${offices}" th:value="${office.id}"
-					th:text="${office.name}"></option>
-			</select>
-		</div>
-
-		<div class="form-group">
-			<label for="checkInTime">TO:</label> <input type="datetime-local"
-				class="form-control" id="checkInTime" th:field="*{checkInTime}">
-		</div>
-
-		<div class="form-group">
-			<label>Check-in office:</label> <select th:field="*{checkInOffice}"
-				class="form-control">
-				<option th:each="office : ${offices}" th:value="${office.id}"
-					th:text="${office.name}"></option>
-			</select>
-		</div>
-
-		<div class="form-group">
-			<label for="GF">Body insurance:</label> <input type="checkbox"
-				class="form-control" id="GF" th:field="*{GF}"
-				th:value="${session.editedReservation.GF}"> <label for="TG">Tire
-				and glass insurance:</label> <input type="checkbox" class="form-control"
-				id="TG" th:field="*{TG}" th:value="${session.editedReservation.TG}">
-			<label for="TI">Third party insurance:</label> <input type="checkbox"
-				class="form-control" id="TI" th:field="*{TI}"
-				th:value="${session.editedReservation.TI}"> <label for="TP">Theft
-				protection:</label> <input type="checkbox" class="form-control" id="TP"
-				th:field="*{TP}" th:value="${session.editedReservation.TP}">
-			<label for="PAP">Personal accident protection:</label> <input
-				type="checkbox" class="form-control" id="PAP" th:field="*{PAP}"
-				th:value="${session.editedReservation.PAP}"> <label for="IT">International
-				travel:</label> <input type="checkbox" class="form-control" id="IT"
-				th:field="*{IT}" th:value="${session.editedReservation.IT}">
-			<label for="NV">Navigation:</label> <input type="checkbox"
-				class="form-control" id="NV" th:field="*{NV}"
-				th:value="${session.editedReservation.NV}"> <label for="PF">Prepaid
-				fuel:</label> <input type="checkbox" class="form-control" id="PF"
-				th:field="*{PF}" th:value="${session.editedReservation.PF}">
-		</div>
-
-		<input type="submit" th:value="Submit" name="action"> <input
-			type="submit" th:value="Cancel" name="action">
 	</form>
 </body>
 </html>

@@ -3,7 +3,6 @@ TODO:
 		Dodaj rezervacije za danas (vehicle statusu)
 	FE:	
 		Napravi validaciju za sve forme (kroz html)
-		Implement search and filter
 		Uljepsaj datalistove u thymeleafu
 		Filter rented/unrented vehicles on /office/vehicles/{id}
 		Uljepsaj frontend
