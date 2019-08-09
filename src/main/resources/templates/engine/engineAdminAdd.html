@@ -83,39 +83,50 @@
 		</div>
 	</nav>
 
+	<div class="col-lg-12">
+		<h2>Enter new engine</h2>
+	</div>
 
-	<h2>Enter new engine</h2>
 	<form method="POST" th:object="${addEngine}"
 		th:action="@{/engine/add/}">
-		<div class="form-group">
-			<label for="capacity">Capacity:</label> <input type="number"
-				class="form-control" id="capacity" th:field="*{capacity}"
-				th:value="${session.addingEngine.capacity}" min="700" max="6000"
-				step="1">
-		</div>
-		<div class="form-group">
-			<label for="maxPower">Power:</label> <input type="number"
-				class="form-control" id="maxPower" th:field="*{maxPower}"
-				th:value="${session.addingEngine.maxPower}" min="40" max="700"
-				step="1">
-		</div>
-		<div class="form-group">
-			<label for="consumption">Consumption:</label> <input type="number"
-				class="form-control" id="consumption" th:field="*{consumption}"
-				th:value="${session.addingEngine.consumption}" min="0" max="40"
-				step="0.1">
-		</div>
-	
-		<div class="form-group">
-		<label>Fuel Type:</label>
-			<select th:field="*{fuelType}" class="form-control">
-				<option th:each="type : ${fuelTypes}" th:value="${type.id}"
-					th:text="${type.type}"></option>
-			</select>
-		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="form-group col-lg-4">
+					<label for="capacity">Capacity:</label> <input type="number"
+						class="form-control" id="capacity" th:field="*{capacity}"
+						th:value="${session.addingEngine.capacity}" min="700" max="6000"
+						step="1" required="required">
+				</div>
+				<div class="form-group col-lg-4">
+					<label for="maxPower">Power:</label> <input type="number"
+						class="form-control" id="maxPower" th:field="*{maxPower}"
+						th:value="${session.addingEngine.maxPower}" min="40" max="700"
+						step="1" required="required">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-lg-4">
+					<label for="consumption">Consumption:</label> <input type="number"
+						class="form-control" id="consumption" th:field="*{consumption}"
+						th:value="${session.addingEngine.consumption}" min="0" max="40"
+						step="0.1" required="required">
+				</div>
 
-		<input type="submit" th:value="Submit" name="action"> <input
-			type="submit" th:value="Cancel" name="action">
+				<div class="form-group col-lg-4">
+					<label>Fuel Type:</label> <select th:field="*{fuelType}"
+						class="form-control" required="required">
+						<option th:each="type : ${fuelTypes}" th:value="${type.id}"
+							th:text="${type.type}"></option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-lg-4">
+					<input type="submit" th:value="Submit" name="action"> <input
+						type="submit" th:value="Cancel" name="action">
+				</div>
+			</div>
+		</div>
 	</form>
 </body>
 </html>

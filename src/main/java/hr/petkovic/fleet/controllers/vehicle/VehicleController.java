@@ -1,6 +1,7 @@
 package hr.petkovic.fleet.controllers.vehicle;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hr.petkovic.fleet.entities.office.Office;
+import hr.petkovic.fleet.entities.vehicle.CarDamage;
 import hr.petkovic.fleet.entities.vehicle.Tire;
 import hr.petkovic.fleet.entities.vehicle.Vehicle;
 import hr.petkovic.fleet.entities.vehicle.VehicleAndOfficeDTO;
@@ -104,7 +106,6 @@ public class VehicleController {
 		model.addAttribute("tires", tireService.findUnusedTires());
 		model.addAttribute("specs", specService.findAllSpecs());
 		model.addAttribute("navs", navService.findAllNavs());
-		logger.info("NAVS:" + navService.findAllNavs().toString());
 		model.addAttribute("offices", officeService.findAllOffices());
 		return "vehicle/vehicleAdminAdd";
 	}
@@ -128,7 +129,7 @@ public class VehicleController {
 
 	// Editing
 	@GetMapping("/edit/{id}")
-	public String getUpdateTires(@PathVariable("id") Long id, Model model, HttpSession session, Vehicle editVehicle) {
+	public String getUpdateVehicle(@PathVariable("id") Long id, Model model, HttpSession session, Vehicle editVehicle) {
 		List<Tire> tires = tireService.findUnusedTires();
 		if (session.getAttribute("editedTire") == null || editVehicle == null || editVehicle.getVIN() == null
 				|| editVehicle.getVIN().isBlank()) {
@@ -136,6 +137,7 @@ public class VehicleController {
 			model.addAttribute("editVehicle", vehicleService.findVehicleById(id));
 			tires.add(vehicleService.findVehicleById(id).getTire());
 		} else {
+			editVehicle.setId(id);
 			session.setAttribute("editedVehicle", editVehicle);
 			model.addAttribute("editVehicle", editVehicle);
 			tires.add(editVehicle.getTire());
@@ -154,6 +156,8 @@ public class VehicleController {
 	public String updateTires(@PathVariable("id") Long id, Model model, Vehicle editVehicle, String action,
 			HttpSession session) {
 		if (action.equals("Submit")) {
+			List<CarDamage> damages = damageService.findDamagesForVehicle(editVehicle.getId());
+			editVehicle.setDamages(new HashSet<>(damages));
 			vehicleService.updateVehicle(id, editVehicle);
 		}
 		session.removeAttribute("editedTire");

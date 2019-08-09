@@ -50,6 +50,7 @@ public class VehicleServiceImpl implements VehicleService {
 		Optional<Vehicle> optVehicle = this.vehicleRepo.findById(id);
 		if (optVehicle.isPresent()) {
 			Vehicle veh = optVehicle.get();
+			veh.setId(vehicle.getId());
 			veh.setCarGroup(vehicle.getCarGroup());
 			veh.setCurrentKM(vehicle.getCurrentKM());
 			veh.setDamages(vehicle.getDamages());

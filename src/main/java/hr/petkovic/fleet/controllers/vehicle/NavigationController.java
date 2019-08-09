@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import hr.petkovic.fleet.entities.vehicle.Engine;
 import hr.petkovic.fleet.entities.vehicle.Navigation;
 import hr.petkovic.fleet.impl.vehicle.NavigationModelServiceImpl;
 import hr.petkovic.fleet.impl.vehicle.NavigationServiceImpl;
@@ -52,7 +51,7 @@ public class NavigationController {
 			model.addAttribute("addNav", new Navigation());
 		} else {
 			session.setAttribute("addingNav", addNav);
-			model.addAttribute("addingNav", addNav);
+			model.addAttribute("addNav", addNav);
 		}
 		session.setAttribute("action", "adding");
 		model.addAttribute("models", modelService.findAllNavModels());

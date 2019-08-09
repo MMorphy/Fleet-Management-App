@@ -1,8 +1,2 @@
-TODO: 
-	BE:
-		Dodaj rezervacije za danas (vehicle statusu)
-	FE:	
-		Napravi validaciju za sve forme (kroz html)
-		Uljepsaj datalistove u thymeleafu
-		Filter rented/unrented vehicles on /office/vehicles/{id}
-		Uljepsaj frontend
+Todo:
+	cant remove damages
