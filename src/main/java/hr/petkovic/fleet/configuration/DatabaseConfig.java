@@ -23,8 +23,6 @@ public class DatabaseConfig {
 
 	@Bean(name = "transactionManager")
 	public PlatformTransactionManager hibernateTransactionManager() {
-//		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-//		transactionManager.setSessionFactory(sessionFactory().getObject());
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 		return transactionManager;
@@ -56,7 +54,6 @@ public class DatabaseConfig {
 
 	private final Properties hibernateProperties() {
 		Properties hibernateProperties = new Properties();
-//		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
 		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "none");
 		hibernateProperties.setProperty("hibernate.dialect.storage_engine", "innodb");

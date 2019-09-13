@@ -130,7 +130,6 @@ public class ReservationController {
 			resService.updateRes(id, convertDTOToObject(editRes));
 		}
 		session.removeAttribute("editedReservation");
-		session.removeAttribute("user");
 		session.removeAttribute("action");
 		return "redirect:/reservation/administration/";
 	}

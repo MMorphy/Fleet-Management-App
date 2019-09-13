@@ -18,11 +18,7 @@
 <title>Reservation administration</title>
 </head>
 <body>
-	<script>
-		$(document).ready(function() {
-			$('#resTable').DataTable();
-		});
-	</script>
+
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -95,7 +91,11 @@
 	</nav>
 
 
-
+	<script>
+		$(document).ready(function() {
+			$('#resTable').DataTable();
+		});
+	</script>
 	<div class="col-md-12">
 		<div class="col-md-12">
 			<h1 class="col-md-3">Reservation administration</h1>
@@ -141,7 +141,6 @@
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
 		<form th:action="@{/reservation/add/}" method="get">
 			<button>Add new reservation</button>

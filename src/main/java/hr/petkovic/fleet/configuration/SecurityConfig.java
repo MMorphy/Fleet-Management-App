@@ -22,29 +22,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-	}	
+	}
 
 	@Override
-	public void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth
-		.jdbcAuthentication()
-		.dataSource(dataSource)
-		.passwordEncoder(passwordEncoder())
-		.usersByUsernameQuery("select username, password, true as enabled from users where username=?")
-		.authoritiesByUsernameQuery("select username, roles.name as authority from users join user_roles on users.id=user_roles.user_id join roles on roles.id=user_roles.role_id where username=?");
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder())
+				.usersByUsernameQuery("select username, password, true as enabled from users where username=?")
+				.authoritiesByUsernameQuery("select username, roles.name as authority "
+						+ "from users join user_roles on users.id=user_roles.user_id "
+						+ "join roles on roles.id=user_roles.role_id where username=?");
 	}
-    @Override
-    protected void configure(HttpSecurity http) throws Exception{
-    	http
-    	.authorizeRequests()
-    	.antMatchers("/user/registration/**").permitAll()
-    	.antMatchers("/reservation/add/**").authenticated()
-    	.and()
-    	.formLogin().loginPage("/login").defaultSuccessUrl("/", true)
-    	.and()
-    	.logout().logoutUrl("/logout").logoutSuccessUrl("/")
-    	.and()
-    	.exceptionHandling().accessDeniedPage("/forbidden");
-        http.cors().disable();
-    }
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/user/registration/**").permitAll().antMatchers("/login").permitAll()
+				.antMatchers("/logout").permitAll().antMatchers("/").permitAll().antMatchers("/reservation/**")
+				.hasRole("OPER").antMatchers("/reservation/add/**").authenticated()
+				.antMatchers("/office/administration/").hasRole("OPER").antMatchers("/reservation/administration/**")
+				.hasRole("OPER").antMatchers("/option/reservation/**").hasRole("OPER")
+				.antMatchers("/workingHours/administration/**").hasRole("OPER")
+				.antMatchers("/vehicle/administration/**").hasRole("OPER").antMatchers("/office/vehicles/**")
+				.hasRole("OPER").antMatchers("/tires/administration/**").hasRole("OPER")
+				.antMatchers("/specification/administration/**").hasRole("OPER")
+				.antMatchers("/damage/administration/vehicle/**").hasRole("OPER")
+				.antMatchers("/navigation/administration/**").hasRole("OPER").antMatchers("/damage/fix/**")
+				.hasRole("OPER").antMatchers("/img/**").permitAll().antMatchers("/**").hasRole("ADMIN").and()
+				.formLogin().loginPage("/login").defaultSuccessUrl("/", true).and().logout().logoutUrl("/logout")
+				.logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/forbidden");
+		http.cors().disable();
+	}
 }

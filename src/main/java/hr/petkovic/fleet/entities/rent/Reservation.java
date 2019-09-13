@@ -52,7 +52,13 @@ public class Reservation {
 	private CarGroup carGroup;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "res_options", joinColumns = @JoinColumn(name = "res_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "option_id", referencedColumnName = "id"))
+	@JoinTable(name = "res_options", 
+				joinColumns = @JoinColumn(
+						name = "res_id", 
+						referencedColumnName = "id"), 
+				inverseJoinColumns = @JoinColumn(
+						name = "option_id", 
+						referencedColumnName = "id"))
 	private Set<Option> options;
 
 	public Long getId() {
